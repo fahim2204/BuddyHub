@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PasswordController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Models\EntityFramework\WorksProfile.cs">
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VirtualModel\RecoveryPasswordData.cs" />
     <Compile Include="Models\VirtualModel\RegistrationData.cs" />
     <Compile Include="Models\VirtualModel\LoginData.cs" />
     <Compile Include="Models\VirtualModel\PostData.cs" />
@@ -195,6 +197,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repo\PostRepository.cs" />
     <Compile Include="Repo\ProfileRepository.cs" />
+    <Compile Include="Repo\RecoveryPasswordRepository.cs" />
     <Compile Include="Repo\UserRepo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +256,7 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
+    <Content Include="Views\Password\SetRecoveryPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
