@@ -13,10 +13,10 @@ namespace BuddyHub.Models.EntityFramework
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class buddyhubEntities2 : DbContext
+    public partial class buddyhubEntities : DbContext
     {
-        public buddyhubEntities2()
-            : base("name=buddyhubEntities2")
+        public buddyhubEntities()
+            : base("name=buddyhubEntities")
         {
         }
     

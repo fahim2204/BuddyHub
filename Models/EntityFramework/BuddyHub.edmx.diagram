@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="241bf70f53b5482caf668f7335b47b61" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="44954cc7079b4f8980bc7089d8aabb2a" Name="Diagram1">
         <EntityTypeShape EntityType="buddyhubModel.Comment" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="buddyhubModel.Follower" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="buddyhubModel.Like" Width="1.5" PointX="6" PointY="13.125" IsExpanded="true" />

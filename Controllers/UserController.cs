@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuddyHub.Models.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace BuddyHub.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View();
+            var db = new buddyhubEntities();
+            return View(db.Users.ToList());
         }
         [Route("Login")]
         public ActionResult Login()

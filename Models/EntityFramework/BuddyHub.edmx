@@ -746,7 +746,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="buddyhubEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="buddyhubEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Followers" EntityType="Self.Follower" />
           <EntitySet Name="Likes" EntityType="Self.Like" />
@@ -829,7 +829,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="buddyhubModelStoreContainer" CdmEntityContainer="buddyhubEntities2">
+        <EntityContainerMapping StorageEntityContainer="buddyhubModelStoreContainer" CdmEntityContainer="buddyhubEntities">
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="buddyhubModel.Comment">
               <MappingFragment StoreEntitySet="Comments">
