@@ -345,7 +345,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="buddyhubEntities2" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="buddyhubEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Comments" EntityType="Self.Comment" />
     <EntitySet Name="Followers" EntityType="Self.Follower" />
     <EntitySet Name="Likes" EntityType="Self.Like" />

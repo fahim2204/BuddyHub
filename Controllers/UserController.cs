@@ -14,8 +14,8 @@ namespace BuddyHub.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            User user = new User();
-            return View(user);
+            var db = new buddyhubEntities();
+            return View(db.Users.ToList());
         }
 
         [HttpPost]

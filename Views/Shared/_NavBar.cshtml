@@ -1,13 +1,16 @@
-﻿
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-
-
-        @if (!Request.IsAuthenticated) {
-            @Html.ActionLink("Login", "Login", "User")
-            @Html.ActionLink("Register", "Registration", "User")
-        }
-
-
+﻿<nav class="navbar navbar-light bg-secondary fixed-top">
+    <div class="container d-flex flex-nowrap">
+        <div class="row ">
+            <div class="col-4">
+                Left Section
+            </div>
+            <div class="col-4">
+                Middle section
+            </div>
+            <div class="col-4">
+                @if (!Request.IsAuthenticated)
+                {@Html.ActionLink("Login", "Login", "User") @Html.ActionLink("Register", "Registration", "User")}
+            </div>
+        </div>
     </div>
-</div>
+</nav>
