@@ -244,9 +244,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\VirtualModels\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Post\" />
   </ItemGroup>

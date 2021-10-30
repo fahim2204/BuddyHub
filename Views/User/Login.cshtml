@@ -1,0 +1,18 @@
+﻿@model BuddyHub.Models.EntityFramework.User
+
+@{ 
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<form action="/User/Login" method="post">
+    Username: <input type="text" name="Username" class="form-control" value="@Model.Username" />
+    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+    <br />
+    Password: <input type="password" name="Password" class="form-control" value="@Model.Password" />
+    @Html.ValidationMessageFor(p => p.Password, "", new { @class = "text-danger" })
+    <br />
+    <input type="submit" name="submit" value="LogIn" class="btn btn-success" />
+</form>
+<hr />
+<a href="/User/Registration" class="btn btn-primary">New User? Registration</a>

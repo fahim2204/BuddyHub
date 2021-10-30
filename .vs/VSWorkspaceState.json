@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Controllers",
+    "\\Models",
+    "\\Models\\EntityFramework",
+    "\\Views",
+    "\\Views\\User"
+  ],
+  "SelectedNode": "\\Views\\User\\Registration.cshtml",
+  "PreviewInSolutionExplorer": false
+}
