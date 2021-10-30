@@ -42,7 +42,24 @@ namespace BuddyHub.Repo
             return test;
 
         }
-        
-        
+        public ProfileData GetProfileData(string username)
+        {
+            var test = (from u in db.Users
+                        join u2 in db.Profiles on u.Id equals u2.FK_Users_Id
+                        select new ProfileData()
+                        {
+                            Name = u.Name,
+                            Type = u.Type,
+                            Email = u2.Email,
+                            Contact = u2.Contact,
+                            PImage = u2.ProfileImage,
+                            Address = u2.Address,
+                            Gender = u2.Gender
+                        }).ToList().FirstOrDefault();
+            return test;
+        }
+
+
+
     }
 }

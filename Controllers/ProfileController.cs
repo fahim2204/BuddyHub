@@ -13,7 +13,7 @@ namespace BuddyHub.Controllers
         public ActionResult Index()
         {
             ProfileRepository pr = new ProfileRepository();
-            var temp = pr.GetProfileData().ToList();
+            var temp = pr.GetProfileData();
             return View(temp);
         }
         public ActionResult Create()
