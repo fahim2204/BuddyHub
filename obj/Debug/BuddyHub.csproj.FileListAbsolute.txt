@@ -77,3 +77,7 @@ F:\Project\.NET\BuddyHub\obj\Debug\BuddyHub.csproj.CoreCompileInputs.cache
 F:\Project\.NET\BuddyHub\obj\Debug\BuddyHub.csproj.CopyComplete
 F:\Project\.NET\BuddyHub\obj\Debug\BuddyHub.dll
 F:\Project\.NET\BuddyHub\obj\Debug\BuddyHub.pdb
+F:\Project\.NET\BuddyHub\bin\EntityFramework.dll
+F:\Project\.NET\BuddyHub\bin\EntityFramework.SqlServer.dll
+F:\Project\.NET\BuddyHub\bin\EntityFramework.xml
+F:\Project\.NET\BuddyHub\bin\EntityFramework.SqlServer.xml

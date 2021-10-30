@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="buddyhubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Posts_Id" Type="int" />
+    <Property Name="FK_Users_Id" Type="int" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="Text" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Followers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FR_Follower_Users_Id" Type="int" />
+    <Property Name="FR_Following_Users_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Likes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Posts_Id" Type="int" />
+    <Property Name="FK_Users_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Users_Id" Type="int" />
+    <Property Name="FK_Notifier_Users_Id" Type="int" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="Message" Type="nchar" MaxLength="100" />
+    <Property Name="GotoLink" Type="nchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="PostImages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImageName" Type="nchar" MaxLength="200" />
+    <Property Name="FK_Posts_Id" Type="int" />
+    <Property Name="FK_Users_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Posts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostsText" Type="nvarchar(max)" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="Status" Type="int" />
+    <Property Name="FK_Users_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Profiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Contact" Type="nchar" MaxLength="25" />
+    <Property Name="Email" Type="nchar" MaxLength="100" />
+    <Property Name="ProfileImage" Type="nchar" MaxLength="300" />
+    <Property Name="Address" Type="nchar" MaxLength="200" />
+    <Property Name="Gender" Type="nchar" MaxLength="100" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="Religion" Type="nchar" MaxLength="10" />
+    <Property Name="Relationship" Type="nchar" MaxLength="100" />
+    <Property Name="FK_Users_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="RecoveryPasswords">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionOne" Type="nchar" MaxLength="300" />
+    <Property Name="QuestionOneAnswer" Type="nchar" MaxLength="300" />
+    <Property Name="QuestionTwo" Type="nchar" MaxLength="300" />
+    <Property Name="QuestionTwoAnswer" Type="nchar" MaxLength="300" />
+    <Property Name="FK_Users_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Saves">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Posts_Id" Type="int" />
+    <Property Name="FK_Users_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="SocialLinks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SocialName" Type="nchar" MaxLength="200" />
+    <Property Name="Link" Type="nchar" MaxLength="300" />
+    <Property Name="FK_Users_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="40" Nullable="false" />
+    <Property Name="Username" Type="nchar" MaxLength="40" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="300" Nullable="false" />
+    <Property Name="Type" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorksProfiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Institution" Type="nchar" MaxLength="300" />
+    <Property Name="StartYear" Type="date" />
+    <Property Name="EndYear" Type="date" />
+    <Property Name="Position" Type="nchar" MaxLength="200" />
+    <Property Name="FK_Users_Id" Type="int" />
+  </EntityType>
+  <Association Name="FK_Comments_Post">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="FK_Posts_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_User">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="FK_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Followers_Following">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Followers" Type="Self.Followers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Followers">
+        <PropertyRef Name="FR_Following_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Followers_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Followers" Type="Self.Followers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Followers">
+        <PropertyRef Name="FR_Follower_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Likes_Post">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
+    <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Likes">
+        <PropertyRef Name="FK_Posts_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Likes_User">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Likes">
+        <PropertyRef Name="FK_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_Notifier">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="FK_Notifier_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_User">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="FK_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostImages_Post">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
+    <End Role="PostImages" Type="Self.PostImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostImages">
+        <PropertyRef Name="FK_Posts_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostImages_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="PostImages" Type="Self.PostImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostImages">
+        <PropertyRef Name="FK_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profiles_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Profiles" Type="Self.Profiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Profiles">
+        <PropertyRef Name="FK_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecoveryPasswords_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="RecoveryPasswords" Type="Self.RecoveryPasswords" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RecoveryPasswords">
+        <PropertyRef Name="FK_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Saves_post">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
+    <End Role="Saves" Type="Self.Saves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Saves">
+        <PropertyRef Name="FK_Posts_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Saves_User">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Saves" Type="Self.Saves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Saves">
+        <PropertyRef Name="FK_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SocialLinks_User">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="SocialLinks" Type="Self.SocialLinks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SocialLinks">
+        <PropertyRef Name="FK_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorksProfiles_User">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="WorksProfiles" Type="Self.WorksProfiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorksProfiles">
+        <PropertyRef Name="FK_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="buddyhubModelStoreContainer">
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Followers" EntityType="Self.Followers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Likes" EntityType="Self.Likes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostImages" EntityType="Self.PostImages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecoveryPasswords" EntityType="Self.RecoveryPasswords" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Saves" EntityType="Self.Saves" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SocialLinks" EntityType="Self.SocialLinks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorksProfiles" EntityType="Self.WorksProfiles" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Comments_Post" Association="Self.FK_Comments_Post">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_User" Association="Self.FK_Comments_User">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Followers_Following" Association="Self.FK_Followers_Following">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Followers" EntitySet="Followers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Followers_Users" Association="Self.FK_Followers_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Followers" EntitySet="Followers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Likes_Post" Association="Self.FK_Likes_Post">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Likes" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Likes_User" Association="Self.FK_Likes_User">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Likes" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_Notifier" Association="Self.FK_Notifications_Notifier">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_User" Association="Self.FK_Notifications_User">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostImages_Post" Association="Self.FK_PostImages_Post">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="PostImages" EntitySet="PostImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostImages_Users" Association="Self.FK_PostImages_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PostImages" EntitySet="PostImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profiles_Users" Association="Self.FK_Profiles_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Profiles" EntitySet="Profiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecoveryPasswords_Users" Association="Self.FK_RecoveryPasswords_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="RecoveryPasswords" EntitySet="RecoveryPasswords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Saves_post" Association="Self.FK_Saves_post">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Saves" EntitySet="Saves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Saves_User" Association="Self.FK_Saves_User">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Saves" EntitySet="Saves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SocialLinks_User" Association="Self.FK_SocialLinks_User">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SocialLinks" EntitySet="SocialLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorksProfiles_User" Association="Self.FK_WorksProfiles_User">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="WorksProfiles" EntitySet="WorksProfiles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

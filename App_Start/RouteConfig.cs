@@ -12,6 +12,17 @@ namespace BuddyHub
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            
+           // routes.MapRoute(
+           //     name: "Login",
+           //     url: "Login",
+           //     defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional }
+           // );
+           // routes.MapRoute(
+           //    name: "Registration",
+           //    url: "Registration",
+           //    defaults: new { controller = "User", action = "Registration", id = UrlParameter.Optional }
+           //);
 
             routes.MapRoute(
                 name: "Default",

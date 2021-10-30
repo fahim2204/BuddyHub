@@ -1,0 +1,13 @@
+﻿
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+
+
+        @if (!Request.IsAuthenticated) {
+            @Html.ActionLink("Login", "Login", "User")
+            @Html.ActionLink("Register", "Registration", "User")
+        }
+
+
+    </div>
+</div>
