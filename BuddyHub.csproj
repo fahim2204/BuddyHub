@@ -310,6 +310,8 @@
     <Content Include="Views\Password\RecoveryNotSet.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
+
+    <Content Include="Views\Profile\View.cshtml" />
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\EditPost.cshtml" />
   </ItemGroup>

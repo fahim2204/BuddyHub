@@ -1,5 +1,10 @@
 ﻿@model BuddyHub.Models.VM.ProfileData
 
+@{
+    ViewBag.Title = "View";
+}
+
+
 <div>
 
     <div class="container">
@@ -34,7 +39,7 @@
 
                             <div class="col-md-6">
                                 <span class="profile ">Date of Birth : </span>
-                                <span class="profile1 ">@Model.DOB</span>
+                                <span class="profile1 ">@Model.DOB.ToString("dd MMM yyyy")</span>
                             </div>
                         </div>
                         <br />
@@ -79,23 +84,8 @@
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 mx-auto">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-center">
-                            <input type="button" class="btn btn-primary " value="My post" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
     </div>
     
 </div>
 
-<p>
-
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
