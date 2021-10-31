@@ -44,5 +44,19 @@ namespace BuddyHub.Repo
                          }).ToList().FirstOrDefault();
             return posts;
         }
+
+        public static void CreatePost(PostData pd, int UserId)
+        {
+            Post p = new Post()
+            {
+                PostsText = pd.PostText,
+                CreatedAt = DateTime.Now,
+                Status = 1,
+                FK_Users_Id = UserId
+            };
+            db.Posts.Add(p);
+            db.SaveChanges();
+
+        }
     }
 }
