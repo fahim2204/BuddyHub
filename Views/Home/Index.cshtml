@@ -46,6 +46,15 @@
                     <a class="text-decoration-none text-black" href="@Url.Action("Details", "Post", new {id=@Html.DisplayFor(modelItem => item.PostId)})">
                         <div class="lh-sm text-dark text-wrap">
                             @Html.DisplayFor(modelItem => item.PostText)
+                            @Html.DisplayFor(modelItem => item.Likes.Count)
+
+
+                            @*@foreach (var it in item.Likes)
+        {
+            @Html.DisplayFor(modelItem =>it.FK_Users_Id)
+        }*@
+
+
                         </div>
                     </a>
                 </div>

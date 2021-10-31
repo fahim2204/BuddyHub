@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuddyHub.Models.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,5 +13,8 @@ namespace BuddyHub.Models.VirtualModel
         public DateTime CreatedAt { get; set; }
         public int Status { get; set; }
         public string Username { get; set; }
+        public virtual ICollection<Like> Likes { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+
     }
 }

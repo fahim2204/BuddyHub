@@ -24,8 +24,7 @@ namespace BuddyHub.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserRepo ur = new UserRepo();
-                var user = ur.GetAuthenticateUser(ld);
+                var user = UserRepo.GetAuthenticateUser(ld);
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(user.Username.ToString(), false);
@@ -49,10 +48,9 @@ namespace BuddyHub.Controllers
 
             if (ModelState.IsValid)
             {
-                UserRepo ur = new UserRepo();
-                if (ur.IsUsernameUnique(rd.Username))
+                if (UserRepo.IsUsernameUnique(rd.Username))
                 {
-                    ur.RegisterUser(rd);
+                    UserRepo.RegisterUser(rd);
                     return RedirectToAction("Login");
                 }
                 else
