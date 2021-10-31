@@ -39,5 +39,26 @@ namespace BuddyHub.Repo
         {
             return !db.Users.Any(u => u.Username == username);
         }
+
+        public static UserData FindUser(string username)
+        {
+            var user = (from usr in db.Users
+                        where usr.Username == username
+                        select usr).FirstOrDefault();
+            if(user == null)
+            {
+                return null;
+            }
+            UserData u = new UserData()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Username = user.Username,
+                Password = user.Password,
+                Type = user.Type,
+                Status = user.Status
+            };
+            return u;
+        }
     }
 }
