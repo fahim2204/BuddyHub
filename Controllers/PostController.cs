@@ -33,28 +33,30 @@ namespace BuddyHub.Controllers
         {
             int UserId = (int)Session["UserId"];
             PostRepository.CreatePost(pd, UserId);
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
-        [Authorize]
-        [HttpGet]
-        public ActionResult EditPost(int PoId)
+        public ActionResult EditPost(int id) 
         {
-            int UserId = (int)Session["UserId"];
-            var post = PostRepository.GetPostDataById(PoId);
-            if(post.FK_Users_Id == UserId)
+            //System.Diagnostics.Debug.WriteLine(PoId);
+
+            string UserId = (string)Session["Username"];
+            var post = PostRepository.GetPostDataById(id);
+            if (post.Username != UserId)
             {
-                return View(post);
+                return RedirectToAction("Index", "Home");
+
             }
-            return RedirectToAction("Index", "Home");
+            return View(post);
+
         }
 
 
         [Authorize]
         [HttpPost]
-        public ActionResult EditPost(PostData pd, int PoId)
+        public ActionResult EditPost(PostData pd, int id)
         {
-            var b = PostRepository.EditPost(pd, PoId);
+            var b = PostRepository.EditPost(pd, id);
             if(b)
             {
                 return RedirectToAction("Index", "Home");
@@ -63,10 +65,10 @@ namespace BuddyHub.Controllers
         }
 
         [Authorize]
-        public ActionResult RemovePost(int PoId)
+        public ActionResult RemovePost(int id)
         {
             int UserId = (int)Session["UserId"];
-            bool b = PostRepository.RemovePost(PoId, UserId);         
+            bool b = PostRepository.RemovePost(id, UserId);         
             return RedirectToAction("Index", "Home");
         }
     }

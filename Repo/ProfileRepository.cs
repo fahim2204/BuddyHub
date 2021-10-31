@@ -46,7 +46,7 @@ namespace BuddyHub.Repo
         */
 
        
-        public void UpdateName(int UserId,string name)
+        public static void UpdateName(int UserId,string name)
 
         {
             var user = (from u in db.Users
@@ -55,7 +55,7 @@ namespace BuddyHub.Repo
             user.Name =name;
             db.SaveChanges();
         }
-        public void UpdateProfile(int UserId,ProfileData pd)
+        public static void UpdateProfile(int UserId,ProfileData pd)
         {
             var profile = (from p in db.Profiles
                         where p.FK_Users_Id == UserId
@@ -70,7 +70,7 @@ namespace BuddyHub.Repo
             db.SaveChanges();
 
         }
-        public ProfileData GetProfileData(string UserName)
+        public static ProfileData GetProfileData(string UserName)
         {
             
             var test = (from u in db.Users
@@ -94,7 +94,7 @@ namespace BuddyHub.Repo
                         }).FirstOrDefault();
             return test;
         }
-        public ProfileData GetProfileData(int UserId)
+        public static ProfileData GetProfileData(int UserId)
         {
 
             var test = (from u in db.Users

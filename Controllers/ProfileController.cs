@@ -16,15 +16,13 @@ namespace BuddyHub.Controllers
         public ActionResult Index()
         {
             int UserId = (int)Session["UserId"];
-            ProfileRepository pr = new ProfileRepository();
-            var temp = pr.GetProfileData(UserId);
+            var temp = ProfileRepository.GetProfileData(UserId);
             return View(temp);
         }
         public ActionResult View(string Username)
         {
             string UserName = "fahim";
-            ProfileRepository pr = new ProfileRepository();
-            var temp = pr.GetProfileData(UserName);
+            var temp = ProfileRepository.GetProfileData(UserName);
 
             return View(temp);
         }
@@ -33,8 +31,7 @@ namespace BuddyHub.Controllers
         {
 
             int UserId = (int)Session["UserId"];
-            ProfileRepository pr = new ProfileRepository();
-            var temp = pr.GetProfileData(UserId);
+            var temp = ProfileRepository.GetProfileData(UserId);
 
             return View(temp);
         }
@@ -43,10 +40,9 @@ namespace BuddyHub.Controllers
         {
             var db = new buddyhubEntities();
             int UserId = (int)Session["UserId"];
-            ProfileRepository pr = new ProfileRepository();
-            var temp = pr.GetProfileData(UserId);
-            pr.UpdateName(UserId, p.Name);
-            pr.UpdateProfile(UserId, p);
+            var temp = ProfileRepository.GetProfileData(UserId);
+            ProfileRepository.UpdateName(UserId, p.Name);
+            ProfileRepository.UpdateProfile(UserId, p);
             return RedirectToAction("Index", "Profile");
         }
     }
