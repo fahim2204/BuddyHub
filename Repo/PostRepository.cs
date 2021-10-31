@@ -57,7 +57,27 @@ namespace BuddyHub.Repo
             };
             db.Posts.Add(p);
             db.SaveChanges();
+        }
 
+        public static bool EditPost(PostData pd, int PoId)
+        {
+            var post = db.Posts.Single(p => p.Id == PoId);
+            post.PostsText = pd.PostText;
+            db.SaveChanges();
+            return true;
+        }
+
+        public static bool RemovePost(int PoId, int UserId)
+        {
+            var post = db.Posts.Find(PoId);
+            if(post.FK_Users_Id == UserId)
+            {
+                db.Posts.Remove(post);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+            
         }
     }
 }
