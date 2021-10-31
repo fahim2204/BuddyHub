@@ -13,6 +13,7 @@ namespace BuddyHub.Models.VirtualModel
         public DateTime CreatedAt { get; set; }
         public int Status { get; set; }
         public string Username { get; set; }
+        public Nullable<int> FK_Users_Id { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
 

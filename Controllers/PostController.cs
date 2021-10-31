@@ -35,11 +35,39 @@ namespace BuddyHub.Controllers
             PostRepository.CreatePost(pd, UserId);
             return View();
         }
+
+        [Authorize]
         [HttpGet]
-        public ActionResult LikeOnPost(string username, int postId)
+        public ActionResult EditPost(int PoId)
         {
-            PostRepository.CreateLike(username, postId);
-            return Redirect("/Home/Index");
+            int UserId = (int)Session["UserId"];
+            var post = PostRepository.GetPostDataById(PoId);
+            if(post.FK_Users_Id == UserId)
+            {
+                return View(post);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult EditPost(PostData pd, int PoId)
+        {
+            var b = PostRepository.EditPost(pd, PoId);
+            if(b)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View(pd);
+        }
+
+        [Authorize]
+        public ActionResult RemovePost(int PoId)
+        {
+            int UserId = (int)Session["UserId"];
+            bool b = PostRepository.RemovePost(PoId, UserId);         
+            return RedirectToAction("Index", "Home");
         }
     }
 }
