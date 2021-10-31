@@ -41,7 +41,9 @@ namespace BuddyHub.Repo
                              PostText = p.PostsText,
                              CreatedAt = (DateTime)p.CreatedAt,
                              Status = (int)p.Status,
-                             Username = u.Username
+                             Username = u.Username,
+                              Likes = (from l in db.Likes where l.FK_Posts_Id == p.Id select l).ToList(),
+                             Comments = (from c in db.Comments where c.FK_Posts_Id == c.Id select c).ToList()
                          }).ToList().FirstOrDefault();
             return posts;
         }
@@ -58,6 +60,30 @@ namespace BuddyHub.Repo
             db.Posts.Add(p);
             db.SaveChanges();
 
+        }
+        public static void CreateLike(string username,int postId)
+        {
+            var user = UserRepo.FindUser(username);
+            if (!IsPostLikedByUser(user.Id, postId))
+            {
+                db.Likes.Add(new Like() { FK_Users_Id = user.Id, FK_Posts_Id = postId });
+                db.SaveChanges();
+                System.Diagnostics.Debug.WriteLine("Post is Liked");
+
+            }
+            else
+            {
+                var like = (from l in db.Likes where l.FK_Posts_Id == postId && l.FK_Users_Id == user.Id select l).FirstOrDefault();
+                db.Likes.Remove(like);
+                db.SaveChanges();
+                System.Diagnostics.Debug.WriteLine("Post is Uniked");
+
+            }
+
+        }
+        public static bool IsPostLikedByUser(int uid, int postId)
+        {
+            return db.Likes.Any(l => l.FK_Posts_Id == postId && l.FK_Users_Id==uid);
         }
     }
 }

@@ -28,8 +28,9 @@ namespace BuddyHub.Controllers
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(user.Username.ToString(), false);
-                    Session["UserId"] = user.Id; 
-                    return RedirectToAction("CreatePost", "Post");
+                    Session["UserId"] = user.Id;
+                    Session["Username"] = user.Username;
+                    return RedirectToAction("Index", "Home");
                 }
             }
              return View(ld);

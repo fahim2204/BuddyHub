@@ -1,0 +1,57 @@
+﻿@model BuddyHub.Models.VirtualModel.PostData
+
+@{
+    ViewBag.Title = "View";
+}
+
+<div class="row border rounded-3 mb-2 p-1 shadow-sm">
+    @*Post info section*@
+    <div class="row d-flex align-items-center mb-1">
+        <div class="col-6 justify-content-start d-flex">
+            <div class="me-1">
+                <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:30px;width:30px" />
+            </div>
+            <a href=""
+               class="fs-6 text-success me-1 text-decoration-none">@Model.Username</a>
+            <div class="font-weight-light text-danger">
+                <time class="timeago" datetime="@Model.CreatedAt"></time>
+            </div>
+        </div>
+        <div class="col-6 justify-content-end d-flex align-items-center">
+            @if ((string)Session["Username"] == @Model.Username)
+            {
+                <a href="\Post\" class="text-decoration-none">
+                    <i class="fa fa-edit me-2 text-success"><span class="ms-1">Edit</span></i>
+                </a>
+                <a href="" class="text-decoration-none">
+                    <i class="fa fa-trash me-2 text-danger"><span class="ms-1">Delete</span></i>
+                </a>
+            }
+
+            <i class="fa fa-ellipsis-h me-1"></i>
+
+        </div>
+    </div>
+
+    @*Main Post Section*@
+    <div class="ms-3 col-12">
+       
+            <div class="lh-sm text-dark text-wrap">
+                @Model.PostText
+            </div>
+      
+    </div>
+
+    <div class="row border-top mt-2 py-1 d-flex align-items-center">
+        <div class="col-6 justify-content-start d-flex">
+            <a href="/Post/LikeOnPost/fahim/@Model.PostId" class="btn btn-outline-primary px-2 py-0">@Model.Likes.Count Likes<i class="fa fa-thumbs-o-up px-1 m-0"></i></a>
+            <button class="btn btn-outline-primary px-2 py-0 ms-2">@Model.Comments.Count Comments<i class="fa fa-comment px-1 m-0"></i></button>
+        </div>
+        <div class="col-6 justify-content-end d-flex">
+            <div class="mx-2"><i class="fa fa-heart me-1"></i></div>
+            <div class="mx-2"><i class="fa fa-share me-1"></i></div>
+
+        </div>
+    </div>
+</div>
+

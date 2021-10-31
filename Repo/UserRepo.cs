@@ -60,5 +60,25 @@ namespace BuddyHub.Repo
             };
             return u;
         }
+        public static UserData FindUserById(int id)
+        {
+            var user = (from usr in db.Users
+                        where usr.Id == id
+                        select usr).FirstOrDefault();
+            if (user == null)
+            {
+                return null;
+            }
+            UserData u = new UserData()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Username = user.Username,
+                Password = user.Password,
+                Type = user.Type,
+                Status = user.Status
+            };
+            return u;
+        }
     }
 }

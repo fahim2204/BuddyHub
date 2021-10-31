@@ -15,6 +15,10 @@ namespace BuddyHub.Controllers
         {
             return View();
         }
+        public ActionResult View(int id)
+        {
+            return View(PostRepository.GetPostDataById(id));
+        }
 
         [Authorize]
         [HttpGet]
@@ -30,6 +34,12 @@ namespace BuddyHub.Controllers
             int UserId = (int)Session["UserId"];
             PostRepository.CreatePost(pd, UserId);
             return View();
+        }
+        [HttpGet]
+        public ActionResult LikeOnPost(string username, int postId)
+        {
+            PostRepository.CreateLike(username, postId);
+            return Redirect("/Home/Index");
         }
     }
 }
