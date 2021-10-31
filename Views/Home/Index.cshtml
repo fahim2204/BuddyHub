@@ -1,0 +1,101 @@
+﻿@model IEnumerable<BuddyHub.Models.VirtualModel.PostData>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-8">
+        <div class="row border rounded-3 shadow-sm  mb-3">
+            <div class="row align-items-center g-1 m-2">
+                <div class="col-1 text-center">
+                    <!-- Will change this picture dynamically -->
+                    <a class="text-dark" href="@Url.Action("View", "Profile", new {id="fahim"})">
+                        <span>
+                            <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:55px;width:55px" />
+                        </span>
+                    </a>
+                </div>
+                <div class="col-6 pe-5">
+                    <a href="@Url.Action("Create", "Post")">
+                        <input class="form-control fs-6 my-2 py-3 rounded-3" type="text" name="postBox"
+                               id="postBox" placeholder="What you like to share ?">
+                    </a>
+                </div>
+            </div>
+        </div>
+        @*Single Post Section Start*@
+
+
+        @foreach (var item in Model)
+        {
+            <div class="row border rounded-3 mb-2 p-1 shadow">
+                @*Post info section*@
+                <div class="col-12 col-lg-8 d-flex align-items-center ms-2 mb-1">
+                    <div class="lh-sm text-muted align-self-center me-1" style="font-size: 12px">
+                        Posted By
+                    </div>
+                    <a href=""
+                        class="fs-6 text-success me-1 text-decoration-none">@Html.DisplayFor(modelItem => item.Username)</a>
+                    <div class="lh-sm text-danger align-self-end" style="font-size: 12px">
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </div>
+                </div>
+                @*Main Post Section*@
+                <div class="ms-3 col-12">
+                    <a class="text-decoration-none text-black" href="@Url.Action("Details", "Post", new {id=@Html.DisplayFor(modelItem => item.PostId)})">
+                        <div class="lh-sm text-dark text-wrap">
+                            @Html.DisplayFor(modelItem => item.PostText)
+                        </div>
+                    </a>
+                </div>
+       
+                <div class="row border-top mt-2 py-1 d-flex align-items-center">
+                    <div class="col-6 justify-content-start d-flex">
+                        <button class="btn btn-outline-primary px-2 py-0">0 Likes<i class="fa fa-thumbs-o-up px-1 m-0"></i></button>
+                        <button class="btn btn-outline-primary px-2 py-0 ms-2">0 Comments<i class="fa fa-comment px-1 m-0"></i></button>
+                    </div>
+                    <div class="col-6 justify-content-end d-flex">
+                        <div class="mx-2"><i class="fa fa-heart me-1"></i></div>
+                        <div class="mx-2"><i class="fa fa-share me-1"></i></div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        @*Single Post Section End*@
+    </div>
+
+    <div class="col-4">
+        side bar
+    </div>
+</div>
+
+
+
+
+
+
+    @*<tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+ 
