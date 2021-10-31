@@ -29,40 +29,38 @@
 
         @foreach (var item in Model)
         {
-            <div class="row border rounded-3 mb-2 p-1 shadow">
+            <div class="row border rounded-3 mb-2 p-1 shadow-sm">
                 @*Post info section*@
-                <div class="col-12 col-lg-8 d-flex align-items-center ms-2 mb-1">
-                    <div class="lh-sm text-muted align-self-center me-1" style="font-size: 12px">
-                        Posted By
+                <div class="row d-flex align-items-center mb-1">
+                    <div class="col-6 justify-content-start d-flex">
+                        <div class="me-1">
+                            <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:30px;width:30px" />
+                        </div>
+                        <a href=""
+                           class="fs-6 text-success me-1 text-decoration-none">@Html.DisplayFor(modelItem => item.Username)</a>
+                        <div class="lh-sm text-danger align-self-end" style="font-size: 12px">
+                            @Html.DisplayFor(modelItem => item.CreatedAt)
+                        </div>
                     </div>
-                    <a href=""
-                        class="fs-6 text-success me-1 text-decoration-none">@Html.DisplayFor(modelItem => item.Username)</a>
-                    <div class="lh-sm text-danger align-self-end" style="font-size: 12px">
-                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    <div class="col-6 justify-content-end d-flex">
+                        <i class="fa fa-ellipsis-h me-1"></i>
+
                     </div>
                 </div>
+
                 @*Main Post Section*@
                 <div class="ms-3 col-12">
                     <a class="text-decoration-none text-black" href="@Url.Action("Details", "Post", new {id=@Html.DisplayFor(modelItem => item.PostId)})">
                         <div class="lh-sm text-dark text-wrap">
                             @Html.DisplayFor(modelItem => item.PostText)
-                            @Html.DisplayFor(modelItem => item.Likes.Count)
-
-
-                            @*@foreach (var it in item.Likes)
-        {
-            @Html.DisplayFor(modelItem =>it.FK_Users_Id)
-        }*@
-
-
                         </div>
                     </a>
                 </div>
        
                 <div class="row border-top mt-2 py-1 d-flex align-items-center">
                     <div class="col-6 justify-content-start d-flex">
-                        <button class="btn btn-outline-primary px-2 py-0">0 Likes<i class="fa fa-thumbs-o-up px-1 m-0"></i></button>
-                        <button class="btn btn-outline-primary px-2 py-0 ms-2">0 Comments<i class="fa fa-comment px-1 m-0"></i></button>
+                        <button class="btn btn-outline-primary px-2 py-0">@Html.DisplayFor(modelItem => item.Likes.Count) Likes<i class="fa fa-thumbs-o-up px-1 m-0"></i></button>
+                        <button class="btn btn-outline-primary px-2 py-0 ms-2">@Html.DisplayFor(modelItem => item.Comments.Count) Comments<i class="fa fa-comment px-1 m-0"></i></button>
                     </div>
                     <div class="col-6 justify-content-end d-flex">
                         <div class="mx-2"><i class="fa fa-heart me-1"></i></div>

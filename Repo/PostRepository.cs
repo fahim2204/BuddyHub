@@ -25,7 +25,8 @@ namespace BuddyHub.Repo
                              CreatedAt = (DateTime)p.CreatedAt,
                              Status = (int)p.Status,
                              Username = u.Username,
-                             Likes = (from l in db.Likes where l.FK_Posts_Id==p.Id select l).ToList()
+                             Likes = (from l in db.Likes where l.FK_Posts_Id==p.Id select l).ToList(),
+                             Comments = (from c in db.Comments where c.FK_Posts_Id == c.Id select c).ToList()
                          }).ToList();
             return posts;
         }
