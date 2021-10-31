@@ -53,6 +53,10 @@ namespace BuddyHub.Repo
             var u = (from user in db.RecoveryPasswords
                      where user.FK_Users_Id == Id
                      select user).FirstOrDefault();
+            if(u == null)
+            {
+                return null;
+            }
             RecoveryPasswordData rpd = new RecoveryPasswordData()
             {
                 Id = u.Id,
@@ -64,5 +68,10 @@ namespace BuddyHub.Repo
             };
             return rpd;
         }
+        
+  /*      public static bool CheckQuestionAnswer(RecoveryPasswordData rpd)
+        {
+            RecoveryPasswordData 
+        }*/
     }
 }

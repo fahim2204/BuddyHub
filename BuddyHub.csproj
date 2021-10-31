@@ -189,12 +189,15 @@
     <Compile Include="Models\EntityFramework\WorksProfile.cs">
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VirtualModel\ChangePassData.cs" />
     <Compile Include="Models\VirtualModel\RecoveryPasswordData.cs" />
     <Compile Include="Models\VirtualModel\RegistrationData.cs" />
     <Compile Include="Models\VirtualModel\LoginData.cs" />
     <Compile Include="Models\VirtualModel\PostData.cs" />
     <Compile Include="Models\VirtualModel\ProfileData.cs" />
+    <Compile Include="Models\VirtualModel\UserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repo\ChangePasswordRepository.cs" />
     <Compile Include="Repo\PostRepository.cs" />
     <Compile Include="Repo\ProfileRepository.cs" />
     <Compile Include="Repo\RecoveryPasswordRepository.cs" />
@@ -257,6 +260,10 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\Password\SetRecoveryPassword.cshtml" />
+    <Content Include="Views\Password\GetRecoveryPassword.cshtml" />
+    <Content Include="Views\Password\CheckingUsername.cshtml" />
+    <Content Include="Views\Password\ChangePassword.cshtml" />
+    <Content Include="Views\Password\RecoveryNotSet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

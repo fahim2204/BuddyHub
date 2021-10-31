@@ -61,8 +61,8 @@ namespace BuddyHub.Controllers
                 } 
             }
             return View(rd);
-
-
         }
+
+
     }
 }

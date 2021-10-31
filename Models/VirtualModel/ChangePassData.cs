@@ -6,15 +6,9 @@ using System.Web;
 
 namespace BuddyHub.Models.VirtualModel
 {
-    public class RegistrationData
+    public class ChangePassData
     {
         [Required]
-        public string Name { get; set; }
-        [Required]
-        [StringLength(255, MinimumLength = 5)]
-        public string Username { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required]
         [DataType(DataType.Password)]
