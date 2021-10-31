@@ -29,7 +29,7 @@ namespace BuddyHub.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(user.Username.ToString(), false);
                     Session["UserId"] = user.Id; 
-                    return RedirectToAction("SetRecoveryPassword", "Password");
+                    return RedirectToAction("CreatePost", "Post");
                 }
             }
              return View(ld);
