@@ -23,6 +23,7 @@ namespace BuddyHub
             //    url: "Registration",
             //    defaults: new { controller = "User", action = "Registration", id = UrlParameter.Optional }
             //);
+            //Post / LikeOnPost / fahim / 10
 
             routes.MapRoute(
                 name: "Like",

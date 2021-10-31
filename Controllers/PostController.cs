@@ -51,7 +51,6 @@ namespace BuddyHub.Controllers
 
         }
 
-
         [Authorize]
         [HttpPost]
         public ActionResult EditPost(PostData pd, int id)
@@ -70,6 +69,11 @@ namespace BuddyHub.Controllers
             int UserId = (int)Session["UserId"];
             bool b = PostRepository.RemovePost(id, UserId);         
             return RedirectToAction("Index", "Home");
+        }
+        public ActionResult LikeOnPost(string username, int postId)
+        {
+            PostRepository.CreateLike(username, postId);
+            return Redirect("/Home/Index");
         }
     }
 }
