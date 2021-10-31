@@ -10,15 +10,19 @@ namespace BuddyHub.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
+        
         public ActionResult Index()
         {
             ProfileRepository pr = new ProfileRepository();
             var temp = pr.GetProfileData();
             return View(temp);
         }
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult Edit()
         {
-            return View();
+            ProfileRepository pr = new ProfileRepository();
+            var temp = pr.GetProfileData();
+            return View(temp);
         }
     }
 }
