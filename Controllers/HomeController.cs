@@ -11,8 +11,7 @@ namespace BuddyHub.Controllers
     {
         public ActionResult Index()
         {
-            PostRepository pr = new PostRepository();
-            return View(pr.GetPostData());
+            return View(PostRepository.GetPostData());
         }
     }
 }

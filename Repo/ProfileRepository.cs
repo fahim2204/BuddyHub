@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BuddyHub.Repo
 {
-    public class ProfileRepository
+    public static class ProfileRepository
     {
         static buddyhubEntities db;
         static ProfileRepository()
@@ -44,8 +44,10 @@ namespace BuddyHub.Repo
 
         }
         */
+
        
         public void UpdateName(int UserId,string name)
+
         {
             var user = (from u in db.Users
                         where u.Id == UserId

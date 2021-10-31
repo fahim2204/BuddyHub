@@ -25,14 +25,17 @@ namespace BuddyHub.Controllers
             string UserName = "fahim";
             ProfileRepository pr = new ProfileRepository();
             var temp = pr.GetProfileData(UserName);
+
             return View(temp);
         }
         [HttpGet]
         public ActionResult Edit()
         {
+
             int UserId = (int)Session["UserId"];
             ProfileRepository pr = new ProfileRepository();
             var temp = pr.GetProfileData(UserId);
+
             return View(temp);
         }
         [HttpPost]
