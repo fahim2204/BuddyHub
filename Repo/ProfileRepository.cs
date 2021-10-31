@@ -14,7 +14,8 @@ namespace BuddyHub.Repo
         {
             db = new buddyhubEntities();
         }
-        public List<ProfileData> GetProfileData()
+        /*
+         public List<ProfileData> GetProfileData()
         {
             var test = (from u in db.Users
                         join u2 in db.Profiles on u.Id equals u2.FK_Users_Id
@@ -42,10 +43,13 @@ namespace BuddyHub.Repo
             return test;
 
         }
-        public ProfileData GetProfileData(string username)
+        */
+        public ProfileData GetProfileData()
         {
+            string name = "nayamet";
             var test = (from u in db.Users
                         join u2 in db.Profiles on u.Id equals u2.FK_Users_Id
+                        where u.Username == name
                         select new ProfileData()
                         {
                             Name = u.Name,
@@ -54,7 +58,13 @@ namespace BuddyHub.Repo
                             Contact = u2.Contact,
                             PImage = u2.ProfileImage,
                             Address = u2.Address,
-                            Gender = u2.Gender
+                            Gender = u2.Gender,
+                            DOB = u2.DOB.ToString(),
+                            Religion = u2.Religion,
+                            Relationship = u2.Relationship,
+                            Username = u.Username
+
+
                         }).ToList().FirstOrDefault();
             return test;
         }
