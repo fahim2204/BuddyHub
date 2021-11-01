@@ -35,11 +35,11 @@
 
     @*Main Post Section*@
     <div class="ms-3 col-12">
-       
-            <div class="lh-sm text-dark text-wrap">
-                @Model.PostText
-            </div>
-      
+
+        <div class="lh-sm text-dark text-wrap">
+            @Model.PostText
+        </div>
+
     </div>
 
     <div class="row border-top mt-2 py-1 d-flex align-items-center">
@@ -55,3 +55,87 @@
     </div>
 </div>
 
+<div class="row border rounded-3 mb-2 p-1 shadow-sm">
+
+
+    <div class="row w-100">
+        <div class="col-1">
+            <img class="img-fluid img-responsive rounded-circle mr-2 m-2"
+                 src="@Url.Content("~/Content/Images/user-avatar.jpg")" width="45" height="45">
+        </div>
+        <div class="col-5">
+            <form action="/Post/CommentOnPost/@Session["Username"]/@Model.PostId" method='POST'>
+                <div class="d-flex">
+                    <div class="row w-100">
+                        <div class="col-9">
+                            <input type="text" name="ctext" class="form-control mr-3 my-2"
+                                   placeholder="Add comment">
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-primary my-2"
+                                    type="submit">
+                                Comment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr class="text-muted my-2">
+    </div>
+
+
+    <h5>Comments:</h5>
+    <hr class="text-muted my-2">
+
+
+    @if(!Model.Comments.Any())
+    {
+    <h6 class="ms-4">No Comments For This Post.</h6>
+    }
+
+
+    @foreach (var item in Model.Comments)
+    {
+
+
+
+
+        @*Post info section*@
+        <div class="row d-flex align-items-center mb-1">
+            <div class="col-6 justify-content-start d-flex">
+                <div class="me-1">
+                    <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:30px;width:30px" />
+                </div>
+                <a href=""
+                   class="fs-6 text-success me-1 text-decoration-none">@item.FK_Username</a>
+                <div class="font-weight-light text-danger">
+                    <time class="timeago" datetime="@item.CreatedAt"></time>
+                </div>
+            </div>
+            <div class="col-6 justify-content-end d-flex align-items-center">
+                @if ((string)Session["Username"] == @item.FK_Username)
+                {
+                    <a href="\Post\EditPost\@Model.PostId" class="text-decoration-none">
+                        <i class="fa fa-edit me-2 text-success"><span class="ms-1">Edit</span></i>
+                    </a>
+                    <a href="\Post\RemovePost\@Model.PostId" class="text-decoration-none">
+                        <i class="fa fa-trash me-2 text-danger"><span class="ms-1">Delete</span></i>
+                    </a>
+                }
+
+                <i class="fa fa-ellipsis-h me-1"></i>
+
+            </div>
+        </div>
+
+        @*Main Post Section*@
+        <div class="ms-4 col-12 mb-2">
+
+            <div class="lh-sm ms-2 text-dark text-wrap">
+                @item.Text
+            </div>
+
+        </div>
+    }
+</div>

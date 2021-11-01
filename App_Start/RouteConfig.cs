@@ -30,6 +30,11 @@ namespace BuddyHub
                 url: "Post/LikeOnPost/{Username}/{PostId}",
                 defaults: new { controller = "Post", action = "LikeOnPost", Username = UrlParameter.Optional, PostId = UrlParameter.Optional }
             );
+            routes.MapRoute(
+               name: "Comment",
+               url: "Post/CommentOnPost/{Username}/{PostId}",
+               defaults: new { controller = "Post", action = "CommentOnPost", Username = UrlParameter.Optional, PostId = UrlParameter.Optional }
+           );
 
             routes.MapRoute(
              name: "Default",

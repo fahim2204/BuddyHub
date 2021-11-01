@@ -26,7 +26,17 @@ namespace BuddyHub.Repo
                              Status = (int)p.Status,
                              Username = u.Username,
                              Likes = (from l in db.Likes where l.FK_Posts_Id==p.Id select l).ToList(),
-                             Comments = (from c in db.Comments where c.FK_Posts_Id == c.Id select c).ToList()
+                             Comments = (from c in db.Comments
+                                         join u1 in db.Users on c.FK_Users_Id equals u1.Id
+                                         where c.FK_Posts_Id == p.Id
+                                         select new CommentData()
+                                         {
+                                             FK_Posts_Id = p.Id,
+                                             FK_Users_Id = u1.Id,
+                                             CreatedAt = c.CreatedAt,
+                                             FK_Username = u1.Username,
+                                             Text = c.Text
+                                         }).ToList()
                          }).ToList();
             return posts;
         }
@@ -43,7 +53,14 @@ namespace BuddyHub.Repo
                              Status = (int)p.Status,
                              Username = u.Username,
                               Likes = (from l in db.Likes where l.FK_Posts_Id == p.Id select l).ToList(),
-                             Comments = (from c in db.Comments where c.FK_Posts_Id == c.Id select c).ToList()
+                             Comments = (from c in db.Comments join u1 in db.Users on c.FK_Users_Id equals u1.Id  where c.FK_Posts_Id == p.Id select new CommentData()
+                             {
+                                 FK_Posts_Id = p.Id,
+                                 FK_Users_Id = u1.Id,
+                                 CreatedAt = c.CreatedAt,
+                                 FK_Username = u1.Username,
+                                 Text = c.Text
+                             }).ToList()
                          }).ToList().FirstOrDefault();
             return posts;
         }
@@ -59,6 +76,17 @@ namespace BuddyHub.Repo
             };
             db.Posts.Add(p);
             db.SaveChanges();
+        }
+
+        public static void CreateComment(string username, int postId, string ctext)
+        {
+            var user = UserRepo.FindUser(username);
+            System.Diagnostics.Debug.WriteLine("Post is Commented"+ ctext);
+
+            db.Comments.Add(new Comment() { FK_Users_Id = user.Id, FK_Posts_Id = postId, CreatedAt = DateTime.Now, Text = ctext });
+            db.SaveChanges();
+
+           
         }
 
         public static bool EditPost(PostData pd, int PoId)
