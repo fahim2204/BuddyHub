@@ -12,18 +12,20 @@ namespace BuddyHub.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
-        
+        [Authorize]
         public ActionResult Index()
         {
             int UserId = (int)Session["UserId"];
             var temp = ProfileRepository.GetProfileData(UserId);
             return View(temp);
         }
+        [Authorize]
         public ActionResult ViewProfile(string Username)
         {
             return View(ProfileRepository.GetProfileData(Username));
         }
         [HttpGet]
+        [Authorize]
         public ActionResult Edit()
         {
 
@@ -33,6 +35,7 @@ namespace BuddyHub.Controllers
             return View(temp);
         }
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(ProfileData p)
         {
             var db = new buddyhubEntities();

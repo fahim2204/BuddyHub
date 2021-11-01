@@ -81,5 +81,23 @@ namespace BuddyHub.Repo
             };
             return u;
         }
+
+        public static void ChangeStatus(string username)
+        {
+            var user = UserRepo.FindUser(username);
+            var tempUser = (from usr in db.Users.Where(usr => usr.Username == username) select usr).FirstOrDefault();
+
+            if (user.Status==1)
+            {
+                tempUser.Status = 2;
+                db.SaveChanges();
+            }
+            else
+            {
+                tempUser.Status = 1;
+                db.SaveChanges();
+
+            }
+        }
     }
 }

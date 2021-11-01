@@ -55,6 +55,7 @@ namespace BuddyHub.Repo
                             Address = u2.Address,
                             Gender = u2.Gender,
                             DOB = (DateTime)u2.DOB,
+                            Status = u.Status,
                             Religion = u2.Religion,
                             Relationship = u2.Relationship,
                             Username = u.Username
@@ -78,6 +79,7 @@ namespace BuddyHub.Repo
                             PImage = u2.ProfileImage,
                             Address = u2.Address,
                             Gender = u2.Gender,
+                            Status = u.Status,
                             DOB = (DateTime)u2.DOB,
                             Religion = u2.Religion,
                             Relationship = u2.Relationship,
@@ -102,6 +104,7 @@ namespace BuddyHub.Repo
                             PImage = u2.ProfileImage,
                             Address = u2.Address,
                             Gender = u2.Gender,
+                            Status = u.Status,
                             DOB = (DateTime)u2.DOB,
                             Religion = u2.Religion,
                             Relationship = u2.Relationship,

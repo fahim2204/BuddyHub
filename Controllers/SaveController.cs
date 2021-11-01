@@ -11,6 +11,7 @@ namespace BuddyHub.Controllers
     public class SaveController : Controller
     {
         // GET: Save
+        [Authorize]
         public ActionResult CheckPost(int id)
         {
             int UserId = (int)Session["UserId"];
@@ -23,7 +24,7 @@ namespace BuddyHub.Controllers
             SaveRepository.RemoveSavePost(post);
             return RedirectToAction("Index", "Home");
         }
-
+        [Authorize]
         public ActionResult ShowSavePost()
         {
             int UserId = (int)Session["UserId"];
@@ -31,7 +32,7 @@ namespace BuddyHub.Controllers
             pd = SaveRepository.GetPostByUserId(UserId);
             return View(pd);
         }
-
+        [Authorize]
         public ActionResult RemoveSavePost(int id)
         {
             int UserId = (int)Session["UserId"];
