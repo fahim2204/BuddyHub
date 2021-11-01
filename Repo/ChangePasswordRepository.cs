@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BuddyHub.Repo
 {
-    public class ChangePasswordRepository
+    public static class ChangePasswordRepository
     {
         static buddyhubEntities db;
         static ChangePasswordRepository()

@@ -81,8 +81,8 @@ namespace BuddyHub.Repo
                             DOB = (DateTime)u2.DOB,
                             Religion = u2.Religion,
                             Relationship = u2.Relationship,
-                            Username = u.Username
-
+                            Username = u.Username,
+                            FK_Users_Id = u2.FK_Users_Id
 
                         }).FirstOrDefault();
             return test;
@@ -105,8 +105,8 @@ namespace BuddyHub.Repo
                             DOB = (DateTime)u2.DOB,
                             Religion = u2.Religion,
                             Relationship = u2.Relationship,
-                            Username = u.Username
-
+                            Username = u.Username,
+                            FK_Users_Id = u2.FK_Users_Id
 
                         }).FirstOrDefault();
             return test;

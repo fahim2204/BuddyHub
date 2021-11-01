@@ -21,5 +21,6 @@ namespace BuddyHub.Models.VM
         public string Relationship { get; set; }
         public string Religion { get; set; }
         public string Username { get; set; }
+        public Nullable<int> FK_Users_Id { get; set; }
     }
 }
