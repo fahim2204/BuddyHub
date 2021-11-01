@@ -18,6 +18,19 @@ namespace BuddyHub.Controllers
             int FK_Users_Id = (int)Session["UserId"];
             RecoveryPasswordData rpd = new RecoveryPasswordData();
             rpd = RecoveryPasswordRepository.FindUser(FK_Users_Id);
+            var q2 = rpd.QuestionTwo;
+            if (rpd == null)
+            {
+                RecoveryPasswordData rp = new RecoveryPasswordData()
+                {
+                    QuestionOne = "",
+                    QuestionOneAnswer = "",
+                    QuestionTwo = "",
+                    QuestionTwoAnswer = ""
+                };
+                
+                return View(rp);
+            }
             return View(rpd);
         }
 
@@ -29,7 +42,7 @@ namespace BuddyHub.Controllers
             {
                 int FK_Users_Id = (int)Session["UserId"];
                 RecoveryPasswordRepository.SetQuestionAnswer(rpd, FK_Users_Id);
-                return RedirectToAction("SetRecoveryPassword");
+                return RedirectToAction("Index", "Home");
             }
             return View(rpd);
         }
@@ -109,5 +122,32 @@ namespace BuddyHub.Controllers
             return View();
         }
 
+        public ActionResult CheckingChangingPassword()
+        {
+           /* CheckingChangingPassword cpd = new CheckingChangingPassword();*/
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CheckingChangingPassword(CheckingChangingPassword ccp)
+        {
+            if(ModelState.IsValid)
+            {
+                string Username = (string)Session["Username"];
+                bool correct = ChangePasswordRepository.CheckingPassword(Username, ccp.OldPassword);
+                if(correct)
+                {
+                    ChangePasswordRepository.ChangePassword(Username, ccp.NewPassword);
+                    return RedirectToAction("Login", "User");
+                }
+                else
+                {
+                    ModelState.AddModelError("OldPassword", "Incorrect password");
+                    return View(ccp);
+                }
+
+            }
+            return View(ccp);
+        }
     }
 }

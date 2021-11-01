@@ -21,5 +21,17 @@ namespace BuddyHub.Repo
             db.SaveChanges();
         }
 
+        public static bool CheckingPassword(string username, string password)
+        {
+            var oldpass = (from op in db.Users
+                           where op.Username == username
+                           select op.Password).FirstOrDefault();
+            if(oldpass.Trim() == password)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

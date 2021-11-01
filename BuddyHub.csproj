@@ -194,6 +194,7 @@
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VirtualModel\ChangePassData.cs" />
+    <Compile Include="Models\VirtualModel\CheckingChangingPassword.cs" />
     <Compile Include="Models\VirtualModel\CommentData.cs" />
     <Compile Include="Models\VirtualModel\FollowerData.cs" />
     <Compile Include="Models\VirtualModel\NotificationData.cs" />
@@ -324,14 +325,12 @@
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\EditPost.cshtml" />
     <Content Include="Views\Save\ShowSavePost.cshtml" />
-
     <Content Include="Views\Follower\ShowFollowers.cshtml" />
     <Content Include="Views\Follower\ShowFollowing.cshtml" />
-
     <Content Include="Views\Admin\AllUser.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\AllPost.cshtml" />
-
+    <Content Include="Views\Password\CheckingChangingPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
