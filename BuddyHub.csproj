@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Auth\AdminAccess.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\FollowerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -322,10 +323,15 @@
     <Content Include="Views\Profile\ViewProfile.cshtml" />
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\EditPost.cshtml" />
-    <Content Include="Views\Admin\AllUser.cshtml" />
     <Content Include="Views\Save\ShowSavePost.cshtml" />
+
     <Content Include="Views\Follower\ShowFollowers.cshtml" />
     <Content Include="Views\Follower\ShowFollowing.cshtml" />
+
+    <Content Include="Views\Admin\AllUser.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\AllPost.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
