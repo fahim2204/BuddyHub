@@ -18,6 +18,12 @@ namespace BuddyHub.Controllers
         {
             return View();
         }
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.RemoveAll();
+            return RedirectToAction("Login");
+        }
 
         [HttpPost]
         public ActionResult Login(LoginData ld)
@@ -30,6 +36,7 @@ namespace BuddyHub.Controllers
                     FormsAuthentication.SetAuthCookie(user.Username.ToString(), false);
                     Session["UserId"] = user.Id;
                     Session["Username"] = user.Username;
+                    Session["Name"] = user.Name;
                     return RedirectToAction("Index", "Home");
                 }
             }

@@ -9,6 +9,7 @@ namespace BuddyHub.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             return View(PostRepository.GetPostData());

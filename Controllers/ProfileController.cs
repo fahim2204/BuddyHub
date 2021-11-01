@@ -19,12 +19,9 @@ namespace BuddyHub.Controllers
             var temp = ProfileRepository.GetProfileData(UserId);
             return View(temp);
         }
-        public ActionResult View(string Username)
+        public ActionResult ViewProfile(string Username)
         {
-            string UserName = "fahim";
-            var temp = ProfileRepository.GetProfileData(UserName);
-
-            return View(temp);
+            return View(ProfileRepository.GetProfileData(Username));
         }
         [HttpGet]
         public ActionResult Edit()
