@@ -75,5 +75,11 @@ namespace BuddyHub.Controllers
             PostRepository.CreateLike(username, postId);
             return Redirect("/Home/Index");
         }
+        [Authorize]
+        public ActionResult CommentOnPost(string username, int postId, string ctext)
+        {
+            PostRepository.CreateComment(username, postId, ctext);
+            return Redirect("/Post/View/"+postId);
+        }
     }
 }

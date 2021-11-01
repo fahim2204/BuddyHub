@@ -190,6 +190,7 @@
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VirtualModel\ChangePassData.cs" />
+    <Compile Include="Models\VirtualModel\CommentData.cs" />
     <Compile Include="Models\VirtualModel\RecoveryPasswordData.cs" />
     <Compile Include="Models\VirtualModel\RegistrationData.cs" />
     <Compile Include="Models\VirtualModel\LoginData.cs" />
@@ -310,7 +311,6 @@
     <Content Include="Views\Password\RecoveryNotSet.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
-
     <Content Include="Views\Profile\View.cshtml" />
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\EditPost.cshtml" />
