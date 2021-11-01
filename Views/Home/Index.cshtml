@@ -96,7 +96,9 @@
 
              }
              <a href="/Profile/@Session["Username"]" class="dashboard-nav-item"><i class="fa fa-user-circle"></i> My Profile</a>
-             <a th:classappend="${toActive=='user' ? 'active':''}" href="" class="dashboard-nav-item"><i class="fa fa-users"></i> Followers </a>
+             <a th:classappend="${toActive=='user' ? 'active':''}" href="/Follower/ShowFollowers" class="dashboard-nav-item"><i class="fa fa-users"></i> Followers </a>
+             <a th:classappend="${toActive=='user' ? 'active':''}" href="/Follower/ShowFollowing" class="dashboard-nav-item"><i class="fa fa-user"></i> Following </a>
+
              <a href="/Save/ShowSavePost" class="dashboard-nav-item"><i class="fa fa-heartbeat"></i> Favourite Post </a>
              <!-- <div class='dashboard-nav-dropdown'>
         <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-users"></i> Users </a>
@@ -110,6 +112,8 @@
     </div> -->
              <a href="" class="dashboard-nav-item"><i class="fa fa-book"></i> My Posts </a>
              <a href="" class="dashboard-nav-item"><i class="fa fa-key"></i> Change Password </a>
+             <a href="/Password/SetRecoveryPassword" class="dashboard-nav-item"><i class="fa fa-question-circle"></i> Set Security Question </a>
+
              <div class="nav-item-divider"></div>
              <a href="/User/Logout" class="dashboard-nav-item"><i class="fa fa-sign-out"></i> Logout </a>
          </nav>
