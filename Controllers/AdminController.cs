@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuddyHub.Repo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,8 +16,7 @@ namespace BuddyHub.Controllers
         }
         public ActionResult AllUser()
         {
-
-            return View();
+            return View(ProfileRepository.GetAllProfileData());
         }
     }
 }
