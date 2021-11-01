@@ -32,6 +32,7 @@ namespace BuddyHub.Repo
                 Type = "general",
                 Status = 1
             };
+            
             db.Users.Add(user);
             db.SaveChanges();
         }

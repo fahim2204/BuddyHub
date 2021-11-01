@@ -13,5 +13,10 @@ namespace BuddyHub.Controllers
         {
             return View();
         }
+        public ActionResult AllUser()
+        {
+
+            return View();
+        }
     }
 }
