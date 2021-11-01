@@ -52,7 +52,7 @@ namespace BuddyHub.Repo
                              CreatedAt = (DateTime)p.CreatedAt,
                              Status = (int)p.Status,
                              Username = u.Username,
-                              Likes = (from l in db.Likes where l.FK_Posts_Id == p.Id select l).ToList(),
+                             Likes = (from l in db.Likes where l.FK_Posts_Id == p.Id select l).ToList(),
                              Comments = (from c in db.Comments join u1 in db.Users on c.FK_Users_Id equals u1.Id  where c.FK_Posts_Id == p.Id select new CommentData()
                              {
                                  FK_Posts_Id = p.Id,
