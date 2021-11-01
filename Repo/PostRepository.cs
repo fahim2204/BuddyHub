@@ -127,6 +127,20 @@ namespace BuddyHub.Repo
             return false;
             
         }
+
+        public static List<PostData> GetMyPost(int UserId)
+        {
+            List<PostData> pd = new List<PostData>();
+            var PoId = (from p in db.Posts
+                        where p.FK_Users_Id == UserId
+                        select p.Id).ToList();
+            foreach(var po in PoId)
+            {
+                PostData p = GetPostDataById(po);
+                pd.Add(p);
+            }
+            return pd;
+        }
         public static void CreateLike(string username,int postId)
         {
             var user = UserRepo.FindUser(username);

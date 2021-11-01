@@ -99,5 +99,12 @@ namespace BuddyHub.Controllers
             PostRepository.ChangeStatus(PostId);
             return Redirect("/Admin/AllPost");
         }
+
+        public ActionResult MyPost()
+        {
+            int UserId = (int)Session["UserId"];
+            List<PostData> pd = PostRepository.GetMyPost(UserId);
+            return View(pd);
+        }
     }
 }

@@ -331,6 +331,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\AllPost.cshtml" />
     <Content Include="Views\Password\CheckingChangingPassword.cshtml" />
+    <Content Include="Views\Post\MyPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
