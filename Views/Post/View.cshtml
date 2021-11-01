@@ -11,7 +11,7 @@
             <div class="me-1">
                 <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:30px;width:30px" />
             </div>
-            <a href=""
+            <a href="/Profile/@Model.Username"
                class="fs-6 text-success me-1 text-decoration-none">@Model.Username</a>
             <div class="font-weight-light text-danger">
                 <time class="timeago" datetime="@Model.CreatedAt"></time>
@@ -107,7 +107,7 @@
                 <div class="me-1">
                     <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:30px;width:30px" />
                 </div>
-                <a href=""
+                <a href="/Profile/@item.FK_Username"
                    class="fs-6 text-success me-1 text-decoration-none">@item.FK_Username</a>
                 <div class="font-weight-light text-danger">
                     <time class="timeago" datetime="@item.CreatedAt"></time>

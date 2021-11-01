@@ -10,7 +10,7 @@
             <div class="row align-items-center g-1 m-2">
                 <div class="col-1 text-center">
                     <!-- Will change this picture dynamically -->
-                    <a class="text-dark" href="@Url.Action("View", "Profile", new {id="fahim"})">
+                    <a class="text-dark" href="/Profile/@Session["Username"]">
                         <span>
                             <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:55px;width:55px" />
                         </span>
@@ -36,7 +36,7 @@
                         <div class="me-1">
                             <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:30px;width:30px" />
                         </div>
-                        <a href=""
+                        <a href="/Profile/@Html.DisplayFor(modelItem => item.Username)"
                            class="fs-6 text-success me-1 text-decoration-none">@Html.DisplayFor(modelItem => item.Username)</a>
                         <div class="font-weight-light text-danger">
                             <time class="timeago" datetime="@Html.DisplayFor(modelItem => item.CreatedAt)"></time>
@@ -69,7 +69,7 @@
                 <div class="row border-top mt-2 py-1 d-flex align-items-center">
                     <div class="col-6 justify-content-start d-flex">
                         <a href="/Post/LikeOnPost/fahim/@Html.DisplayFor(modelItem => item.PostId)" class="btn btn-outline-primary px-2 py-0">@Html.DisplayFor(modelItem => item.Likes.Count) Likes<i class="fa fa-thumbs-o-up px-1 m-0"></i></a>
-                        <button class="btn btn-outline-primary px-2 py-0 ms-2">@Html.DisplayFor(modelItem => item.Comments.Count) Comments<i class="fa fa-comment px-1 m-0"></i></button>
+                        <a href="@Url.Action("View", "Post", new {id=@Html.DisplayFor(modelItem => item.PostId)})" class="btn btn-outline-primary px-2 py-0 ms-2">@Html.DisplayFor(modelItem => item.Comments.Count) Comments<i class="fa fa-comment px-1 m-0"></i></a>
                     </div>
                     <div class="col-6 justify-content-end d-flex">
                         <div class="mx-2"><i class="fa fa-heart me-1"></i></div>
@@ -84,33 +84,11 @@
     </div>
 
     <div class="col-4">
-        side bar
+        <div class="row border rounded-3 mb-2 ms-2 p-1 shadow-sm">
+
+        </div>
     </div>
 </div>
 
 
-
-
-
-@*<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.PostId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.PostText)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CreatedAt)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Status)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Username)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-    </td>*@
 
