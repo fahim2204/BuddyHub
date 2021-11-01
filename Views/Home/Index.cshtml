@@ -85,9 +85,35 @@
 
     <div class="col-4">
  <div class="row border rounded-3 mb-2 ms-2 p-1 shadow-sm">
-            <a href="/Save/ShowSavePost" class="btn btn-primary">Save posts</a>
+            @*<a href="/Save/ShowSavePost" class="btn btn-primary">Save posts</a>*@
 
-       
+     <div class="dashboard-nav bg-secondary rounded-3">
+         <nav class="dashboard-nav-list">
+             <!-- <a th:href="" class="dashboard-nav-item"><i class="fas fa-home"></i>Home </a> -->
+             @if ((String)Session["Type"] == "admin")
+             {
+                 <a href="/Admin/Index" class="dashboard-nav-item"><i class="fa fa-dashboard"></i> Goto Admin Panel</a>
+
+             }
+             <a href="/Profile/@Session["Username"]" class="dashboard-nav-item"><i class="fa fa-user-circle"></i> My Profile</a>
+             <a th:classappend="${toActive=='user' ? 'active':''}" href="" class="dashboard-nav-item"><i class="fa fa-users"></i> Followers </a>
+             <a href="/Save/ShowSavePost" class="dashboard-nav-item"><i class="fa fa-heartbeat"></i> Favourite Post </a>
+             <!-- <div class='dashboard-nav-dropdown'>
+        <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-users"></i> Users </a>
+        <div class='dashboard-nav-dropdown-menu'>
+            <a href="#" class="dashboard-nav-dropdown-item">All</a>
+            <a href="#" class="dashboard-nav-dropdown-item">Subscribed</a>
+            <a href="#" class="dashboard-nav-dropdown-item">Non-subscribed</a>
+            <a href="#" class="dashboard-nav-dropdown-item">Banned</a>
+            <a href="#" class="dashboard-nav-dropdown-item">New</a>
+        </div>
+    </div> -->
+             <a href="" class="dashboard-nav-item"><i class="fa fa-book"></i> My Posts </a>
+             <a href="" class="dashboard-nav-item"><i class="fa fa-key"></i> Change Password </a>
+             <div class="nav-item-divider"></div>
+             <a href="/User/Logout" class="dashboard-nav-item"><i class="fa fa-sign-out"></i> Logout </a>
+         </nav>
+     </div>
 
 
         </div>

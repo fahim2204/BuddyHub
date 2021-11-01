@@ -1,4 +1,5 @@
-﻿using BuddyHub.Models.EntityFramework;
+﻿using BuddyHub.Auth;
+using BuddyHub.Models.EntityFramework;
 using BuddyHub.Models.VirtualModel;
 using BuddyHub.Repo;
 using System;
@@ -18,6 +19,7 @@ namespace BuddyHub.Controllers
         {
             return View();
         }
+        [Authorize]
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
@@ -33,11 +35,27 @@ namespace BuddyHub.Controllers
                 var user = UserRepo.GetAuthenticateUser(ld);
                 if (user != null)
                 {
-                    FormsAuthentication.SetAuthCookie(user.Username.ToString(), false);
-                    Session["UserId"] = user.Id;
-                    Session["Username"] = user.Username;
-                    Session["Name"] = user.Name;
-                    return RedirectToAction("Index", "Home");
+                    if (user.Status == 1)
+                    {
+                        FormsAuthentication.SetAuthCookie(user.Type.Replace(" ", "").ToString(), false);
+                        System.Diagnostics.Debug.WriteLine("Auth cokies set");
+
+                        Session["UserId"] = user.Id;
+                        Session["Username"] = user.Username.Replace(" ", "");
+                        Session["Name"] = user.Name;
+                        Session["Type"] = user.Type.Replace(" ","");
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Password", "Sorry You are Disable By Admin!!!");
+                        return View(ld);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Password", "Wrong Credentials!!! Try again");
+                    return View(ld);
                 }
             }
              return View(ld);
@@ -68,7 +86,12 @@ namespace BuddyHub.Controllers
             }
             return View(rd);
         }
-
+        [AdminAccess]
+        public ActionResult ChangeStatus(string username)
+        {
+            UserRepo.ChangeStatus(username);
+            return Redirect("/Admin/AllUser");
+        }
 
     }
 }

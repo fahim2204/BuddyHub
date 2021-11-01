@@ -25,6 +25,16 @@ namespace BuddyHub
             //);
             //Post / LikeOnPost / fahim / 10
             routes.MapRoute(
+                name: "ChangePostStatus",
+                url: "Post/ChangeStatus/{PostId}",
+                defaults: new { controller = "Post", action = "ChangeStatus", PostId = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "ChangeProfileStatus",
+                url: "User/ChangeStatus/{Username}",
+                defaults: new { controller = "User", action = "ChangeStatus", Username = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "Profile",
                 url: "Profile/{Username}",
                 defaults: new { controller = "Profile", action = "ViewProfile", Username = UrlParameter.Optional }

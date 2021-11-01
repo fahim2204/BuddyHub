@@ -36,8 +36,8 @@ namespace BuddyHub.Repo
                                              CreatedAt = c.CreatedAt,
                                              FK_Username = u1.Username,
                                              Text = c.Text
-                                         }).ToList()
-                         }).ToList();
+                                         }).OrderByDescending(c => c.CreatedAt).ToList()
+                         }).OrderByDescending(p => p.CreatedAt).ToList();
             return posts;
         }
         public static PostData GetPostDataById(int id)
@@ -60,9 +60,27 @@ namespace BuddyHub.Repo
                                  CreatedAt = c.CreatedAt,
                                  FK_Username = u1.Username,
                                  Text = c.Text
-                             }).ToList()
+                             }).OrderByDescending(c => c.CreatedAt).ToList()
                          }).ToList().FirstOrDefault();
             return posts;
+        }
+
+        public static void ChangeStatus(int postId)
+        {
+          
+            var tempPost = (from p in db.Posts.Where(p => p.Id == postId) select p).FirstOrDefault();
+
+            if (tempPost.Status == 1)
+            {
+                tempPost.Status = 2;
+                db.SaveChanges();
+            }
+            else
+            {
+                tempPost.Status = 1;
+                db.SaveChanges();
+
+            }
         }
 
         public static void CreatePost(PostData pd, int UserId)

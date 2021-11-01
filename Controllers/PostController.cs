@@ -1,4 +1,5 @@
-﻿using BuddyHub.Models.VirtualModel;
+﻿using BuddyHub.Auth;
+using BuddyHub.Models.VirtualModel;
 using BuddyHub.Repo;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace BuddyHub.Controllers
     public class PostController : Controller
     {
         // GET: Post
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
+        [Authorize]
         public ActionResult View(int id)
         {
             return View(PostRepository.GetPostDataById(id));
@@ -36,6 +39,7 @@ namespace BuddyHub.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         public ActionResult EditPost(int id) 
         {
             //System.Diagnostics.Debug.WriteLine(PoId);
@@ -70,6 +74,14 @@ namespace BuddyHub.Controllers
             bool b = PostRepository.RemovePost(id, UserId);         
             return RedirectToAction("Index", "Home");
         }
+        [AdminAccess]
+        public ActionResult AdminRemovePost(int id)
+        {
+            int UserId = (int)Session["UserId"];
+            bool b = PostRepository.RemovePost(id, UserId);
+            return RedirectToAction("AllPost", "Admin");
+        }
+        [Authorize]
         public ActionResult LikeOnPost(string username, int postId)
         {
             PostRepository.CreateLike(username, postId);
@@ -80,6 +92,12 @@ namespace BuddyHub.Controllers
         {
             PostRepository.CreateComment(username, postId, ctext);
             return Redirect("/Post/View/"+postId);
+        }
+        [AdminAccess]
+        public ActionResult ChangeStatus(int PostId)
+        {
+            PostRepository.ChangeStatus(PostId);
+            return Redirect("/Admin/AllPost");
         }
     }
 }
