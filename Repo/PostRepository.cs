@@ -40,6 +40,33 @@ namespace BuddyHub.Repo
                          }).OrderByDescending(p => p.CreatedAt).ToList();
             return posts;
         }
+        public static List<PostData> GetPostBySearch(String text)
+        {
+            var posts = (from u in db.Users
+                         join p in db.Posts on u.Id equals p.FK_Users_Id
+                         where p.PostsText.Contains(text)
+                         select new PostData()
+                         {
+                             PostId = p.Id,
+                             PostText = p.PostsText,
+                             CreatedAt = (DateTime)p.CreatedAt,
+                             Status = (int)p.Status,
+                             Username = u.Username,
+                             Likes = (from l in db.Likes where l.FK_Posts_Id == p.Id select l).ToList(),
+                             Comments = (from c in db.Comments
+                                         join u1 in db.Users on c.FK_Users_Id equals u1.Id
+                                         where c.FK_Posts_Id == p.Id
+                                         select new CommentData()
+                                         {
+                                             FK_Posts_Id = p.Id,
+                                             FK_Users_Id = u1.Id,
+                                             CreatedAt = c.CreatedAt,
+                                             FK_Username = u1.Username,
+                                             Text = c.Text
+                                         }).OrderByDescending(c => c.CreatedAt).ToList()
+                         }).OrderByDescending(p => p.CreatedAt).ToList();
+            return posts;
+        }
         public static PostData GetPostDataById(int id)
         {
             var posts = (from u in db.Users

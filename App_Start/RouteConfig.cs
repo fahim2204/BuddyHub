@@ -40,6 +40,11 @@ namespace BuddyHub
                 defaults: new { controller = "Profile", action = "ViewProfile", Username = UrlParameter.Optional }
             );
             routes.MapRoute(
+                name: "EditProfile",
+                url: "Profile/Edit/{Username}",
+                defaults: new { controller = "Profile", action = "Edit", Username = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "Like",
                 url: "Post/LikeOnPost/{Username}/{PostId}",
                 defaults: new { controller = "Post", action = "LikeOnPost", Username = UrlParameter.Optional, PostId = UrlParameter.Optional }

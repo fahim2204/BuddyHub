@@ -43,7 +43,7 @@ namespace BuddyHub.Controllers
             var temp = ProfileRepository.GetProfileData(UserId);
             ProfileRepository.UpdateName(UserId, p.Name);
             ProfileRepository.UpdateProfile(UserId, p);
-            return RedirectToAction("Index", "Profile");
+            return Redirect("/Profile/"+p.Username);
         }
     }
 }
