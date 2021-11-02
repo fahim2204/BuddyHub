@@ -23,6 +23,6 @@ namespace BuddyHub.Models.VM
         public string Username { get; set; }
         public Nullable<int> FK_Users_Id { get; set; }
         public int Status { get; internal set; }
-
+        public string ProfileImage { get; internal set; }
     }
 }
