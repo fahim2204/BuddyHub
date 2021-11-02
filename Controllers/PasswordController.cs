@@ -18,7 +18,7 @@ namespace BuddyHub.Controllers
             int FK_Users_Id = (int)Session["UserId"];
             RecoveryPasswordData rpd = new RecoveryPasswordData();
             rpd = RecoveryPasswordRepository.FindUser(FK_Users_Id);
-            var q2 = rpd.QuestionTwo;
+            //var q2 = rpd.QuestionTwo;
             if (rpd == null)
             {
                 RecoveryPasswordData rp = new RecoveryPasswordData()

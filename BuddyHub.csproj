@@ -338,10 +338,11 @@
     <Content Include="Views\WorkProfile\AddWorkProfile.cshtml" />
     <Content Include="Views\WorkProfile\EditWorkProfile.cshtml" />
     <Content Include="Views\WorkProfile\ShowWorkProfile.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\Post\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Notification\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

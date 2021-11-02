@@ -81,6 +81,26 @@ namespace BuddyHub.Repo
             };
             return u;
         }
+        public static UserData FindUserByPostId(int id)
+        {
+            var user = (from usr in db.Users join ps in db.Posts on usr.Id equals ps.FK_Users_Id
+                        where ps.Id == id
+                        select usr).FirstOrDefault();
+            if (user == null)
+            {
+                return null;
+            }
+            UserData u = new UserData()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Username = user.Username,
+                Password = user.Password,
+                Type = user.Type,
+                Status = user.Status
+            };
+            return u;
+        }
 
         public static void ChangeStatus(string username)
         {

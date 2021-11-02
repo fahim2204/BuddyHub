@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuddyHub.Repo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,10 @@ namespace BuddyHub.Controllers
     public class NotificationController : Controller
     {
         // GET: Notification
-        public ActionResult Index()
+        [Authorize]
+        public ActionResult Index(int id)
         {
-            return View();
+            return View(NotificationRepository.GetNotificationDataFor(id));
         }
     }
 }

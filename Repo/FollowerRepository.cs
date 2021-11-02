@@ -43,6 +43,7 @@ namespace BuddyHub.Repo
                 FR_Following_Users_Id = FollowingUserId
             };
             db.Followers.Add(f);
+            NotificationRepository.SetNotification(UserRepo.FindUserById(UserId).Username, UserRepo.FindUserById(FollowingUserId).Username, UserRepo.FindUserById(FollowingUserId).Name, "started following you", "/Follower/ShowFollowers");
             db.SaveChanges();
         }
 
