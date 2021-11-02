@@ -96,6 +96,9 @@
 
              }
              <a href="/Profile/@Session["Username"]" class="dashboard-nav-item"><i class="fa fa-user-circle"></i> My Profile</a>
+
+             <a href="/WorkProfile/ShowWorkProfile" class="dashboard-nav-item"><i class="fa fa-book"></i>Work profile</a>
+
              <a th:classappend="${toActive=='user' ? 'active':''}" href="/Follower/ShowFollowers" class="dashboard-nav-item"><i class="fa fa-users"></i> Followers </a>
              <a th:classappend="${toActive=='user' ? 'active':''}" href="/Follower/ShowFollowing" class="dashboard-nav-item"><i class="fa fa-user"></i> Following </a>
 
@@ -110,9 +113,10 @@
             <a href="#" class="dashboard-nav-dropdown-item">New</a>
         </div>
     </div> -->
-             <a href="" class="dashboard-nav-item"><i class="fa fa-book"></i> My Posts </a>
-             <a href="" class="dashboard-nav-item"><i class="fa fa-key"></i> Change Password </a>
-             <a href="/Password/SetRecoveryPassword" class="dashboard-nav-item"><i class="fa fa-question-circle"></i> Set Security Question </a>
+
+             <a href="/post/MyPost" class="dashboard-nav-item"><i class="fa fa-book"></i> My Posts </a>
+             <a href="/Password/CheckingChangingPassword" class="dashboard-nav-item"><i class="fa fa-key"></i> Change Password </a>
+             <a href="/Password/SetRecoveryPassword" class="dashboard-nav-item"><i class="fa fa-key"></i> Recovery Password </a>
 
              <div class="nav-item-divider"></div>
              <a href="/User/Logout" class="dashboard-nav-item"><i class="fa fa-sign-out"></i> Logout </a>

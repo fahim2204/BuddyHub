@@ -139,6 +139,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SaveController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WorkProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,6 +195,7 @@
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VirtualModel\ChangePassData.cs" />
+    <Compile Include="Models\VirtualModel\CheckingChangingPassword.cs" />
     <Compile Include="Models\VirtualModel\CommentData.cs" />
     <Compile Include="Models\VirtualModel\FollowerData.cs" />
     <Compile Include="Models\VirtualModel\NotificationData.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="Models\VirtualModel\ProfileData.cs" />
     <Compile Include="Models\VirtualModel\SaveData.cs" />
     <Compile Include="Models\VirtualModel\UserData.cs" />
+    <Compile Include="Models\VirtualModel\WorkProfileData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repo\ChangePasswordRepository.cs" />
     <Compile Include="Repo\FollowerRepository.cs" />
@@ -213,6 +216,7 @@
     <Compile Include="Repo\RecoveryPasswordRepository.cs" />
     <Compile Include="Repo\SaveRepository.cs" />
     <Compile Include="Repo\UserRepo.cs" />
+    <Compile Include="Repo\WorkProfileRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -324,14 +328,16 @@
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\EditPost.cshtml" />
     <Content Include="Views\Save\ShowSavePost.cshtml" />
-
     <Content Include="Views\Follower\ShowFollowers.cshtml" />
     <Content Include="Views\Follower\ShowFollowing.cshtml" />
-
     <Content Include="Views\Admin\AllUser.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\AllPost.cshtml" />
-
+    <Content Include="Views\Password\CheckingChangingPassword.cshtml" />
+    <Content Include="Views\Post\MyPost.cshtml" />
+    <Content Include="Views\WorkProfile\AddWorkProfile.cshtml" />
+    <Content Include="Views\WorkProfile\EditWorkProfile.cshtml" />
+    <Content Include="Views\WorkProfile\ShowWorkProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

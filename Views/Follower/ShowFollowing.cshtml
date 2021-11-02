@@ -18,14 +18,16 @@
 
 @foreach (var item in Model) {
 <tr>
-    <a href="/Profile/ViewProfile/@item.Username">
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.PImage)
-    </td>
-    </a>
+        <td>
+            <a href="/Profile/ViewProfile/@item.Username" class="btn btn-success">Goto profile</a>
+        </td>    
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PImage)
+        </td>
+    
 
 </tr>
 }
