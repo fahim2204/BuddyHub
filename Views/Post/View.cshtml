@@ -1,4 +1,11 @@
-﻿@model BuddyHub.Models.VirtualModel.PostData
+﻿
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+@model BuddyHub.Models.VirtualModel.PostData
 
 @{
     ViewBag.Title = "View";
@@ -11,7 +18,7 @@
             <div class="me-1">
                 <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:30px;width:30px" />
             </div>
-            <a href="/Profile/@Model.Username"
+            <a href=""
                class="fs-6 text-success me-1 text-decoration-none">@Model.Username</a>
             <div class="font-weight-light text-danger">
                 <time class="timeago" datetime="@Model.CreatedAt"></time>
@@ -20,12 +27,12 @@
         <div class="col-6 justify-content-end d-flex align-items-center">
             @if ((string)Session["Username"] == @Model.Username)
             {
-                <a href="\Post\EditPost\@Model.PostId" class="text-decoration-none">
-                    <i class="fa fa-edit me-2 text-success"><span class="ms-1">Edit</span></i>
-                </a>
-                <a href="\Post\RemovePost\@Model.PostId" class="text-decoration-none">
-                    <i class="fa fa-trash me-2 text-danger"><span class="ms-1">Delete</span></i>
-                </a>
+            <a href="\Post\EditPost\@Model.PostId" class="text-decoration-none">
+                <i class="fa fa-edit me-2 text-success"><span class="ms-1">Edit</span></i>
+            </a>
+            <a href="\Post\RemovePost\@Model.PostId" class="text-decoration-none">
+                <i class="fa fa-trash me-2 text-danger"><span class="ms-1">Delete</span></i>
+            </a>
             }
 
             <i class="fa fa-ellipsis-h me-1"></i>
@@ -101,41 +108,41 @@
 
 
 
-        @*Post info section*@
-        <div class="row d-flex align-items-center mb-1">
-            <div class="col-6 justify-content-start d-flex">
-                <div class="me-1">
-                    <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:30px;width:30px" />
-                </div>
-                <a href="/Profile/@item.FK_Username"
-                   class="fs-6 text-success me-1 text-decoration-none">@item.FK_Username</a>
-                <div class="font-weight-light text-danger">
-                    <time class="timeago" datetime="@item.CreatedAt"></time>
-                </div>
+    @*Post info section*@
+    <div class="row d-flex align-items-center mb-1">
+        <div class="col-6 justify-content-start d-flex">
+            <div class="me-1">
+                <img class="rounded-circle" src="@Url.Content("~/Content/Images/user-avatar.jpg")" style="height:30px;width:30px" />
             </div>
-            <div class="col-6 justify-content-end d-flex align-items-center">
-                @if ((string)Session["Username"] == @item.FK_Username)
+            <a href=""
+               class="fs-6 text-success me-1 text-decoration-none">@item.FK_Username</a>
+            <div class="font-weight-light text-danger">
+                <time class="timeago" datetime="@item.CreatedAt"></time>
+            </div>
+        </div>
+        <div class="col-6 justify-content-end d-flex align-items-center">
+            @if ((string)Session["Username"] == @item.FK_Username)
                 {
-                    <a href="\Post\EditPost\@Model.PostId" class="text-decoration-none">
-                        <i class="fa fa-edit me-2 text-success"><span class="ms-1">Edit</span></i>
-                    </a>
-                    <a href="\Post\RemovePost\@Model.PostId" class="text-decoration-none">
-                        <i class="fa fa-trash me-2 text-danger"><span class="ms-1">Delete</span></i>
-                    </a>
+            <a href="\Post\EditPost\@Model.PostId" class="text-decoration-none">
+                <i class="fa fa-edit me-2 text-success"><span class="ms-1">Edit</span></i>
+            </a>
+            <a href="\Post\RemovePost\@Model.PostId" class="text-decoration-none">
+                <i class="fa fa-trash me-2 text-danger"><span class="ms-1">Delete</span></i>
+            </a>
                 }
 
-                <i class="fa fa-ellipsis-h me-1"></i>
-
-            </div>
-        </div>
-
-        @*Main Post Section*@
-        <div class="ms-4 col-12 mb-2">
-
-            <div class="lh-sm ms-2 text-dark text-wrap">
-                @item.Text
-            </div>
+            <i class="fa fa-ellipsis-h me-1"></i>
 
         </div>
+    </div>
+
+    @*Main Post Section*@
+    <div class="ms-4 col-12 mb-2">
+
+        <div class="lh-sm ms-2 text-dark text-wrap">
+            @item.Text
+        </div>
+
+    </div>
     }
 </div>

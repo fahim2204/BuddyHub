@@ -102,6 +102,7 @@ namespace BuddyHub.Repo
             System.Diagnostics.Debug.WriteLine("Post is Commented"+ ctext);
 
             db.Comments.Add(new Comment() { FK_Users_Id = user.Id, FK_Posts_Id = postId, CreatedAt = DateTime.Now, Text = ctext });
+            NotificationRepository.SetNotification(UserRepo.FindUserByPostId(postId).Username, UserRepo.FindUserById(user.Id).Username, UserRepo.FindUserById(user.Id).Name, "commented on your post", "/Post/View/"+postId);
             db.SaveChanges();
 
            
@@ -147,6 +148,9 @@ namespace BuddyHub.Repo
             if (!IsPostLikedByUser(user.Id, postId))
             {
                 db.Likes.Add(new Like() { FK_Users_Id = user.Id, FK_Posts_Id = postId });
+                var te = UserRepo.FindUserByPostId(postId).Username;
+                var dg = UserRepo.FindUserById(user.Id).Username;
+                NotificationRepository.SetNotification(UserRepo.FindUserByPostId(postId).Username, UserRepo.FindUserById(user.Id).Username, UserRepo.FindUserById(user.Id).Name, "liked on your post", "/Post/View/" + postId);
                 db.SaveChanges();
                 System.Diagnostics.Debug.WriteLine("Post is Liked");
 

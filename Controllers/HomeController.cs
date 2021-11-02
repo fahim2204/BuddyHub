@@ -14,5 +14,6 @@ namespace BuddyHub.Controllers
         {
             return View(PostRepository.GetPostData());
         }
+        
     }
 }
