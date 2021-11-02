@@ -340,6 +340,7 @@
     <Content Include="Views\WorkProfile\ShowWorkProfile.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Post\View.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

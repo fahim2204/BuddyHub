@@ -14,6 +14,11 @@ namespace BuddyHub.Controllers
         {
             return View(PostRepository.GetPostData());
         }
-        
+        [Authorize]
+        public ActionResult Search(string SearchText)
+        {
+            return View(PostRepository.GetPostBySearch(SearchText));
+        }
+
     }
 }
