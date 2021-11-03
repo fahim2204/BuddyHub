@@ -96,9 +96,6 @@
 
              }
              <a href="/Profile/@Session["Username"]" class="dashboard-nav-item"><i class="fa fa-user-circle"></i> My Profile</a>
-
-             <a href="/WorkProfile/ShowWorkProfile" class="dashboard-nav-item"><i class="fa fa-book"></i>Work profile</a>
-
              <a th:classappend="${toActive=='user' ? 'active':''}" href="/Follower/ShowFollowers" class="dashboard-nav-item"><i class="fa fa-users"></i> Followers </a>
              <a th:classappend="${toActive=='user' ? 'active':''}" href="/Follower/ShowFollowing" class="dashboard-nav-item"><i class="fa fa-user"></i> Following </a>
 

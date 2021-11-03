@@ -18,7 +18,6 @@ namespace BuddyHub.Models.EntityFramework
         public Post()
         {
             this.Comments = new HashSet<Comment>();
-            this.Likes = new HashSet<Like>();
             this.PostImages = new HashSet<PostImage>();
             this.Saves = new HashSet<Save>();
         }
@@ -31,8 +30,6 @@ namespace BuddyHub.Models.EntityFramework
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Like> Likes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostImage> PostImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

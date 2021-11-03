@@ -20,10 +20,10 @@ namespace BuddyHub.Models.EntityFramework
         public string ProfileImage { get; set; }
         public string Address { get; set; }
         public string Gender { get; set; }
-        public Nullable<System.DateTime> DOB { get; set; }
+        public System.DateTime DOB { get; set; }
         public string Religion { get; set; }
         public string Relationship { get; set; }
-        public Nullable<int> FK_Users_Id { get; set; }
+        public int FK_Users_Id { get; set; }
     
         public virtual User User { get; set; }
     }

@@ -257,13 +257,6 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\EntityFramework\BuddyHub.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BuddyHub.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EntityFramework\BuddyHub.edmx.diagram">
-      <DependentUpon>BuddyHub.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -283,6 +276,13 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\EntityFramework\BuddyHub.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BuddyHub.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EntityFramework\BuddyHub.edmx.diagram">
+      <DependentUpon>BuddyHub.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\BuddyHub - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -322,7 +322,6 @@
     <Content Include="Views\Password\CheckingUsername.cshtml" />
     <Content Include="Views\Password\ChangePassword.cshtml" />
     <Content Include="Views\Password\RecoveryNotSet.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\ViewProfile.cshtml" />
     <Content Include="Views\Post\CreatePost.cshtml" />
@@ -341,6 +340,8 @@
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Post\View.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Profile\WorkProfile.cshtml" />
+    <Content Include="Views\Profile\Posts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

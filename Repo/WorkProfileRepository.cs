@@ -30,11 +30,19 @@ namespace BuddyHub.Repo
                     StartYear = w.StartYear,
                     EndYear = w.EndYear,
                     Position = w.Position,
-                    FK_Users_Id = w.FK_Users_Id
+                    FK_Users_Id = w.FK_Users_Id,
+                    Username = (from u in db.Users where u.Id == UserId select u.Username).ToString()
                 };
                 wpd.Add(work);
             }
             return wpd;
+        }
+
+        public static void DeleteWorkProfile(int opId)
+        {
+            var wp = db.WorksProfiles.Find(opId);
+            db.WorksProfiles.Remove(wp);
+            db.SaveChanges();
         }
 
         public static void AddWorkProfile(int UserId, WorkProfileData wpd)

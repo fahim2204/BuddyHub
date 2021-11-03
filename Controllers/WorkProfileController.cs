@@ -11,20 +11,18 @@ namespace BuddyHub.Controllers
     public class WorkProfileController : Controller
     {
         // GET: WorkProfile
-        public ActionResult ShowWorkProfile()
-        {
-            int UserId = (int)Session["UserId"];
-            List<WorkProfileData> wp = WorkProfileRepository.ShowWorkProfile(UserId);
-            return View(wp);
-        }
 
         [HttpGet]
+        [Authorize]
+
         public ActionResult AddWorkProfile()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
+
         public ActionResult AddWorkProfile(WorkProfileData wpd)
         {
             int UserId = (int)Session["UserId"];
@@ -37,6 +35,8 @@ namespace BuddyHub.Controllers
         }
 
         [HttpGet]
+        [Authorize]
+
         public ActionResult EditWorkProfile(int id)
         {
             WorkProfileData wpd = WorkProfileRepository.FindWorkProfileById(id);
@@ -44,6 +44,7 @@ namespace BuddyHub.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult EditWorkProfile(WorkProfileData wpd)
         {
             int UserId = (int)Session["UserId"];
