@@ -13,14 +13,22 @@ namespace BuddyHub.Controllers
     {
         // GET: Profile
         [Authorize]
-        public ActionResult Index()
+        public ActionResult ViewProfile(string Username)
         {
-            int UserId = (int)Session["UserId"];
-            var temp = ProfileRepository.GetProfileData(UserId);
-            return View(temp);
+            return View(ProfileRepository.GetProfileData(Username));
         }
         [Authorize]
-        public ActionResult ViewProfile(string Username)
+        public ActionResult WorkProfile(string Username)
+        {
+            return View(ProfileRepository.GetProfileData(Username));
+        }
+        public ActionResult DeleteWorkProfile(string Username, int OpId)
+        {
+            WorkProfileRepository.DeleteWorkProfile(OpId);
+            return Redirect("/Profile/"+Username);
+        }
+        [Authorize]
+        public ActionResult Posts(string Username)
         {
             return View(ProfileRepository.GetProfileData(Username));
         }

@@ -2,6 +2,7 @@
 using BuddyHub.Models.VirtualModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
@@ -31,10 +32,20 @@ namespace BuddyHub.Repo
                 Name = ld.Name,
                 Type = "general",
                 Status = 1
-            };
-            
+            };            
             db.Users.Add(user);
             db.SaveChanges();
+           
+            var profile = new Profile()
+            {
+                
+                FK_Users_Id = (from u in db.Users where u.Username == ld.Username select u).FirstOrDefault().Id
+            };
+            db.Profiles.Add(profile);
+            db.SaveChanges();
+
+   
+           
         }
         public static bool IsUsernameUnique(string username)
         {
