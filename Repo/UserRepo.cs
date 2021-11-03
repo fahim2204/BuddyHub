@@ -113,6 +113,16 @@ namespace BuddyHub.Repo
             return u;
         }
 
+        public static void RemoveUserAdmin(int id)
+        {
+            var profile = (from usr in db.Profiles.Where(usr => usr.FK_Users_Id == id) select usr).FirstOrDefault();
+            var user = (from usr in db.Users.Where(usr => usr.Id == id) select usr).FirstOrDefault();
+            db.Profiles.Remove(profile);
+            db.Users.Remove(user);
+            db.SaveChanges();
+
+        }
+
         public static void ChangeStatus(string username)
         {
             var user = UserRepo.FindUser(username);

@@ -92,6 +92,12 @@ namespace BuddyHub.Controllers
             UserRepo.ChangeStatus(username);
             return Redirect("/Admin/AllUser");
         }
+        [AdminAccess]
+        public ActionResult AdminUserRemove(int id)
+        {
+            UserRepo.RemoveUserAdmin(id);
+            return Redirect("/Admin/AllUser");
+        }
 
     }
 }

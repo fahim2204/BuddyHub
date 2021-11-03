@@ -143,56 +143,56 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFramework\BuddyHub.Context.cs">
+    <Compile Include="Models\EntityFramework\Buddyhub.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BuddyHub.Context.tt</DependentUpon>
+      <DependentUpon>Buddyhub.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFramework\BuddyHub.cs">
+    <Compile Include="Models\EntityFramework\Buddyhub.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFramework\BuddyHub.Designer.cs">
+    <Compile Include="Models\EntityFramework\Buddyhub.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BuddyHub.edmx</DependentUpon>
+      <DependentUpon>Buddyhub.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\Comment.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\Follower.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\Like.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\Notification.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\Post.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\PostImage.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\Profile.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\RecoveryPassword.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\Save.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\SocialLink.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\User.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\WorksProfile.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
+      <DependentUpon>Buddyhub.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VirtualModel\ChangePassData.cs" />
     <Compile Include="Models\VirtualModel\CheckingChangingPassword.cs" />
@@ -241,15 +241,15 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\EntityFramework\BuddyHub.Context.tt">
+    <Content Include="Models\EntityFramework\Buddyhub.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BuddyHub.edmx</DependentUpon>
-      <LastGenOutput>BuddyHub.Context.cs</LastGenOutput>
+      <DependentUpon>Buddyhub.edmx</DependentUpon>
+      <LastGenOutput>Buddyhub.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EntityFramework\BuddyHub.tt">
+    <Content Include="Models\EntityFramework\Buddyhub.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BuddyHub.edmx</DependentUpon>
-      <LastGenOutput>BuddyHub.cs</LastGenOutput>
+      <DependentUpon>Buddyhub.edmx</DependentUpon>
+      <LastGenOutput>Buddyhub.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -276,12 +276,12 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\EntityFramework\BuddyHub.edmx">
+    <EntityDeploy Include="Models\EntityFramework\Buddyhub.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BuddyHub.Designer.cs</LastGenOutput>
+      <LastGenOutput>Buddyhub.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\EntityFramework\BuddyHub.edmx.diagram">
-      <DependentUpon>BuddyHub.edmx</DependentUpon>
+    <Content Include="Models\EntityFramework\Buddyhub.edmx.diagram">
+      <DependentUpon>Buddyhub.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\BuddyHub - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.min.js.map" />

@@ -1,11 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "View";
-}
-
-<h2>View</h2>
-
-@model BuddyHub.Models.VirtualModel.PostData
+﻿@model BuddyHub.Models.VirtualModel.PostData
 
 @{
     ViewBag.Title = "View";
@@ -25,7 +18,7 @@
             </div>
         </div>
         <div class="col-6 justify-content-end d-flex align-items-center">
-            @if ((string)Session["Username"] == @Model.Username)
+            @if ((string)Session["Username"] == @Model.Username.Replace(" ", ""))
             {
             <a href="\Post\EditPost\@Model.PostId" class="text-decoration-none">
                 <i class="fa fa-edit me-2 text-success"><span class="ms-1">Edit</span></i>
@@ -108,7 +101,7 @@
 
 
 
-    @*Post info section*@
+    @*Comment info section*@
     <div class="row d-flex align-items-center mb-1">
         <div class="col-6 justify-content-start d-flex">
             <div class="me-1">
@@ -121,12 +114,12 @@
             </div>
         </div>
         <div class="col-6 justify-content-end d-flex align-items-center">
-            @if ((string)Session["Username"] == @item.FK_Username)
+            @if ((string)Session["Username"] == @item.FK_Username.Replace(" ",""))
                 {
-            <a href="\Post\EditPost\@Model.PostId" class="text-decoration-none">
+            @*<a href="\Post\EditPost\@Model.PostId" class="text-decoration-none">
                 <i class="fa fa-edit me-2 text-success"><span class="ms-1">Edit</span></i>
-            </a>
-            <a href="\Post\RemovePost\@Model.PostId" class="text-decoration-none">
+            </a>*@
+            <a href="\Post\RemoveComment\@item.Id" class="text-decoration-none">
                 <i class="fa fa-trash me-2 text-danger"><span class="ms-1">Delete</span></i>
             </a>
                 }
