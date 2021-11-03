@@ -20,7 +20,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FR_Follower_Users_Id" Type="int" />
+          <Property Name="FR_Follower_Users_Id" Type="int" Nullable="false" />
           <Property Name="FR_Following_Users_Id" Type="int" />
         </EntityType>
         <EntityType Name="Likes">
@@ -66,14 +66,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Contact" Type="nvarchar" MaxLength="50" Nullable="false" StoreGeneratedPattern="Computed" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" StoreGeneratedPattern="Computed" />
-          <Property Name="ProfileImage" Type="nvarchar" MaxLength="300" Nullable="false" StoreGeneratedPattern="Computed" />
-          <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" StoreGeneratedPattern="Computed" />
-          <Property Name="Gender" Type="nvarchar" MaxLength="100" Nullable="false" StoreGeneratedPattern="Computed" />
-          <Property Name="DOB" Type="date" Nullable="false" StoreGeneratedPattern="Computed" />
-          <Property Name="Religion" Type="nvarchar" MaxLength="50" Nullable="false" StoreGeneratedPattern="Computed" />
-          <Property Name="Relationship" Type="nvarchar" MaxLength="10" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProfileImage" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Religion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="FK_Users_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RecoveryPasswords">
@@ -151,7 +151,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Followers_Following">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Followers" Type="Self.Followers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -163,7 +165,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Followers_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Followers" Type="Self.Followers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -235,7 +237,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RecoveryPasswords_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RecoveryPasswords" Type="Self.RecoveryPasswords" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -386,7 +390,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FR_Follower_Users_Id" Type="Int32" />
+          <Property Name="FR_Follower_Users_Id" Type="Int32" Nullable="false" />
           <Property Name="FR_Following_Users_Id" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Self.FK_Followers_Following" FromRole="Followers" ToRole="Users" />
           <NavigationProperty Name="User1" Relationship="Self.FK_Followers_Users" FromRole="Followers" ToRole="Users" />
@@ -441,14 +445,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="ProfileImage" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="Relationship" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfileImage" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Relationship" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FK_Users_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Profiles_Users" FromRole="Profiles" ToRole="Users" />
         </EntityType>
@@ -543,7 +547,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Followers_Following">
-          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Followers" Type="Self.Follower" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -555,7 +561,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Followers_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="Followers" Type="Self.Follower" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -639,7 +645,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RecoveryPasswords_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RecoveryPasswords" Type="Self.RecoveryPassword" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">

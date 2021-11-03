@@ -30,7 +30,8 @@ namespace BuddyHub.Repo
                                          join u1 in db.Users on c.FK_Users_Id equals u1.Id
                                          where c.FK_Posts_Id == p.Id
                                          select new CommentData()
-                                         {
+                                         {  
+                                             Id = c.Id,
                                              FK_Posts_Id = p.Id,
                                              FK_Users_Id = u1.Id,
                                              CreatedAt = c.CreatedAt,
@@ -58,6 +59,7 @@ namespace BuddyHub.Repo
                                          where c.FK_Posts_Id == p.Id
                                          select new CommentData()
                                          {
+                                             Id = c.Id,
                                              FK_Posts_Id = p.Id,
                                              FK_Users_Id = u1.Id,
                                              CreatedAt = c.CreatedAt,
@@ -82,6 +84,7 @@ namespace BuddyHub.Repo
                              Likes = (from l in db.Likes where l.FK_Posts_Id == p.Id select l).ToList(),
                              Comments = (from c in db.Comments join u1 in db.Users on c.FK_Users_Id equals u1.Id  where c.FK_Posts_Id == p.Id select new CommentData()
                              {
+                                 Id = c.Id,
                                  FK_Posts_Id = p.Id,
                                  FK_Users_Id = u1.Id,
                                  CreatedAt = c.CreatedAt,
@@ -154,6 +157,18 @@ namespace BuddyHub.Repo
             }
             return false;
             
+        }
+        public static bool RemoveComment(int PoId, int UserId)
+        {
+            var comment = db.Comments.Find(PoId);
+            if (comment.FK_Users_Id == UserId)
+            {
+                db.Comments.Remove(comment);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+
         }
 
         public static List<PostData> GetMyPost(int UserId)

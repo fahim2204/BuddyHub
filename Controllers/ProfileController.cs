@@ -34,23 +34,15 @@ namespace BuddyHub.Controllers
         }
         [HttpGet]
         [Authorize]
-        public ActionResult Edit()
+        public ActionResult Edit(string Username)
         {
-
-            int UserId = (int)Session["UserId"];
-            var temp = ProfileRepository.GetProfileData(UserId);
-
-            return View(temp);
+            return View(ProfileRepository.GetProfileData(Username));
         }
         [HttpPost]
         [Authorize]
-        public ActionResult Edit(ProfileData p)
+        public ActionResult Edit(string Username, ProfileData p)
         {
-            var db = new buddyhubEntities();
-            int UserId = (int)Session["UserId"];
-            var temp = ProfileRepository.GetProfileData(UserId);
-            ProfileRepository.UpdateName(UserId, p.Name);
-            ProfileRepository.UpdateProfile(UserId, p);
+            ProfileRepository.UpdateProfile(Username, p);
             return Redirect("/Profile/"+p.Username);
         }
     }

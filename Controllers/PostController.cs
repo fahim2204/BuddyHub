@@ -40,13 +40,14 @@ namespace BuddyHub.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public ActionResult EditPost(int id) 
         {
             //System.Diagnostics.Debug.WriteLine(PoId);
 
             string UserId = (string)Session["Username"];
             var post = PostRepository.GetPostDataById(id);
-            if (post.Username != UserId)
+            if (post.Username.Replace(" ","") != UserId)
             {
                 return RedirectToAction("Index", "Home");
 
@@ -72,6 +73,13 @@ namespace BuddyHub.Controllers
         {
             int UserId = (int)Session["UserId"];
             bool b = PostRepository.RemovePost(id, UserId);         
+            return RedirectToAction("Index", "Home");
+        }
+        [Authorize]
+        public ActionResult RemoveComment(int id)
+        {
+            int UserId = (int)Session["UserId"];
+            bool b = PostRepository.RemoveComment(id, UserId);
             return RedirectToAction("Index", "Home");
         }
         [AdminAccess]

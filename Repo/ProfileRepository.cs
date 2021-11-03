@@ -17,20 +17,23 @@ namespace BuddyHub.Repo
         }
 
        
-        public static void UpdateName(int UserId,string name)
+   
+        public static void UpdateProfile(string Username, ProfileData pd)
+        {
+            var UserId = UserRepo.FindUser(Username).Id;
+            var profile = db.Profiles.First(p => p.FK_Users_Id == UserId);
 
-        {
-            var user = (from u in db.Users
-                        where u.Id == UserId
-                        select u).FirstOrDefault();
-            user.Name =name;
-            db.SaveChanges();
-        }
-        public static void UpdateProfile(int UserId,ProfileData pd)
-        {
-            var profile = (from p in db.Profiles
-                        where p.FK_Users_Id == UserId
-                        select p).FirstOrDefault();
+            //var tmp = new Profile()
+            //{
+            //    Contact = pd.Contact,
+            //    Email = pd.Email,
+            //    Address = pd.Address,
+            //    Gender = pd.Gender,
+            //    Relationship = pd.Relationship,
+            //    Religion = pd.Religion,
+            //    DOB = pd.DOB,
+
+            //};
             profile.Contact = pd.Contact;
             profile.Email = pd.Email;
             profile.Address = pd.Address;
@@ -38,6 +41,11 @@ namespace BuddyHub.Repo
             profile.DOB = pd.DOB;
             profile.Religion = pd.Religion;
             profile.Relationship = pd.Relationship;
+            db.SaveChanges();
+
+            var user = db.Users.First(u => u.Username == Username);
+            user.Name = pd.Name;
+
             db.SaveChanges();
 
         }
@@ -58,6 +66,7 @@ namespace BuddyHub.Repo
                             DOB = (DateTime)u2.DOB,
                             Status = u.Status,
                             Religion = u2.Religion,
+                            FK_Users_Id = u2.FK_Users_Id,
                             ProfileImage = u2.ProfileImage,
                             Relationship = u2.Relationship,
                             Username = u.Username,

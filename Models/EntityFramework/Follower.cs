@@ -15,7 +15,7 @@ namespace BuddyHub.Models.EntityFramework
     public partial class Follower
     {
         public int Id { get; set; }
-        public Nullable<int> FR_Follower_Users_Id { get; set; }
+        public int FR_Follower_Users_Id { get; set; }
         public Nullable<int> FR_Following_Users_Id { get; set; }
     
         public virtual User User { get; set; }
