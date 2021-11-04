@@ -36,11 +36,12 @@
     @Scripts.Render("~/bundles/jquery")
 
     @Scripts.Render("~/bundles/bootstrap")
+   
     @RenderSection("scripts", required: false)
-        <script>
-            jQuery(document).ready(function () {
-                jQuery("time.timeago").timeago();
-            });
-        </script>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery("time.timeago").timeago();
+        });
+    </script>
 </body>
 </html>

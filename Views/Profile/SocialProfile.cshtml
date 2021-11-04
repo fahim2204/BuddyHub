@@ -1,7 +1,7 @@
 ﻿@model BuddyHub.Models.VM.ProfileData
 
 @{
-    ViewBag.Title = "WorkProfile";
+    ViewBag.Title = "Social Profile";
 }
 
 <div class="row mt-1">
@@ -48,7 +48,7 @@
             <div class="col-3 d-flex justify-content-center my-1">
                 @if ((string)Session["Username"] != Model.Username.Replace(" ", ""))
                 {
-                <a class="btn btn-outline-primary" href="/Follower/DoFollow/@Model.FK_Users_Id">Follow/Unfollow</a>
+                    <a class="btn btn-outline-primary" href="/Follower/DoFollow/@Model.FK_Users_Id">Follow/Unfollow</a>
                 }
             </div>
             <div class="col-12 mt-4">
@@ -56,22 +56,16 @@
                     @if ((string)Session["Username"] == Model.Username.Replace(" ", ""))
                     {
                         <p>
-                            <a href="/WorkProfile/AddWorkProfile" class="btn btn-primary">Add New</a>
+                            <a href="/User/AddSocialProfile" class="btn btn-primary">Add New</a>
                         </p>
                     }
                     <table class="table">
                         <tr>
                             <th>
-                                Institution
+                                Name
                             </th>
                             <th>
-                                Start Year
-                            </th>
-                            <th>
-                                End Year
-                            </th>
-                            <th>
-                                Position
+                                Social Link
                             </th>
                             @if ((string)Session["Username"] == Model.Username.Replace(" ", ""))
                             {
@@ -81,26 +75,22 @@
                             }
                         </tr>
 
-                        @foreach (var item in Model.WorkProfiles)
+                        @foreach (var item in Model.Socials)
                         {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Institution)
+                            @Html.DisplayFor(modelItem => item.SocialName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.StartYear)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EndYear)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Position)
+                            <a href="@Html.DisplayFor(modelItem => item.Link)">
+                                @Html.DisplayFor(modelItem => item.Link)
+                            </a>
                         </td>
                         @if ((string)Session["Username"] == Model.Username.Replace(" ", ""))
                         {
                     <td>
-                        <a href="/WorkProfile/EditWorkProfile/@item.Id" class="btn btn-sm btn-primary me-2">Edit</a>
-                        <a href="/Profile/DeleteWorkProfile/@Model.Username.Replace(" ", "")/@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                        <a class="btn btn-sm btn-outline-danger text-decoration-none" href="\User\RemoveSocialLink\@item.Id" >Delete</a>
+
                     </td>
                         }
 
@@ -113,4 +103,5 @@
         </div>
     </div>
 </div>
+
 

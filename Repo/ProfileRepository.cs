@@ -22,18 +22,6 @@ namespace BuddyHub.Repo
         {
             var UserId = UserRepo.FindUser(Username).Id;
             var profile = db.Profiles.First(p => p.FK_Users_Id == UserId);
-
-            //var tmp = new Profile()
-            //{
-            //    Contact = pd.Contact,
-            //    Email = pd.Email,
-            //    Address = pd.Address,
-            //    Gender = pd.Gender,
-            //    Relationship = pd.Relationship,
-            //    Religion = pd.Religion,
-            //    DOB = pd.DOB,
-
-            //};
             profile.Contact = pd.Contact;
             profile.Email = pd.Email;
             profile.Address = pd.Address;
@@ -49,6 +37,22 @@ namespace BuddyHub.Repo
             db.SaveChanges();
 
         }
+
+        public static void AddSocialProfile(SocialLink sl)
+        {
+
+            SocialLink social = new SocialLink()
+            {
+                SocialName = sl.SocialName,
+                Link = sl.Link,
+                FK_Users_Id = sl.FK_Users_Id
+            };
+
+            db.SocialLinks.Add(social);
+            db.SaveChanges();
+
+        }
+
         public static List<ProfileData> GetAllProfileData()
         {
 
@@ -85,6 +89,14 @@ namespace BuddyHub.Repo
                         }).ToList();
             return AllProfile;
         }
+
+        internal static void RemoveSocialProfile(int id)
+        {
+            var ss = db.SocialLinks.Find(id);
+            db.SocialLinks.Remove(ss);
+            db.SaveChanges();
+        }
+
         public static ProfileData GetProfileData(string UserName)
         {
             
@@ -146,7 +158,7 @@ namespace BuddyHub.Repo
                                              FR_Follower_Users_Id = f.FR_Follower_Users_Id,
                                              FR_Following_Users_Id = f.FR_Following_Users_Id
                                          }).ToList(),
-
+                            Socials = (from s in db.SocialLinks where s.FK_Users_Id == u.Id select s).ToList(),
                         }).FirstOrDefault();
             return test;
         }

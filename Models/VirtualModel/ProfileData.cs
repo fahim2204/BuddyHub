@@ -1,4 +1,5 @@
-﻿using BuddyHub.Models.VirtualModel;
+﻿using BuddyHub.Models.EntityFramework;
+using BuddyHub.Models.VirtualModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,7 +30,6 @@ namespace BuddyHub.Models.VM
         public virtual ICollection<WorkProfileData> WorkProfiles { get; set; }
         public virtual ICollection<PostData> Posts { get; set; }
         public virtual ICollection<FollowerData> Followers { get; set; }
-
-
+        public List<SocialLink> Socials { get; internal set; }
     }
 }

@@ -11,10 +11,11 @@ namespace BuddyHub.Models.VirtualModel
         [Required]
         public string Name { get; set; }
         [Required]
-        [StringLength(255, MinimumLength = 5)]
+        [StringLength(255, MinimumLength = 3, ErrorMessage = "Must more than 3 character long.")]
         public string Username { get; set; }
         [Required]
         [DataType(DataType.Password)]
+        [RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$",ErrorMessage = "Password must contain a small, a capital letter and digit")]
         public string Password { get; set; }
         [Required]
         [DataType(DataType.Password)]

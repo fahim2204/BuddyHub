@@ -98,6 +98,24 @@ namespace BuddyHub.Controllers
             UserRepo.RemoveUserAdmin(id);
             return Redirect("/Admin/AllUser");
         }
+        [Authorize]
+        public ActionResult AddSocialProfile()
+        {
+            return View();
+        }
+        [Authorize]
+        public ActionResult RemoveSocialLink(int id)
+        {
+            ProfileRepository.RemoveSocialProfile(id);
+            return Redirect("/Profile/SocialProfile/"+Session["Username"]);
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddSocialProfile(SocialLink sl)
+        {
+            ProfileRepository.AddSocialProfile(sl);
+            return Redirect("/Profile/SocialProfile/" + Session["Username"]);
+        }
 
     }
 }
