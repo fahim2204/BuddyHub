@@ -12,6 +12,7 @@ namespace BuddyHub.Controllers
     public class FollowerController : Controller
     {
         // GET: Follower
+        [Authorize]
         public ActionResult DoFollow(int id)
         {
             int UserId = (int)Session["UserId"];
@@ -24,14 +25,14 @@ namespace BuddyHub.Controllers
             FollowerRepository.UnDoFollow(f);
             return RedirectToAction("Index", "Home");
         }
-
+        [Authorize]
         public ActionResult ShowFollowers()
         {
             int UserId = (int)Session["UserId"];
             List<ProfileData> pd = FollowerRepository.ShowFollowers(UserId);
             return View(pd);
         }
-
+        [Authorize]
         public ActionResult ShowFollowing()
         {
             int UserId = (int)Session["UserId"];

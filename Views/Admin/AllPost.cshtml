@@ -4,11 +4,6 @@
     ViewBag.Title = "AllPost";
 }
 
-<h2 class="text-center">AllPost</h2>
-
-
-
-
 
 <div class="container">
     <div class="row mt-1">
@@ -29,7 +24,7 @@
                             <a href="#" class="dashboard-nav-dropdown-item">New</a>
                         </div>
                     </div> -->
-                    <a href="" class="dashboard-nav-item"><i class="fa fa-user"></i> Profile </a>
+                    <a href="/Profile/@Session["Username"]" class="dashboard-nav-item"><i class="fa fa-user"></i> Profile </a>
                     <div class="nav-item-divider"></div>
                     <a href="/User/Logout" class="dashboard-nav-item"><i class="fa fa-sign-out"></i> Logout </a>
                 </nav>

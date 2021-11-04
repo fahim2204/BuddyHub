@@ -107,7 +107,7 @@ namespace BuddyHub.Controllers
             PostRepository.ChangeStatus(PostId);
             return Redirect("/Admin/AllPost");
         }
-
+        [Authorize]
         public ActionResult MyPost()
         {
             int UserId = (int)Session["UserId"];

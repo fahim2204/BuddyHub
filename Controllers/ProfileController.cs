@@ -22,6 +22,7 @@ namespace BuddyHub.Controllers
         {
             return View(ProfileRepository.GetProfileData(Username));
         }
+        [Authorize]
         public ActionResult DeleteWorkProfile(string Username, int OpId)
         {
             WorkProfileRepository.DeleteWorkProfile(OpId);

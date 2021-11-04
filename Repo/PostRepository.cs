@@ -18,6 +18,7 @@ namespace BuddyHub.Repo
         {
             var posts = (from u in db.Users
                          join p in db.Posts on u.Id equals p.FK_Users_Id
+                         where p.Status == 1
                          select new PostData()
                          {
                              PostId = p.Id,
@@ -31,6 +32,33 @@ namespace BuddyHub.Repo
                                          where c.FK_Posts_Id == p.Id
                                          select new CommentData()
                                          {  
+                                             Id = c.Id,
+                                             FK_Posts_Id = p.Id,
+                                             FK_Users_Id = u1.Id,
+                                             CreatedAt = c.CreatedAt,
+                                             FK_Username = u1.Username,
+                                             Text = c.Text
+                                         }).OrderByDescending(c => c.CreatedAt).ToList()
+                         }).OrderByDescending(p => p.CreatedAt).ToList();
+            return posts;
+        }
+        public static List<PostData> GetAllPostAdmin()
+        {
+            var posts = (from u in db.Users
+                         join p in db.Posts on u.Id equals p.FK_Users_Id
+                         select new PostData()
+                         {
+                             PostId = p.Id,
+                             PostText = p.PostsText,
+                             CreatedAt = (DateTime)p.CreatedAt,
+                             Status = (int)p.Status,
+                             Username = u.Username,
+                             Likes = (from l in db.Likes where l.FK_Posts_Id == p.Id select l).ToList(),
+                             Comments = (from c in db.Comments
+                                         join u1 in db.Users on c.FK_Users_Id equals u1.Id
+                                         where c.FK_Posts_Id == p.Id
+                                         select new CommentData()
+                                         {
                                              Id = c.Id,
                                              FK_Posts_Id = p.Id,
                                              FK_Users_Id = u1.Id,
@@ -137,8 +165,22 @@ namespace BuddyHub.Repo
 
            
         }
+        public static List<CommentData> GetAllComment()
+        {
+            var Comments = (from c in db.Comments
+                            join u1 in db.Users on c.FK_Users_Id equals u1.Id
+                            select new CommentData()
+                            {
+                                Id = c.Id,
+                                FK_Users_Id = u1.Id,
+                                CreatedAt = c.CreatedAt,
+                                FK_Username = u1.Username,
+                                Text = c.Text
+                            }).OrderByDescending(c => c.CreatedAt).ToList();
+            return Comments;
+        }
 
-        public static bool EditPost(PostData pd, int PoId)
+            public static bool EditPost(PostData pd, int PoId)
         {
             var post = db.Posts.Single(p => p.Id == PoId);
             post.PostsText = pd.PostText;

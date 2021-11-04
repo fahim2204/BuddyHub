@@ -14,6 +14,9 @@ namespace BuddyHub.Controllers
         [AdminAccess]
         public ActionResult Index()
         {
+            ViewBag.TotalUser = ProfileRepository.GetAllProfileData().Count();
+            ViewBag.TotalPost = PostRepository.GetPostData().Count();
+            ViewBag.TotalComment = PostRepository.GetAllComment().Count();
             return View();
         }
         [AdminAccess]
@@ -24,7 +27,7 @@ namespace BuddyHub.Controllers
         [AdminAccess]
         public ActionResult AllPost()
         {
-            return View(PostRepository.GetPostData());
+            return View(PostRepository.GetAllPostAdmin());
         }
     }
 }

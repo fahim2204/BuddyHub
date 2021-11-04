@@ -4,7 +4,7 @@
   "parameters": {
     "resourceGroupName": {
       "type": "string",
-      "defaultValue": "SQLDatabase",
+      "defaultValue": "net",
       "metadata": {
         "_parameterType": "resourceGroup",
         "description": "Name of the resource group for the resource. It is recommended to put resources under same resource group for better tracking."
@@ -51,23 +51,24 @@
             {
               "kind": "v12.0",
               "location": "[parameters('resourceLocation')]",
-              "name": "newbuddy",
+              "name": "newhub",
               "type": "Microsoft.Sql/servers",
               "apiVersion": "2017-10-01-preview"
             },
             {
               "sku": {
-                "name": "Standard",
-                "tier": "Standard",
-                "capacity": 10
+                "name": "GP_Gen5",
+                "tier": "GeneralPurpose",
+                "family": "Gen5",
+                "capacity": 2
               },
-              "kind": "v12.0,user",
+              "kind": "v12.0,user,vcore",
               "location": "[parameters('resourceLocation')]",
-              "name": "newbuddy/buddyhub",
+              "name": "newhub/buddyhub",
               "type": "Microsoft.Sql/servers/databases",
               "apiVersion": "2017-10-01-preview",
               "dependsOn": [
-                "newbuddy"
+                "newhub"
               ]
             }
           ]
