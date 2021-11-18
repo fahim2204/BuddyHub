@@ -17,8 +17,11 @@ namespace API.App_Start
             //});
 
             CreateMap<User, UserDto>();
+            CreateMap<UserDto, User>();
             CreateMap<User, LoginDto>();
+            CreateMap<LoginDto, User>();
             CreateMap<User, RegistrationDto>();
+            CreateMap<RegistrationDto, User>();
 
         }
     }

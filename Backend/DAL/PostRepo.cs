@@ -16,17 +16,17 @@ namespace DAL
             this.db = db;
         }
 
-        public void Add(Post entity)
+        public bool Add(Post entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Edit(Post entity)
+        public bool Edit(int id, Post entity)
         {
             throw new NotImplementedException();
         }
