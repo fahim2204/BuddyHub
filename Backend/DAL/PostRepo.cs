@@ -16,27 +16,27 @@ namespace DAL
             this.db = db;
         }
 
-        public bool Add(Post entity)
+        public void Add(Post entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(int id)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public bool Edit(int id, Post entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Post Get(int id)
+        public void Edit(int id, Post entity)
         {
             throw new NotImplementedException();
         }
 
         public IEnumerable<Post> Get()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Post Get(int id)
         {
             throw new NotImplementedException();
         }

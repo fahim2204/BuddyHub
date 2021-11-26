@@ -36,17 +36,49 @@ namespace BLL
 
         public static bool RegisterUser(UserDto user)
         {
-            return DataAccessFactory.UserDataAccess().Add(Mapper.Map<UserDto,User>(user));
+            if(user == null) { return false; }
+            else
+            {
+                DataAccessFactory.UserDataAccess().Add(Mapper.Map<UserDto,User>(user));
+                return true;
+            }
         }
 
         public static bool DeleteUserById(int id)
         {
-            return DataAccessFactory.UserDataAccess().Delete(id);
+            var _User = DataAccessFactory.UserDataAccess().Get(id);
+            if (_User == null) { return false; }
+            else
+            {
+                DataAccessFactory.UserDataAccess().Delete(id);
+                return true;
+            }
+        }
+
+        public static UserDto GetUserByUsername(string username)
+        {
+            var _User = DataAccessFactory.UserDataAccess().Get().Where(u => u.Username == username).FirstOrDefault();
+            if (_User != null)
+            {
+                return Mapper.Map<User, UserDto>(_User);
+            }
+            else
+            {
+                return null;
+
+            }
         }
 
         public static bool EditUser(int id, UserDto user)
         {
-            return DataAccessFactory.UserDataAccess().Edit(id, Mapper.Map<UserDto, User>(user));
+            var _User = DataAccessFactory.UserDataAccess().Get(id);
+
+            if (_User == null) { return false; }
+            else
+            {
+                DataAccessFactory.UserDataAccess().Edit(id, Mapper.Map<UserDto, User>(user));
+                return true;
+            }
         }
     }
 }

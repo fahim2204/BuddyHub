@@ -42,6 +42,15 @@
           <Property Name="Message" Type="nvarchar" MaxLength="100" />
           <Property Name="GotoLink" Type="nvarchar" MaxLength="300" />
         </EntityType>
+        <EntityType Name="OAuth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OriginId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OriginName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FK_Users_Id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PostImages">
           <Key>
             <PropertyRef Name="Id" />
@@ -226,6 +235,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OAuths_OAuths">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="OAuth" Type="Self.OAuth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OAuth">
+              <PropertyRef Name="FK_Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PostImages_Posts">
           <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
           <End Role="PostImages" Type="Self.PostImages" Multiplicity="*" />
@@ -353,6 +374,7 @@
           <EntitySet Name="Followers" EntityType="Self.Followers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Likes" EntityType="Self.Likes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OAuth" EntityType="Self.OAuth" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostImages" EntityType="Self.PostImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
@@ -392,6 +414,10 @@
           <AssociationSet Name="FK_Notifications_Users1" Association="Self.FK_Notifications_Users1">
             <End Role="Users" EntitySet="Users" />
             <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OAuths_OAuths" Association="Self.FK_OAuths_OAuths">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="OAuth" EntitySet="OAuth" />
           </AssociationSet>
           <AssociationSet Name="FK_PostImages_Posts" Association="Self.FK_PostImages_Posts">
             <End Role="Posts" EntitySet="Posts" />
@@ -576,6 +602,7 @@
           <NavigationProperty Name="Followers1" Relationship="BuddyDbModel.FK_Followers_Users1" FromRole="User" ToRole="Follower" />
           <NavigationProperty Name="Notifications" Relationship="BuddyDbModel.FK_Notifications_Users" FromRole="User" ToRole="Notification" />
           <NavigationProperty Name="Notifications1" Relationship="BuddyDbModel.FK_Notifications_Users1" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="OAuths" Relationship="BuddyDbModel.FK_OAuths_OAuths" FromRole="User" ToRole="OAuth" />
         </EntityType>
         <EntityType Name="WorksProfile">
           <Key>
@@ -796,6 +823,11 @@
             <End Role="Post" EntitySet="Posts" />
             <End Role="Save" EntitySet="Saves" />
           </AssociationSet>
+          <EntitySet Name="OAuths" EntityType="BuddyDbModel.OAuth" />
+          <AssociationSet Name="FK_OAuths_OAuths" Association="BuddyDbModel.FK_OAuths_OAuths">
+            <End Role="User" EntitySet="Users" />
+            <End Role="OAuth" EntitySet="OAuths" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Comments_Posts">
           <End Type="BuddyDbModel.Post" Role="Post" Multiplicity="1" />
@@ -890,6 +922,28 @@
             </Principal>
             <Dependent Role="Save">
               <PropertyRef Name="FK_Posts_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OAuth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OriginId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OriginName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FK_Users_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="BuddyDbModel.FK_OAuths_OAuths" FromRole="OAuth" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_OAuths_OAuths">
+          <End Type="BuddyDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="BuddyDbModel.OAuth" Role="OAuth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OAuth">
+              <PropertyRef Name="FK_Users_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1029,6 +1083,16 @@
                 <ScalarProperty Name="EndYear" ColumnName="EndYear" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="FK_Users_Id" ColumnName="FK_Users_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OAuths">
+            <EntityTypeMapping TypeName="BuddyDbModel.OAuth">
+              <MappingFragment StoreEntitySet="OAuth">
+                <ScalarProperty Name="FK_Users_Id" ColumnName="FK_Users_Id" />
+                <ScalarProperty Name="OriginName" ColumnName="OriginName" />
+                <ScalarProperty Name="OriginId" ColumnName="OriginId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

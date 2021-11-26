@@ -22,5 +22,9 @@ namespace DAL
         {
             return new PostRepo(db);
         }
+        public static IRepository<OAuth, int> OAuthDataAccess()
+        {
+            return new OAuthRepo(db);
+        }
     }
 }

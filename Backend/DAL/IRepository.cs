@@ -8,11 +8,11 @@ namespace DAL
 {
     public interface IRepository<T,ID>
     {
-        bool Add(T entity);
+        void Add(T entity);
         IEnumerable<T> Get();
         T Get(ID id);
-        bool Edit(ID id, T entity);
-        bool Delete(ID id);
+        void Edit(ID id, T entity);
+        void Delete(ID id);
 
     }
 }

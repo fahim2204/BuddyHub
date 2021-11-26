@@ -37,5 +37,6 @@ namespace BOL
         public virtual DbSet<SocialLink> SocialLinks { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WorksProfile> WorksProfiles { get; set; }
+        public virtual DbSet<OAuth> OAuths { get; set; }
     }
 }

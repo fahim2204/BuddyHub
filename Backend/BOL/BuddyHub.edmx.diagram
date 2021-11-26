@@ -34,6 +34,8 @@
         <AssociationConnector Association="BuddyDbModel.FK_Notifications_Users1" />
         <AssociationConnector Association="BuddyDbModel.FK_PostImages_Posts" />
         <AssociationConnector Association="BuddyDbModel.FK_Saves_Posts" />
+        <EntityTypeShape EntityType="BuddyDbModel.OAuth" Width="1.5" PointX="3" PointY="29.5" />
+        <AssociationConnector Association="BuddyDbModel.FK_OAuths_OAuths" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
