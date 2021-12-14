@@ -26,5 +26,9 @@ namespace DAL
         {
             return new OAuthRepo(db);
         }
+        public static IRepository<Profile, int> ProfileDataAccess()
+        {
+            return new ProfileRepo(db);
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace BOL
     
     public partial class Profile
     {
-        public int Id { get; set; }
+        public int FK_Users_Id { get; set; }
         public string Contact { get; set; }
         public string Email { get; set; }
         public string ProfileImage { get; set; }
@@ -23,7 +23,6 @@ namespace BOL
         public Nullable<System.DateTime> DOB { get; set; }
         public string Religion { get; set; }
         public string Relationship { get; set; }
-        public int FK_Users_Id { get; set; }
     
         public virtual User User { get; set; }
     }

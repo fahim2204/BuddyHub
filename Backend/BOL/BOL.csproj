@@ -71,6 +71,7 @@
     <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Dto\OAuthDto.cs" />
     <Compile Include="Dto\RegistrationDto.cs" />
+    <Compile Include="Dto\ProfileDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
     <Compile Include="Follower.cs">
       <DependentUpon>BuddyHub.tt</DependentUpon>
@@ -85,9 +86,6 @@
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
     <Compile Include="Post.cs">
-      <DependentUpon>BuddyHub.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PostImage.cs">
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
     <Compile Include="Profile.cs">
@@ -111,32 +109,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="BuddyHub.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BuddyHub.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="BuddyHub.edmx.diagram">
       <DependentUpon>BuddyHub.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="BuddyHub.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BuddyHub.Context.cs</LastGenOutput>
       <DependentUpon>BuddyHub.edmx</DependentUpon>
+      <LastGenOutput>BuddyHub.Context.cs</LastGenOutput>
     </Content>
     <Content Include="BuddyHub.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BuddyHub.edmx</DependentUpon>
       <LastGenOutput>BuddyHub.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,10 +14,9 @@ namespace BOL
     
     public partial class OAuth
     {
-        public int Id { get; set; }
+        public int FK_Users_Id { get; set; }
         public string OriginId { get; set; }
         public string OriginName { get; set; }
-        public int FK_Users_Id { get; set; }
     
         public virtual User User { get; set; }
     }

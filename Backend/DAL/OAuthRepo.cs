@@ -20,7 +20,7 @@ namespace DAL
 
         public void Delete(int id)
         {
-            var _oAuth = db.OAuths.FirstOrDefault(u => u.Id == id);
+            var _oAuth = db.OAuths.FirstOrDefault(u => u.FK_Users_Id == id);
             db.OAuths.Remove(_oAuth);
             db.SaveChanges();
         }
@@ -28,14 +28,14 @@ namespace DAL
         public void Edit(int id, OAuth entity)
         {
 
-            var _oAuth = db.OAuths.FirstOrDefault(u => u.Id == id);
+            var _oAuth = db.OAuths.FirstOrDefault(u => u.FK_Users_Id == id);
             db.Entry(_oAuth).CurrentValues.SetValues(entity);
             db.SaveChanges();
         }
 
         public IEnumerable<OAuth> Get() => db.OAuths;
 
-        public OAuth Get(int id) => db.OAuths.FirstOrDefault(u => u.Id == id);
+        public OAuth Get(int id) => db.OAuths.FirstOrDefault(u => u.FK_Users_Id == id);
 
     }
 }

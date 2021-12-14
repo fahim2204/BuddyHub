@@ -36,7 +36,7 @@ namespace BLL
 
         public static bool RegisterUser(UserDto user)
         {
-            if(user == null) { return false; }
+            if(user == null || !IsUsernameAvailble(user.Username)) { return false; }
             else
             {
                 DataAccessFactory.UserDataAccess().Add(Mapper.Map<UserDto,User>(user));
@@ -67,6 +67,10 @@ namespace BLL
                 return null;
 
             }
+        }
+        public static bool IsUsernameAvailble(string username)
+        {
+            return GetUserByUsername(username) == null ? true : false;
         }
 
         public static bool EditUser(int id, UserDto user)

@@ -29,7 +29,7 @@ namespace BOL
         public virtual DbSet<Follower> Followers { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
-        public virtual DbSet<PostImage> PostImages { get; set; }
+        public virtual DbSet<OAuth> OAuths { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<RecoveryPassword> RecoveryPasswords { get; set; }
@@ -37,6 +37,5 @@ namespace BOL
         public virtual DbSet<SocialLink> SocialLinks { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WorksProfile> WorksProfiles { get; set; }
-        public virtual DbSet<OAuth> OAuths { get; set; }
     }
 }

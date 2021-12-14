@@ -15,14 +15,52 @@ namespace BLL
 {
     public class OAuthService
     {
-        public static IEnumerable<OAuth> GetAllOAuth()
+        public static IEnumerable<OAuthDto> GetAllOAuth()
         {
+            var t = DataAccessFactory.OAuthDataAccess().Get();
+            var u = new List<OAuthDto>();
 
-            //OAuth _oAuth = DataAccessFactory.OAuthDataAccess().Get();
-            //var temp2 = DataAccessFactory.UserDataAccess().Get().Where(u=> u.Id == _oAuth.FK_Users_Id);
+            foreach(OAuth i in t)
+            {
+                u.Add(new OAuthDto()
+                {
+                    OriginId = i.OriginId,
+                    OriginName = i.OriginName,
+                    Name = i.User.Name,
+                    Username = i.User.Username,
+                    Password = i.User.Password,
+                    Type = i.User.Type,
+                    Status = i.User.Status,
+                    Contact = i.User.Profile.Contact,
+                    Email = i.User.Profile.Email,
+                    ProfileImage = i.User.Profile.ProfileImage,
+                    Address = i.User.Profile.Address,
+                    Gender =  i.User.Profile.Gender,
+                    DOB = i.User.Profile.DOB,
+                    Relationship = i.User.Profile.Relationship,
+                    Religion = i.User.Profile.Religion
 
+                });
+            }
+            
+            return u;
+        }
 
-            return DataAccessFactory.OAuthDataAccess().Get();
+        public static bool IsOAuthExists(OAuthDto oAuth)
+        {
+            if(oAuth != null)
+            {
+                var _OAuth = DataAccessFactory.OAuthDataAccess().Get().Where(o => o.OriginId == oAuth.OriginId && o.OriginName == oAuth.OriginName).FirstOrDefault();
+                if(_OAuth == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static OAuthDto GetOAuthById(int id)
@@ -46,48 +84,46 @@ namespace BLL
             if(OAuth == null) { return false; }
             else
             {
-                var _user = new User()
+                bool isCreated = UserService.RegisterUser(new UserDto()
+                    {
+                        Name = OAuth.Name,
+                        Username = OAuth.Username,
+                        Type = "general",
+                        Status = 1,
+                        Password = OAuth.Password
+                    });
+                if (isCreated)
                 {
-                    Name = OAuth.Name,
-                    Username = OAuth.Username,
-                    Type = "general",
-                    Status = 1,
-                    Password = OAuth.Password
-                };
-                DataAccessFactory.UserDataAccess().Add(_user);
-                var  fk_uid = UserService.GetUserByUsername(OAuth.Username).Id;
-                var _oAuth = new OAuth()
+                    var fk_uid = UserService.GetUserByUsername(OAuth.Username).Id;
+                    var _oAuth = new OAuth()
+                    {
+                        FK_Users_Id = fk_uid,
+                        OriginId = OAuth.OriginId,
+                        OriginName = OAuth.OriginName
+                    };
+                    DataAccessFactory.OAuthDataAccess().Add(_oAuth);
+                    var _profile = new BOL.Profile()
+                    {
+                        FK_Users_Id = fk_uid,
+                        Contact = "Not Set",
+                        Email = OAuth.Email,
+                        ProfileImage = OAuth.ProfileImage,
+                        Address = "Not Set",
+                        Gender = "Not Set",
+                        DOB = new DateTime(),
+                        Relationship = "Not Set",
+                        Religion = "Not Set"
+                    };
+                    DataAccessFactory.ProfileDataAccess().Add(_profile);
+                    return true;
+                }
+                else
                 {
-                    FK_Users_Id = fk_uid,
-                    OriginId = OAuth.OriginId,
-                    OriginName = OAuth.OriginName
-                };
-                DataAccessFactory.OAuthDataAccess().Add(_oAuth);
-                return true;
+                    return false;
+                }
+                
             }
         }
 
-        public static bool DeleteOAuthById(int id)
-        {
-            var _OAuth = DataAccessFactory.OAuthDataAccess().Get(id);
-            if (_OAuth == null) { return false; }
-            else
-            {
-                DataAccessFactory.OAuthDataAccess().Delete(id);
-                return true;
-            }
-        }
-
-        public static bool EditOAuth(int id, OAuthDto OAuth)
-        {
-            var _OAuth = DataAccessFactory.OAuthDataAccess().Get(id);
-
-            if (_OAuth == null) { return false; }
-            else
-            {
-                DataAccessFactory.OAuthDataAccess().Edit(id, Mapper.Map<OAuthDto, OAuth>(OAuth));
-                return true;
-            }
-        }
     }
 }

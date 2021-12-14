@@ -1,14 +1,14 @@
 ﻿using BLL;
 using BOL.Dto;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
+using System.Net.Mail;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace API.Controllers
 {
+    [EnableCors(origins:"*", headers: "*", methods: "*")]
     public class OAuthController : ApiController
     {
 
@@ -27,13 +27,33 @@ namespace API.Controllers
             }
         }
         [HttpPost]
+        [Route("Api/CheckOAuth")]
+        public IHttpActionResult CheckIfOAuthAvailable(OAuthDto oAuth)
+        {
+            
+                if (OAuthService.IsOAuthExists(oAuth))
+                {
+                    return Ok("Yes");
+                }
+                else
+                {
+                    return Ok("No");
+                }
+        }
+        [HttpPost]
         [Route("Api/OAuth")]
         public IHttpActionResult CreateOAuth(OAuthDto oAuth)
         {
             if (ModelState.IsValid)
             {
-                OAuthService.RegisterOAuth(oAuth);
-                return Ok("User Registered Successfully");
+                if (OAuthService.RegisterOAuth(oAuth))
+                {
+                    return Ok("User Registered Successfully");
+                }
+                else
+                {
+                    return BadRequest("Already Registered!!");
+                }
             }
             else
             {
@@ -41,5 +61,7 @@ namespace API.Controllers
             }
 
         }
+
+       
     }
 }

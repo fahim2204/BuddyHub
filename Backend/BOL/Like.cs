@@ -18,7 +18,7 @@ namespace BOL
         public int FK_Posts_Id { get; set; }
         public int FK_Users_Id { get; set; }
     
-        public virtual User User { get; set; }
         public virtual Post Post { get; set; }
+        public virtual User User { get; set; }
     }
 }
