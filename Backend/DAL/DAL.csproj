@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="DataAccessFactory.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="LogRepo.cs" />
     <Compile Include="OAuthRepo.cs" />
     <Compile Include="PostRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

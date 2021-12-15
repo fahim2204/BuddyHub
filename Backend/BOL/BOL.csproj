@@ -68,6 +68,7 @@
     <Compile Include="Comment.cs">
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dto\LogDto.cs" />
     <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Dto\OAuthDto.cs" />
     <Compile Include="Dto\RegistrationDto.cs" />
@@ -77,6 +78,9 @@
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
     <Compile Include="Like.cs">
+      <DependentUpon>BuddyHub.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs">
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
     <Compile Include="Notification.cs">

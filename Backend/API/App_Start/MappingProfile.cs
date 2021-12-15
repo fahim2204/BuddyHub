@@ -26,6 +26,10 @@ namespace API.App_Start
             CreateMap<OAuth, OAuthDto>();
             CreateMap<OAuthDto, User>();
             CreateMap<User, OAuthDto>();
+            CreateMap<Log, LogDto>();
+            CreateMap<LogDto, Log>();
+
+
 
         }
     }

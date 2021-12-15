@@ -1,0 +1,15 @@
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import classes from "../App.css";
+
+function NavBar() {
+    return (
+        <div>
+            <NavLink to="/" className={c => c.isActive ? "text-danger text-decoration-none" : "text-decoration-none"}> Home </NavLink>
+            <NavLink to="/login" className={c => c.isActive ? "text-danger text-decoration-none" : "text-decoration-none"}> Login </NavLink>
+            <NavLink to="/register" className={c => c.isActive ? "text-danger text-decoration-none" : "text-decoration-none"}> Register </NavLink>
+        </div>
+    )
+}
+
+export default NavBar

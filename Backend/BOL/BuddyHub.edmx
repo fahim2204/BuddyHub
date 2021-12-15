@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="buddyhubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="buddyhubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Comments">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,6 +30,19 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FK_Posts_Id" Type="int" Nullable="false" />
           <Property Name="FK_Users_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Users_Id" Type="int" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="EndAt" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Ip" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="Notifications">
           <Key>
@@ -200,6 +213,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Logs_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="FK_Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Notifications_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
@@ -334,6 +359,7 @@
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Followers" EntityType="Self.Followers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Likes" EntityType="Self.Likes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OAuth" EntityType="Self.OAuth" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
@@ -366,6 +392,10 @@
           <AssociationSet Name="FK_Likes_Users" Association="Self.FK_Likes_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Likes" EntitySet="Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logs_Users" Association="Self.FK_Logs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Logs" EntitySet="Logs" />
           </AssociationSet>
           <AssociationSet Name="FK_Notifications_Users" Association="Self.FK_Notifications_Users">
             <End Role="Users" EntitySet="Users" />
@@ -408,7 +438,8 @@
             <End Role="WorksProfiles" EntitySet="WorksProfiles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="buddyhubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -443,6 +474,20 @@
           <Property Name="FK_Users_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Post" Relationship="Self.FK_Likes_Posts" FromRole="Likes" ToRole="Posts" />
           <NavigationProperty Name="User" Relationship="Self.FK_Likes_Users" FromRole="Likes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Users_Id" Type="Int32" Nullable="false" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Ip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Logs_Users" FromRole="Logs" ToRole="Users" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -541,6 +586,7 @@
           <NavigationProperty Name="Followers" Relationship="Self.FK_Followers_Users" FromRole="Users" ToRole="Followers" />
           <NavigationProperty Name="Followers1" Relationship="Self.FK_Followers_Users1" FromRole="Users" ToRole="Followers" />
           <NavigationProperty Name="Likes" Relationship="Self.FK_Likes_Users" FromRole="Users" ToRole="Likes" />
+          <NavigationProperty Name="Logs" Relationship="Self.FK_Logs_Users" FromRole="Users" ToRole="Logs" />
           <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_Users" FromRole="Users" ToRole="Notifications" />
           <NavigationProperty Name="Notifications1" Relationship="Self.FK_Notifications_Users1" FromRole="Users" ToRole="Notifications" />
           <NavigationProperty Name="OAuth" Relationship="Self.FK_OAuth_Users" FromRole="Users" ToRole="OAuth" />
@@ -635,6 +681,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Likes">
+              <PropertyRef Name="FK_Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logs_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Logs" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Logs">
               <PropertyRef Name="FK_Users_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -769,10 +827,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="buddyhubEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BuddyDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Followers" EntityType="Self.Follower" />
           <EntitySet Name="Likes" EntityType="Self.Like" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
           <EntitySet Name="Notifications" EntityType="Self.Notification" />
           <EntitySet Name="OAuths" EntityType="Self.OAuth" />
           <EntitySet Name="Posts" EntityType="Self.Post" />
@@ -805,6 +864,10 @@
           <AssociationSet Name="FK_Likes_Users" Association="Self.FK_Likes_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Likes" EntitySet="Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logs_Users" Association="Self.FK_Logs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Logs" EntitySet="Logs" />
           </AssociationSet>
           <AssociationSet Name="FK_Notifications_Users" Association="Self.FK_Notifications_Users">
             <End Role="Users" EntitySet="Users" />
@@ -852,7 +915,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="buddyhubModelStoreContainer" CdmEntityContainer="buddyhubEntities">
+        <EntityContainerMapping StorageEntityContainer="buddyhubModelStoreContainer" CdmEntityContainer="BuddyDbContext">
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="buddyhubModel.Comment">
               <MappingFragment StoreEntitySet="Comments">
@@ -879,6 +942,20 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FK_Posts_Id" ColumnName="FK_Posts_Id" />
                 <ScalarProperty Name="FK_Users_Id" ColumnName="FK_Users_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="buddyhubModel.Log">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FK_Users_Id" ColumnName="FK_Users_Id" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="EndAt" ColumnName="EndAt" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Ip" ColumnName="Ip" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

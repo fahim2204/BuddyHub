@@ -11,7 +11,12 @@ namespace API.Controllers
     [EnableCors(origins:"*", headers: "*", methods: "*")]
     public class OAuthController : ApiController
     {
-
+        [HttpGet]
+        [Route("Api/OBC")]
+        public IHttpActionResult OBC()
+        {
+            return Ok(Request.Headers);
+        }
         [HttpGet]
         [Route("Api/OAuth")]
         public IHttpActionResult GetOAuth()

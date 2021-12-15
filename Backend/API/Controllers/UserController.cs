@@ -3,9 +3,11 @@ using BLL;
 using BOL;
 using BOL.Dto;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace API.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
         [HttpGet]

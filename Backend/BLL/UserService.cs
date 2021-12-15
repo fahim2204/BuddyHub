@@ -72,6 +72,32 @@ namespace BLL
         {
             return GetUserByUsername(username) == null ? true : false;
         }
+        public static bool IsAuthenticUser(LoginDto user)
+        {
+            var _user = GetUserByUsername(user.Username);
+            if (_user == null) { return false; }
+            else
+            {
+                if(_user.Password == user.Password)
+                {
+                    if (LogService.UpdateLogTimeAndStatus(_user.Id))
+                    {
+                        LogService.SetLog(new LogDto()
+                        {
+                            Country = "Bangladesh",
+                            Ip = "192.168.50.1",
+                            FK_Users_Id = _user.Id
+                        });
+                    }                    
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+        }
 
         public static bool EditUser(int id, UserDto user)
         {

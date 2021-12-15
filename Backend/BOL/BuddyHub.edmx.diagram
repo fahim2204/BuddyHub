@@ -4,25 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="755cb8cc7a2e45adaa08a7606a85c3ee" Name="Diagram1">
-        <EntityTypeShape EntityType="buddyhubModel.Comment" Width="1.5" PointX="5.25" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.Follower" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.Like" Width="1.5" PointX="5.25" PointY="20.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.Notification" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.OAuth" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.Post" Width="1.5" PointX="3" PointY="19.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.Profile" Width="1.5" PointX="3" PointY="23.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.RecoveryPassword" Width="1.5" PointX="3" PointY="26.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.Save" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.SocialLink" Width="1.5" PointX="3" PointY="30" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.User" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="buddyhubModel.WorksProfile" Width="1.5" PointX="3" PointY="32.75" IsExpanded="true" />
+      <Diagram DiagramId="d24571ccd60444bb93f2f2b7812b9a6d" Name="Diagram1">
+        <EntityTypeShape EntityType="buddyhubModel.Comment" Width="1.5" PointX="5.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.Follower" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.Like" Width="1.5" PointX="5.25" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.Log" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.Notification" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.OAuth" Width="1.5" PointX="3" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.Post" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.Profile" Width="1.5" PointX="3" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.RecoveryPassword" Width="1.5" PointX="3" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.Save" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.SocialLink" Width="1.5" PointX="3" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.User" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="buddyhubModel.WorksProfile" Width="1.5" PointX="3" PointY="36.375" IsExpanded="true" />
         <AssociationConnector Association="buddyhubModel.FK_Comments_Posts" ManuallyRouted="false" />
         <AssociationConnector Association="buddyhubModel.FK_Comments_User" ManuallyRouted="false" />
         <AssociationConnector Association="buddyhubModel.FK_Followers_Users" ManuallyRouted="false" />
         <AssociationConnector Association="buddyhubModel.FK_Followers_Users1" ManuallyRouted="false" />
         <AssociationConnector Association="buddyhubModel.FK_Likes_Posts" ManuallyRouted="false" />
         <AssociationConnector Association="buddyhubModel.FK_Likes_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="buddyhubModel.FK_Logs_Users" ManuallyRouted="false" />
         <AssociationConnector Association="buddyhubModel.FK_Notifications_Users" ManuallyRouted="false" />
         <AssociationConnector Association="buddyhubModel.FK_Notifications_Users1" ManuallyRouted="false" />
         <AssociationConnector Association="buddyhubModel.FK_OAuth_Users" ManuallyRouted="false" />

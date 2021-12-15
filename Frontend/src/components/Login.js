@@ -1,66 +1,114 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import { useAlert } from 'react-alert';
+import Header from './Header';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../Config';
 
+
+//? Send All Axios Request with Token
+// axios.interceptors.request.use(
+//     config => {
+//         config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+//         return config;
+//     },
+//     error => {
+//         return Promise.reject(error);
+//     }
+// )
+
+const token = "abcdefghijklmnopqrstuvwxyz1234567890";
+const authAxios = axios.create({
+    baseURL: apiUrl,
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization: `${token}`
+    }
+})
 
 
 const Login = () => {
 
+    useEffect(() => {document.title = "BuddyHub - Login"},[])
+    var [clientInfo, setClientInfo] = useState({
+        Ip : "127.0.0.1",
+        Country: "Bangladesh",
+    });
+    var [loginInfo, SetLoginInfo] = useState({
+        Username: "",
+        Password: ""
+    });
+        
+
     const alert = useAlert();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    const CheckOAuth = (user)=>{
-        axios.post(`https://localhost:44349/Api/CheckOAuth`, user)
-        .then(res => {
-            console.log(res);
-            if(res.data === "Yes"){
-                alert.success("User Already Exists");
-            }else{
-                //alert.info("User Not Found");
-                // navigate("/Register");
-            }
-        })
-    }
 
-    const SendLoginRequest = (user)=>{
-        axios.post(`https://localhost:44349/Api/oauth`, user)
-        .then(res => {
-            console.log("Resource adata");
-            console.log(res);
-            // console.log(res.data);
+    const GetClientInfo = async () => {
+        await axios.get(`https://geolocation-db.com/json`)
+        .then(res => { 
+            setClientInfo(res.data);
+            console.log(res.data);
         })
         .catch(err => {
-            if(err === undefined){
-                alert.show('Something went wrong');
-            }else{
-                console.log(err.response.data.Message);
-                if(err.response.data.Message === "Already Registered!!"){
-                    alert.show('You are already Registered!!', {
-                        timeout: 5000, // custom timeout just for this one alert
-                        type: 'success',
-                        onOpen: () => {
-                          console.log('hey')
-                        }, // callback that will be executed after this alert open
-                        onClose: () => {
-                          console.log('closed')
-                        } // callback that will be executed after this alert is removed
-                      });
-                }else{
-                    alert.error('Opps!!!', {
-                        timeout: 5000, // custom timeout just for this one alert
-                        onOpen: () => {
-                          console.log('hey')
-                        }, // callback that will be executed after this alert open
-                        onClose: () => {
-                          console.log('closed')
-                        } // callback that will be executed after this alert is removed
-                      })
-                }
-            }
-            // console.log(err.response.status);
+            console.log(err);
         })
+         
+    }
+
+
+    const CheckOAuth = (user) => {
+        axios.post(`${apiUrl}/CheckOAuth`, user)
+            .then(res => {
+                console.log(res);
+                if (res.data === "Yes") {
+                    alert.success("User Already Exists");
+                } else {
+                    alert.info("User Not Found");
+                    navigate("/Register");
+                }
+            })
+    }
+
+    const SendLoginRequest = (user) => {
+        axios.post(`https://localhost:44349/Api/oauth`, user)
+            .then(res => {
+                console.log("Resource adata");
+                console.log(res);
+                // console.log(res.data);
+            })
+            .catch(err => {
+                if (err === undefined) {
+                    alert.show('Something went wrong');
+                } else {
+                    console.log(err.response.data.Message);
+                    if (err.response.data.Message === "Already Registered!!") {
+                        alert.show('You are already Registered!!', {
+                            timeout: 5000, // custom timeout just for this one alert
+                            type: 'success',
+                            onOpen: () => {
+                                console.log('hey')
+                            }, // callback that will be executed after this alert open
+                            onClose: () => {
+                                console.log('closed')
+                            } // callback that will be executed after this alert is removed
+                        });
+                    } else {
+                        alert.error('Opps!!!', {
+                            timeout: 5000,
+                            onOpen: () => {
+                                console.log('hey')
+                            },
+                            onClose: () => {
+                                console.log('closed')
+                            }
+                        })
+                    }
+                }
+                // console.log(err.response.status);
+            })
     }
 
     const responseGoogle = (response) => {
@@ -77,8 +125,41 @@ const Login = () => {
         // SendLoginRequest(user);
         CheckOAuth(user);
     }
+
+
+    const Testtoken = () => {
+        authAxios.get(`${apiUrl}/OBC`)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+const HandleLoginForm = e => {
+    SetLoginInfo({
+        ...loginInfo,
+        [e.target.name]: e.target.value
+    })
+}
+const DoLogin = async () => {
+    await axios.post(`${apiUrl}/Login`, loginInfo)
+    .then(res => {
+        console.log(res.data);
+        sessionStorage.setItem('token', res.data.token);
+        navigate("/");
+    })
+        .catch(err => {
+            alert.error('Opps!!!');
+        })
+
+}
+
+
     return (
         <div>
+            <Header />
+            <button onClick={Testtoken}>Test Token</button>
             <div className="container">
                 <div className="row d-flex justify-content-center">
                     <div className="col-5">
@@ -90,17 +171,17 @@ const Login = () => {
                                     <div className="row mb-3">
                                         <label htmlFor="inputUsername" className="col-sm-3 col-form-label">Username :</label>
                                         <div className="col-sm-7">
-                                            <input type="email" className="form-control" id="inputUsername" />
+                                            <input type="text" className="form-control" onChange={HandleLoginForm} name="Username" />
                                         </div>
                                     </div>
                                     <div className="row mb-3">
                                         <label htmlFor="inputPassword" className="col-sm-3 col-form-label">Password :</label>
                                         <div className="col-sm-7">
-                                            <input type="password" className="form-control" id="inputPassword" />
+                                            <input type="password" className="form-control" onChange={HandleLoginForm} name="Password"/>
                                         </div>
                                     </div>
                                     <div className="d-flex justify-content-center mt-4">
-                                        <button type="submit" className="btn btn-primary d-inline-block">Sign in</button>
+                                        <button type="submit" onClick={DoLogin} className="btn btn-primary d-inline-block">Sign in</button>
                                     </div>
                                 </div>
 

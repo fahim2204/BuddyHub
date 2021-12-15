@@ -30,5 +30,9 @@ namespace DAL
         {
             return new ProfileRepo(db);
         }
+        public static IRepository<Log, int> LogDataAccess()
+        {
+            return new LogRepo(db);
+        }
     }
 }

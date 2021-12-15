@@ -30,8 +30,9 @@ namespace DAL
         {
             var _Profile = db.Profiles.FirstOrDefault(u => u.FK_Users_Id == id);
             
-                db.Entry(_Profile).CurrentValues.SetValues(Profile);
-                db.SaveChanges();
+            db.Entry(_Profile).CurrentValues.SetValues(Profile);
+            db.Entry(_Profile).Property(x => x.FK_Users_Id).IsModified = false;
+            db.SaveChanges();
         }
 
         public Profile Get(int id) => db.Profiles.FirstOrDefault(u => u.FK_Users_Id == id);
