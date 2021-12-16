@@ -26,6 +26,7 @@ namespace BOL
         }
     
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<EmailLog> EmailLogs { get; set; }
         public virtual DbSet<Follower> Followers { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
         public virtual DbSet<Log> Logs { get; set; }

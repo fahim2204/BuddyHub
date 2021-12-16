@@ -153,12 +153,13 @@ const DoLogin = async () => {
             alert.error('Opps!!!');
         })
 
+        
+
 }
 
 
     return (
         <div>
-            <Header />
             <button onClick={Testtoken}>Test Token</button>
             <div className="container">
                 <div className="row d-flex justify-content-center">

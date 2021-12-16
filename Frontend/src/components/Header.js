@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import NavBar from './NavBar';
 
 const Header = () => {
     return (
@@ -7,16 +9,13 @@ const Header = () => {
                 <div className="container d-flex flex-nowrap shadow-sm">
                     <div className="row w-100 align-items-center">
                         <div className="col-4 d-flex justify-content-start">
-                            <a className="text-decoration-none text-secondary" href="/Home/Index">
+                            <Link className="text-decoration-none text-secondary" to="/">
                                 <img className="img-fluid img-responsive"
-                                    src="" alt="Logo" width="70" height="50" />
-                                <h5 className="d-inline-block ms-1 font-monospace">
-                                    BuddyHub
-                                </h5>
-                            </a>
-
+                                    src="/Buddyhub-logo.png" alt="Logo" width="170" height="100" />
+                            </Link>
                         </div>
                     </div>
+                    <NavBar />
                 </div>
             </nav>
 

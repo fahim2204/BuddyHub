@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="buddyhubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BuddyDbContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Comments">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,6 +14,16 @@
           <Property Name="FK_Users_Id" Type="int" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmailLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_User_Id" Type="int" Nullable="false" />
+          <Property Name="EmailToken" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Created_At" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Followers">
           <Key>
@@ -160,6 +170,18 @@
             </Principal>
             <Dependent Role="Comments">
               <PropertyRef Name="FK_Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailLog_EmailLog">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="EmailLogs" Type="Self.EmailLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmailLogs">
+              <PropertyRef Name="Fk_User_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -355,8 +377,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="buddyhubModelStoreContainer">
+        <EntityContainer Name="BuddyDbContextStoreContainer">
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailLogs" EntityType="Self.EmailLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Followers" EntityType="Self.Followers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Likes" EntityType="Self.Likes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
@@ -376,6 +399,10 @@
           <AssociationSet Name="FK_Comments_User" Association="Self.FK_Comments_User">
             <End Role="Users" EntitySet="Users" />
             <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailLog_EmailLog" Association="Self.FK_EmailLog_EmailLog">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EmailLogs" EntitySet="EmailLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_Followers_Users" Association="Self.FK_Followers_Users">
             <End Role="Users" EntitySet="Users" />
@@ -442,7 +469,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="buddyhubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="BuddyDbContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="Id" />
@@ -454,6 +481,17 @@
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Post" Relationship="Self.FK_Comments_Posts" FromRole="Comments" ToRole="Posts" />
           <NavigationProperty Name="User" Relationship="Self.FK_Comments_User" FromRole="Comments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="EmailLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_User_Id" Type="Int32" Nullable="false" />
+          <Property Name="EmailToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_EmailLog_EmailLog" FromRole="EmailLogs" ToRole="Users" />
         </EntityType>
         <EntityType Name="Follower">
           <Key>
@@ -583,6 +621,7 @@
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_User" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="EmailLogs" Relationship="Self.FK_EmailLog_EmailLog" FromRole="Users" ToRole="EmailLogs" />
           <NavigationProperty Name="Followers" Relationship="Self.FK_Followers_Users" FromRole="Users" ToRole="Followers" />
           <NavigationProperty Name="Followers1" Relationship="Self.FK_Followers_Users1" FromRole="Users" ToRole="Followers" />
           <NavigationProperty Name="Likes" Relationship="Self.FK_Likes_Users" FromRole="Users" ToRole="Likes" />
@@ -632,6 +671,18 @@
             </Principal>
             <Dependent Role="Comments">
               <PropertyRef Name="FK_Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailLog_EmailLog">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="EmailLogs" Type="Self.EmailLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmailLogs">
+              <PropertyRef Name="Fk_User_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -827,8 +878,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BuddyDbContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="buddyhubEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="EmailLogs" EntityType="Self.EmailLog" />
           <EntitySet Name="Followers" EntityType="Self.Follower" />
           <EntitySet Name="Likes" EntityType="Self.Like" />
           <EntitySet Name="Logs" EntityType="Self.Log" />
@@ -848,6 +900,10 @@
           <AssociationSet Name="FK_Comments_User" Association="Self.FK_Comments_User">
             <End Role="Users" EntitySet="Users" />
             <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailLog_EmailLog" Association="Self.FK_EmailLog_EmailLog">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EmailLogs" EntitySet="EmailLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_Followers_Users" Association="Self.FK_Followers_Users">
             <End Role="Users" EntitySet="Users" />
@@ -915,9 +971,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="buddyhubModelStoreContainer" CdmEntityContainer="BuddyDbContext">
+        <EntityContainerMapping StorageEntityContainer="BuddyDbContextStoreContainer" CdmEntityContainer="buddyhubEntities">
           <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="buddyhubModel.Comment">
+            <EntityTypeMapping TypeName="BuddyDbContext.Comment">
               <MappingFragment StoreEntitySet="Comments">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FK_Posts_Id" ColumnName="FK_Posts_Id" />
@@ -927,8 +983,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EmailLogs">
+            <EntityTypeMapping TypeName="BuddyDbContext.EmailLog">
+              <MappingFragment StoreEntitySet="EmailLogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fk_User_Id" ColumnName="Fk_User_Id" />
+                <ScalarProperty Name="EmailToken" ColumnName="EmailToken" />
+                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Followers">
-            <EntityTypeMapping TypeName="buddyhubModel.Follower">
+            <EntityTypeMapping TypeName="BuddyDbContext.Follower">
               <MappingFragment StoreEntitySet="Followers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FR_Follower_Users_Id" ColumnName="FR_Follower_Users_Id" />
@@ -937,7 +1004,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Likes">
-            <EntityTypeMapping TypeName="buddyhubModel.Like">
+            <EntityTypeMapping TypeName="BuddyDbContext.Like">
               <MappingFragment StoreEntitySet="Likes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FK_Posts_Id" ColumnName="FK_Posts_Id" />
@@ -946,7 +1013,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logs">
-            <EntityTypeMapping TypeName="buddyhubModel.Log">
+            <EntityTypeMapping TypeName="BuddyDbContext.Log">
               <MappingFragment StoreEntitySet="Logs">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FK_Users_Id" ColumnName="FK_Users_Id" />
@@ -960,7 +1027,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Notifications">
-            <EntityTypeMapping TypeName="buddyhubModel.Notification">
+            <EntityTypeMapping TypeName="BuddyDbContext.Notification">
               <MappingFragment StoreEntitySet="Notifications">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FK_Users_Id" ColumnName="FK_Users_Id" />
@@ -972,7 +1039,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OAuths">
-            <EntityTypeMapping TypeName="buddyhubModel.OAuth">
+            <EntityTypeMapping TypeName="BuddyDbContext.OAuth">
               <MappingFragment StoreEntitySet="OAuth">
                 <ScalarProperty Name="FK_Users_Id" ColumnName="FK_Users_Id" />
                 <ScalarProperty Name="OriginId" ColumnName="OriginId" />
@@ -981,7 +1048,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Posts">
-            <EntityTypeMapping TypeName="buddyhubModel.Post">
+            <EntityTypeMapping TypeName="BuddyDbContext.Post">
               <MappingFragment StoreEntitySet="Posts">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PostsText" ColumnName="PostsText" />
@@ -992,7 +1059,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Profiles">
-            <EntityTypeMapping TypeName="buddyhubModel.Profile">
+            <EntityTypeMapping TypeName="BuddyDbContext.Profile">
               <MappingFragment StoreEntitySet="Profiles">
                 <ScalarProperty Name="FK_Users_Id" ColumnName="FK_Users_Id" />
                 <ScalarProperty Name="Contact" ColumnName="Contact" />
@@ -1007,7 +1074,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecoveryPasswords">
-            <EntityTypeMapping TypeName="buddyhubModel.RecoveryPassword">
+            <EntityTypeMapping TypeName="BuddyDbContext.RecoveryPassword">
               <MappingFragment StoreEntitySet="RecoveryPasswords">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="QuestionOne" ColumnName="QuestionOne" />
@@ -1019,7 +1086,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Saves">
-            <EntityTypeMapping TypeName="buddyhubModel.Save">
+            <EntityTypeMapping TypeName="BuddyDbContext.Save">
               <MappingFragment StoreEntitySet="Saves">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FK_Posts_Id" ColumnName="FK_Posts_Id" />
@@ -1028,7 +1095,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SocialLinks">
-            <EntityTypeMapping TypeName="buddyhubModel.SocialLink">
+            <EntityTypeMapping TypeName="BuddyDbContext.SocialLink">
               <MappingFragment StoreEntitySet="SocialLinks">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SocialName" ColumnName="SocialName" />
@@ -1038,7 +1105,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="buddyhubModel.User">
+            <EntityTypeMapping TypeName="BuddyDbContext.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1050,7 +1117,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorksProfiles">
-            <EntityTypeMapping TypeName="buddyhubModel.WorksProfile">
+            <EntityTypeMapping TypeName="BuddyDbContext.WorksProfile">
               <MappingFragment StoreEntitySet="WorksProfiles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Institution" ColumnName="Institution" />

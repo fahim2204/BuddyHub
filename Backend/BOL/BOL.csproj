@@ -68,12 +68,16 @@
     <Compile Include="Comment.cs">
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dto\EmailDto.cs" />
     <Compile Include="Dto\LogDto.cs" />
     <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Dto\OAuthDto.cs" />
     <Compile Include="Dto\RegistrationDto.cs" />
     <Compile Include="Dto\ProfileDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
+    <Compile Include="EmailLog.cs">
+      <DependentUpon>BuddyHub.tt</DependentUpon>
+    </Compile>
     <Compile Include="Follower.cs">
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>

@@ -27,9 +27,7 @@ namespace DAL
         public void Edit(int id, Log entity)
         {
             var _log = db.Logs.Find(id);
-            _log.Status = entity.Status;
-            //db.Entry(_log).Property(x => x.Id).IsModified = false;
-            //db.Entry(_log).CurrentValues.SetValues(entity);
+            db.Entry(_log).CurrentValues.SetValues(entity);
             db.SaveChanges();
         }
 

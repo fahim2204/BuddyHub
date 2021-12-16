@@ -63,7 +63,8 @@ namespace BLL
             {
                 if (_log.EndAt < DateTime.Now)
                 {
-                    DataAccessFactory.LogDataAccess().Edit(_log.Id, new Log() { Status = 1 });
+                    _log.Status = 1;
+                    DataAccessFactory.LogDataAccess().Edit(_log.Id, _log);
                     return true;
                 }
                 else

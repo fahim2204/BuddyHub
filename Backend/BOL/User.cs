@@ -18,6 +18,7 @@ namespace BOL
         public User()
         {
             this.Comments = new HashSet<Comment>();
+            this.EmailLogs = new HashSet<EmailLog>();
             this.Followers = new HashSet<Follower>();
             this.Followers1 = new HashSet<Follower>();
             this.Likes = new HashSet<Like>();
@@ -39,6 +40,8 @@ namespace BOL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmailLog> EmailLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Follower> Followers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -6,31 +6,57 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Net.Mail;
 using System.Web.Http.Cors;
+using BOL.Dto;
+using BLL;
 
 namespace API.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class EmailConfirmationController : ApiController
     {
-        [HttpGet]
+
+        [HttpPost]
         [Route("Api/SendEmail")]
-        public void SendEmail()
+        public IHttpActionResult SendEmail(EmailDto email)
         {
             var message = new MailMessage();
-
-            message.To.Add(new MailAddress("fahimfaisal1998@gmail.com"));
-            message.From = new MailAddress("buddyhub@fahimfaisal.net");
+            message.To.Add(new MailAddress(email.UserEmail, email.Name));
+            message.From = new MailAddress("buddyhub@fahimfaisal.net", "BuddyHub");
             //message.Bcc.Add(new MailAddress("Amit Mohanty <amitmohanty@email.com>"));
-            message.Subject = "Test Message form ASP";
-            message.Body = System.IO.File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("/Assets/Html/EmailTemplate.html"));
-            //Body = Body.Replace("#DealerCompanyName#", _lstGetDealerRoleAndContactInfoByCompanyIDResult[0].CompanyName);
+            message.Subject = "Please Confirm Your Account";
+            string BodyText = System.IO.File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("/Assets/Html/EmailTemplate.html"));
+            // Generate Token
+            string Token = EmailLogService.EntryEmailByUsername(email.Username);
+
+            BodyText = BodyText.Replace("bh-confirm-link", "https://localhost:44349/Api/ConfirmEmail/" + Token);
+            BodyText = BodyText.Replace("bh-username", email.Name);
+            message.Body = BodyText;
             message.IsBodyHtml = true;
             var smtp = new SmtpClient("fahimfaisal.net");
             //smtp.Port = 465;  ///---------**Note**--Time Out when using the port
             smtp.Credentials = new NetworkCredential("buddyhub@fahimfaisal.net", "faisal@123");
             smtp.EnableSsl = true;
-            smtp.Send(message);
-
+            try
+            {
+                smtp.Send(message);
+                return Ok("Successful");
+            } catch (Exception ex)
+            {
+                return Ok(ex);
+            };
+        }
+        [HttpGet]
+        [Route("Api/ConfirmEmail/{token}")]
+        public IHttpActionResult VerifyEmail(string token)
+        {
+            if (EmailLogService.ConfirmEmailStatus(token))
+            {
+                return Ok("Successful");
+            }
+            else
+            {
+                return BadRequest("Token Not Valid");
+            }
         }
     }
 }

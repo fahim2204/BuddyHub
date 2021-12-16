@@ -34,5 +34,9 @@ namespace DAL
         {
             return new LogRepo(db);
         }
+        public static IRepository<EmailLog, int> EmailLogDataAccess()
+        {
+            return new EmailLogRepo(db);
+        }
     }
 }
