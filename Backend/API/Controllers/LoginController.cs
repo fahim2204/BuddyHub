@@ -19,13 +19,22 @@ namespace API.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (UserService.IsAuthenticUser(_user))
+                var res = UserService.IsAuthenticUser(_user);
+                if (res == "authorized")
                 {
                     return Ok(LogService.GetTokenByUsername(_user.Username));
                 }
+                else if(res == "unauthorized")
+                {
+                    return Unauthorized();
+                }
+                else if(res == "emailnotverified") 
+                {
+                    return Ok("Please Confirm Your Email");
+                }
                 else
                 {
-                    return BadRequest("Already Registered!!");
+                    return BadRequest("Not Found");
                 }
             }
             else

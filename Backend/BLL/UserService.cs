@@ -72,28 +72,36 @@ namespace BLL
         {
             return GetUserByUsername(username) == null ? true : false;
         }
-        public static bool IsAuthenticUser(LoginDto user)
+        public static string IsAuthenticUser(LoginDto user)
         {
             var _user = GetUserByUsername(user.Username);
-            if (_user == null) { return false; }
+            if (_user == null) { return "notfound"; }
             else
             {
                 if(_user.Password == user.Password)
                 {
-                    if (LogService.UpdateLogTimeAndStatus(_user.Id))
+                    if(_user.Status == 1)
                     {
-                        LogService.SetLog(new LogDto()
+                        if (LogService.UpdateLogTimeAndStatus(_user.Id))
                         {
-                            Country = "Bangladesh",
-                            Ip = "192.168.50.1",
-                            FK_Users_Id = _user.Id
-                        });
-                    }                    
-                    return true;
+                            LogService.SetLog(new LogDto()
+                            {
+                                Country = "Bangladesh",
+                                Ip = "192.168.50.1",
+                                FK_Users_Id = _user.Id
+                            });
+                        }
+                        return "authorized";
+                    }
+                    else
+                    {
+                        return "emailnotverified";
+                    }
+                   
                 }
                 else
                 {
-                    return false;
+                    return "unauthorized";
                 }
             }
 

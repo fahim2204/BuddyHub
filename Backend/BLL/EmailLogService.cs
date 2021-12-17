@@ -1,4 +1,6 @@
-﻿using BOL;
+﻿using AutoMapper;
+using BOL;
+using BOL.Dto;
 using DAL;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ namespace BLL
 {
     public class EmailLogService
     {
+       
         public static string EntryEmailByUsername(string username)
         {
             var _user = UserService.GetUserByUsername(username);
@@ -36,6 +39,9 @@ namespace BLL
             }
             else
             {
+                var user = UserService.GetUserById(_emailLog.Fk_User_Id);
+                user.Status = 1;
+                DataAccessFactory.UserDataAccess().Edit(_emailLog.Fk_User_Id, Mapper.Map<UserDto, User>(user));
                 _emailLog.Status = 1;
                 DataAccessFactory.EmailLogDataAccess().Edit(_emailLog.Id, _emailLog);
                 return true;

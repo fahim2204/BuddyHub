@@ -2,8 +2,8 @@ import React,{useState, useEffect} from 'react';
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import { useAlert } from 'react-alert';
-import Header from './Header';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
 import { apiUrl } from '../Config';
 
 
@@ -125,6 +125,19 @@ const Login = () => {
         // SendLoginRequest(user);
         CheckOAuth(user);
     }
+    const responseFacebook = (response) => {
+        console.log(response);
+        // let user = {
+        //     Username: response.profileObj.email,
+        //     Name: response.profileObj.name,
+        //     Email: response.profileObj.email,
+        //     ProfileImage: response.profileObj.imageUrl,
+        //     OriginId: response.googleId,
+        //     OriginName: 'Google',
+        //     Password: response.googleId,
+        // }
+        // SendLoginRequest(user);
+    }
 
 
     const Testtoken = () => {
@@ -160,7 +173,7 @@ const DoLogin = async () => {
 
     return (
         <div>
-            <button onClick={Testtoken}>Test Token</button>
+            {/* <button onClick={Testtoken}>Test Token</button> */}
             <div className="container">
                 <div className="row d-flex justify-content-center">
                     <div className="col-5">
@@ -187,16 +200,29 @@ const DoLogin = async () => {
                                 </div>
 
                                 {/* Implement Login With Google OAuth */}
-                                <div className="d-flex justify-content-center mt-4">
-                                    <GoogleLogin
-                                        clientId="197200157088-jok25uj7eb4dm1jhdie8f5cth1kntimu.apps.googleusercontent.com"
-                                        buttonText="Login"
-                                        // scope = 'https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/user.gender.read https://www.googleapis.com/auth/userinfo.profile'
-                                        onSuccess={responseGoogle}
-                                        onFailure={responseGoogle}
-                                        cookiePolicy={'single_host_origin'}
-                                    />
+                                <div className="row d-flex justify-content-center mt-4">
+                                    <div className="col-4 text-center align-self-center">
+                                        <GoogleLogin
+                                            clientId="197200157088-jok25uj7eb4dm1jhdie8f5cth1kntimu.apps.googleusercontent.com"
+                                            buttonText="Login"
+                                            onSuccess={responseGoogle}
+                                            onFailure={responseGoogle}
+                                            cookiePolicy={'single_host_origin'}
+                                        />
+                                    </div>
+                                    <div className="col-4 text-center align-self-center">
+                                        <FacebookLogin
+                                            appId="408009050991275"
+                                            autoLoad={false}
+                                            fields="name,email,picture"
+                                            callback={responseFacebook}
+                                            textButton="Login"
+                                            cssClass='btn btn-primary'
+                                            icon="fa-facebook"
+                                        />
+                                    </div>
                                 </div>
+                                <h6 className='text-center mt-4 text-muted'>Not Registered Yet? <Link to="/register">Register</Link></h6>
                             </div>
                         </div>
                     </div>

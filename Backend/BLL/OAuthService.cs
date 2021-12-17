@@ -110,7 +110,7 @@ namespace BLL
                         ProfileImage = OAuth.ProfileImage,
                         Address = "Not Set",
                         Gender = "Not Set",
-                        DOB = new DateTime(),
+                        DOB = new DateTime(2000, 01, 01, 01, 00, 00),
                         Relationship = "Not Set",
                         Religion = "Not Set"
                     };

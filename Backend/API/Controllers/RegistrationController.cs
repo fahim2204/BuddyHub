@@ -1,5 +1,6 @@
 ﻿using BLL;
 using BOL.Dto;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace API.Controllers
             }
             else
             {
-                return BadRequest(ModelState);
+                return BadRequest("Fillup All Data Correctly!!");
             }
         } 
         [HttpGet]
@@ -40,6 +41,12 @@ namespace API.Controllers
             {
                 return Ok(_users);
             }
+        }
+        [HttpGet]
+        [Route("Api/Time")]
+        public IHttpActionResult GetAllUsefgr(RegistrationDto registrationDto)
+        {
+            return Ok(DateTime.Now);
         }
 
     }

@@ -38,6 +38,19 @@ namespace API.Controllers
                 return Ok(_user);
             }
         }
+        [Route("Api/User/Username/{username}")]
+        public IHttpActionResult GetUserByUsename(string username)
+        {
+            var _user = UserService.GetUserByUsername(username);
+            if (_user == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(_user);
+            }
+        }
         [HttpPost]
         [Route("Api/User")]
         public IHttpActionResult CreateUser(UserDto user)
