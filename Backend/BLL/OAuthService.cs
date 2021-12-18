@@ -79,19 +79,41 @@ namespace BLL
             }
         }
 
-        public static bool RegisterOAuth(OAuthDto OAuth)
+        public static AuthenticUserDto LoginOAuth(OAuthDto oAuth)
         {
-            if(OAuth == null) { return false; }
+            if (IsOAuthExists(oAuth))
+            {
+                var _oauth = GetAllOAuth().FirstOrDefault(x => x.OriginId == oAuth.OriginId && x.OriginName == oAuth.OriginName);
+                var _user = UserService.GetUserByUsername(_oauth.Username);
+                if (LogService.UpdateLogTimeAndStatus(_user.Id))
+                {
+                    LogService.SetLog(new LogDto()
+                    {
+                        Country = "Bangladesh",
+                        Ip = "192.168.50.1",
+                        FK_Users_Id = _user.Id
+                    });
+                }
+                return UserService.GetAuthenticUserInfoByUsername(_oauth.Username);
+            }
             else
             {
+                return null;
+            }
+        }
+
+        public static bool RegisterOAuth(OAuthDto OAuth)
+        {
+            if (!IsOAuthExists(OAuth))
+            {
                 bool isCreated = UserService.RegisterUser(new UserDto()
-                    {
-                        Name = OAuth.Name,
-                        Username = OAuth.Username,
-                        Type = "general",
-                        Status = 1,
-                        Password = OAuth.Password
-                    });
+                {
+                    Name = OAuth.Name,
+                    Username = OAuth.Username,
+                    Type = "general",
+                    Status = 1,
+                    Password = OAuth.Password
+                });
                 if (isCreated)
                 {
                     var fk_uid = UserService.GetUserByUsername(OAuth.Username).Id;
@@ -121,7 +143,10 @@ namespace BLL
                 {
                     return false;
                 }
-                
+            }
+            else
+            {
+                return false;
             }
         }
 

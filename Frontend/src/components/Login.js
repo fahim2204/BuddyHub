@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import { useAlert } from 'react-alert';
@@ -31,16 +31,16 @@ const authAxios = axios.create({
 
 const Login = () => {
 
-    useEffect(() => {document.title = "BuddyHub - Login"},[])
+    useEffect(() => { document.title = "BuddyHub - Login" }, [])
     var [clientInfo, setClientInfo] = useState({
-        Ip : "127.0.0.1",
+        Ip: "127.0.0.1",
         Country: "Bangladesh",
     });
     var [loginInfo, SetLoginInfo] = useState({
         Username: "",
         Password: ""
     });
-        
+
 
     const alert = useAlert();
     const navigate = useNavigate();
@@ -48,36 +48,38 @@ const Login = () => {
 
     const GetClientInfo = async () => {
         await axios.get(`https://geolocation-db.com/json`)
-        .then(res => { 
-            setClientInfo(res.data);
-            console.log(res.data);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-         
+            .then(res => {
+                setClientInfo(res.data);
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
     }
 
 
     const CheckOAuth = (user) => {
         axios.post(`${apiUrl}/CheckOAuth`, user)
             .then(res => {
-                console.log(res);
                 if (res.data === "Yes") {
-                    alert.success("User Already Exists");
+                    SendLoginRequest(user);
                 } else {
                     alert.info("User Not Found");
-                    navigate("/Register");
+                    setTimeout(() => {navigate("/Register")}, 2000);
                 }
             })
     }
 
     const SendLoginRequest = (user) => {
-        axios.post(`https://localhost:44349/Api/oauth`, user)
+        axios.post(`${apiUrl}/OAuth/Login`, user)
             .then(res => {
-                console.log("Resource adata");
-                console.log(res);
-                // console.log(res.data);
+                console.log(res.data);
+                alert.success("Success!!");
+                    sessionStorage.setItem('LoggedUser', res.data);
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 2000)
             })
             .catch(err => {
                 if (err === undefined) {
@@ -107,20 +109,17 @@ const Login = () => {
                         })
                     }
                 }
-                // console.log(err.response.status);
             })
     }
 
     const responseGoogle = (response) => {
         console.log(response);
         let user = {
-            Username: response.profileObj.email,
             Name: response.profileObj.name,
             Email: response.profileObj.email,
             ProfileImage: response.profileObj.imageUrl,
             OriginId: response.googleId,
             OriginName: 'Google',
-            Password: response.googleId,
         }
         // SendLoginRequest(user);
         CheckOAuth(user);
@@ -149,40 +148,36 @@ const Login = () => {
                 console.log(err);
             })
     }
-const HandleLoginForm = e => {
-    SetLoginInfo({
-        ...loginInfo,
-        [e.target.name]: e.target.value
-    })
-}
-const DoLogin = async () => {
-
-    await axios.post(`${apiUrl}/Login`, loginInfo)
-    .then(res => {
-        console.log(res.data);
-        if(res.data === "unauthorized"){
-            alert.error("Wrong Credentials!!")
-        }else if(res.data === "authorized"){
-            alert.success("Success!!");
-            console.log(res.data);
-            sessionStorage.setItem('token', res.data);
-            setTimeout(() => {
-                navigate("/");
-            },2000)
-            // setTimeout
-        }
-        // else if(){}
-        // navigate("/");
-    })
-        .catch(err => {
-            alert.error('Opps!!!');
+    const HandleLoginForm = e => {
+        SetLoginInfo({
+            ...loginInfo,
+            [e.target.name]: e.target.value
         })
+    }
+    const DoLogin = async () => {
 
-        
+        await axios.post(`${apiUrl}/Login`, loginInfo)
+            .then(res => {
+                console.log(res.data);
+                if (res.data === "unauthorized") {
+                    alert.error("Wrong Credentials!!")
+                } else if (res.data === "emailnotverified") {
+                    alert.error("Please Verify your Email!!");
+                } else {
+                    alert.success("Success!!");
+                    sessionStorage.setItem('token', res.data);
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 2000)
+                }
+            })
+            .catch(err => {
+                alert.error('Validation Error!!!');
+            })
 
-}
 
 
+    }
     return (
         <div>
             {/* <button onClick={Testtoken}>Test Token</button> */}
@@ -203,7 +198,7 @@ const DoLogin = async () => {
                                     <div className="row mb-3">
                                         <label htmlFor="inputPassword" className="col-sm-3 col-form-label">Password :</label>
                                         <div className="col-sm-7">
-                                            <input type="password" className="form-control" onChange={HandleLoginForm} name="Password"/>
+                                            <input type="password" className="form-control" onChange={HandleLoginForm} name="Password" />
                                         </div>
                                     </div>
                                     <div className="d-flex justify-content-center mt-4">

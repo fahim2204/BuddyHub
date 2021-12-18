@@ -34,6 +34,7 @@ namespace BLL
             }
         }
 
+   
         public static bool RegisterUser(UserDto user)
         {
             if(user == null || !IsUsernameAvailble(user.Username)) { return false; }
@@ -42,6 +43,21 @@ namespace BLL
                 DataAccessFactory.UserDataAccess().Add(Mapper.Map<UserDto,User>(user));
                 return true;
             }
+        }
+
+        public static AuthenticUserDto GetAuthenticUserInfoByUsername(string username)
+        {
+            var _user = GetUserByUsername(username);
+            var _token = LogService.GetTokenByUsername(username);
+            return new AuthenticUserDto()
+            {
+                Id = _user.Id,
+                Name = _user.Name,
+                Username = _user.Username,
+                Token = _token,
+                Status = _user.Status,
+                Type = _user.Type,
+            };
         }
 
         public static bool DeleteUserById(int id)
@@ -72,6 +88,8 @@ namespace BLL
         {
             return GetUserByUsername(username) == null ? true : false;
         }
+
+
         public static string IsAuthenticUser(LoginDto user)
         {
             var _user = GetUserByUsername(user.Username);

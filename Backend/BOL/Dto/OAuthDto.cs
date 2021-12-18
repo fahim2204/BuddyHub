@@ -18,9 +18,7 @@ namespace BOL.Dto
         //From the User table
         [Required]
         public string Name { get; set; }
-        [Required]
         public string Username { get; set; }
-        [Required]
         public string Password { get; set; }
         public string Type { get; set; }
         public int Status { get; set; }

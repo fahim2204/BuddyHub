@@ -46,7 +46,7 @@ namespace API.Controllers
                 }
         }
         [HttpPost]
-        [Route("Api/OAuth")]
+        [Route("Api/OAuth/Register")]
         public IHttpActionResult CreateOAuth(OAuthDto oAuth)
         {
             if (ModelState.IsValid)
@@ -66,7 +66,29 @@ namespace API.Controllers
             }
 
         }
+        [HttpPost]
+        [Route("Api/OAuth/Login")]
+        public IHttpActionResult LoginOAuth(OAuthDto oAuth)
+        {
+            if (ModelState.IsValid)
+            {
+                var _user = OAuthService.LoginOAuth(oAuth);
+                if (_user != null)
+                {
+                    return Ok(_user);
+                }
+                else
+                {
+                    return Ok("null");
+                }
+            }
+            else
+            {
+                return BadRequest("Didn't Fullfill Validation");
+            }
 
-       
+        }
+
+
     }
 }
