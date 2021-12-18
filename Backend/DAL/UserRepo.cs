@@ -26,9 +26,9 @@ namespace DAL
            
         }
 
-        public void Edit(int id, User user)
+        public void Edit(User user)
         {
-            var _user = db.Users.FirstOrDefault(u => u.Id == id);
+            var _user = db.Users.Find(user.Id);
             db.Entry(_user).CurrentValues.SetValues(user);
             db.SaveChanges();
         }

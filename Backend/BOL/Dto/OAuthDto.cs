@@ -9,6 +9,7 @@ namespace BOL.Dto
 {
     public class OAuthDto
     {
+        public int Id { get; set; }
         [Required]
         public string OriginId { get; set; }
         [Required]

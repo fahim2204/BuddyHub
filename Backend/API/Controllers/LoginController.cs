@@ -26,20 +26,20 @@ namespace API.Controllers
                 }
                 else if(res == "unauthorized")
                 {
-                    return Unauthorized();
+                    return Ok("unauthorized");
                 }
                 else if(res == "emailnotverified") 
                 {
-                    return Ok("Please Confirm Your Email");
+                    return Ok("emailnotverified");
                 }
                 else
                 {
-                    return BadRequest("Not Found");
+                    return Ok("unauthorized");
                 }
             }
             else
             {
-                return BadRequest("Didn't Fullfill Validation");
+                return BadRequest("validationerror");
             }
         }
     }

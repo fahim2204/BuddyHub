@@ -8,6 +8,8 @@ namespace BOL.Dto
 {
     public class ProfileDto
     {
+        public int Id { get; set; }
+
         public int FK_Users_Id { get; set; }
         public string Contact { get; set; }
         public string Email { get; set; }

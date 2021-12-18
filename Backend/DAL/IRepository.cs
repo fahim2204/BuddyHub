@@ -11,7 +11,7 @@ namespace DAL
         void Add(T entity);
         IEnumerable<T> Get();
         T Get(ID id);
-        void Edit(ID id, T entity);
+        void Edit(T entity);
         void Delete(ID id);
 
     }

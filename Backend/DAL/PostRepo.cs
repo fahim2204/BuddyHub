@@ -26,7 +26,7 @@ namespace DAL
             throw new NotImplementedException();
         }
 
-        public void Edit(int id, Post entity)
+        public void Edit(Post entity)
         {
             throw new NotImplementedException();
         }

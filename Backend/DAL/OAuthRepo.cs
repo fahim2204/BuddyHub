@@ -25,10 +25,10 @@ namespace DAL
             db.SaveChanges();
         }
 
-        public void Edit(int id, OAuth entity)
+        public void Edit(OAuth entity)
         {
 
-            var _oAuth = db.OAuths.FirstOrDefault(u => u.FK_Users_Id == id);
+            var _oAuth = db.OAuths.Find(entity.FK_Users_Id);
             db.Entry(_oAuth).CurrentValues.SetValues(entity);
             db.SaveChanges();
         }

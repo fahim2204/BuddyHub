@@ -9,6 +9,8 @@ namespace BOL.Dto
 {
     public class LogDto
     {
+        public int Id { get; set; }
+
         public int FK_Users_Id { get; set; }
 
         public string Token { get; set; }

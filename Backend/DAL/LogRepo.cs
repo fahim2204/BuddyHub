@@ -24,9 +24,9 @@ namespace DAL
             db.SaveChanges();
         }
 
-        public void Edit(int id, Log entity)
+        public void Edit(Log entity)
         {
-            var _log = db.Logs.Find(id);
+            var _log = db.Logs.Find(entity.Id);
             db.Entry(_log).CurrentValues.SetValues(entity);
             db.SaveChanges();
         }

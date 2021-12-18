@@ -8,6 +8,7 @@ namespace BOL.Dto
 {
     public class EmailDto
     {
+        public int Id { get; set; }
         public string UserEmail { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }

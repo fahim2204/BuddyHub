@@ -24,9 +24,9 @@ namespace DAL
             db.SaveChanges();
         }
 
-        public void Edit(int id, EmailLog entity)
+        public void Edit(EmailLog entity)
         {
-            var emailLog = db.EmailLogs.Find(id);
+            var emailLog = db.EmailLogs.Find(entity.Id);
             db.Entry(emailLog).CurrentValues.SetValues(entity);
             db.SaveChanges();
         }

@@ -55,14 +55,14 @@ namespace BLL
             }
         }
 
-        public static bool EditProfile(int id, ProfileDto user)
+        public static bool EditProfile(ProfileDto user)
         {
-            var _Profile = DataAccessFactory.ProfileDataAccess().Get(id);
+            var _Profile = DataAccessFactory.ProfileDataAccess().Get(user.Id);
 
             if (_Profile == null) { return false; }
             else
             {
-                DataAccessFactory.ProfileDataAccess().Edit(id, Mapper.Map<ProfileDto, BOL.Profile>(user));
+                DataAccessFactory.ProfileDataAccess().Edit(Mapper.Map<ProfileDto, BOL.Profile>(user));
                 return true;
             }
         }

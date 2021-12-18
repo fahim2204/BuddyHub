@@ -41,9 +41,9 @@ namespace BLL
             {
                 var user = UserService.GetUserById(_emailLog.Fk_User_Id);
                 user.Status = 1;
-                DataAccessFactory.UserDataAccess().Edit(_emailLog.Fk_User_Id, Mapper.Map<UserDto, User>(user));
+                DataAccessFactory.UserDataAccess().Edit(Mapper.Map<UserDto, User>(user));
                 _emailLog.Status = 1;
-                DataAccessFactory.EmailLogDataAccess().Edit(_emailLog.Id, _emailLog);
+                DataAccessFactory.EmailLogDataAccess().Edit(_emailLog);
                 return true;
             }
 

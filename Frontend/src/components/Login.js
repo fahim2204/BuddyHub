@@ -156,11 +156,23 @@ const HandleLoginForm = e => {
     })
 }
 const DoLogin = async () => {
+
     await axios.post(`${apiUrl}/Login`, loginInfo)
     .then(res => {
         console.log(res.data);
-        sessionStorage.setItem('token', res.data.token);
-        navigate("/");
+        if(res.data === "unauthorized"){
+            alert.error("Wrong Credentials!!")
+        }else if(res.data === "authorized"){
+            alert.success("Success!!");
+            console.log(res.data);
+            sessionStorage.setItem('token', res.data);
+            setTimeout(() => {
+                navigate("/");
+            },2000)
+            // setTimeout
+        }
+        // else if(){}
+        // navigate("/");
     })
         .catch(err => {
             alert.error('Opps!!!');

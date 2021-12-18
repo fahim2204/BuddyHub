@@ -26,12 +26,10 @@ namespace DAL
            
         }
 
-        public void Edit(int id, Profile Profile)
+        public void Edit(Profile profile)
         {
-            var _Profile = db.Profiles.FirstOrDefault(u => u.FK_Users_Id == id);
-            
-            db.Entry(_Profile).CurrentValues.SetValues(Profile);
-            db.Entry(_Profile).Property(x => x.FK_Users_Id).IsModified = false;
+            var _Profile = db.Profiles.Find(profile);
+            db.Entry(_Profile).CurrentValues.SetValues(_Profile);
             db.SaveChanges();
         }
 

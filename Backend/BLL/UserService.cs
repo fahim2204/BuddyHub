@@ -114,7 +114,7 @@ namespace BLL
             if (_User == null) { return false; }
             else
             {
-                DataAccessFactory.UserDataAccess().Edit(id, Mapper.Map<UserDto, User>(user));
+                DataAccessFactory.UserDataAccess().Edit(Mapper.Map<UserDto, User>(user));
                 return true;
             }
         }
