@@ -22,6 +22,14 @@ namespace DAL
         {
             return new PostRepo(db);
         }
+        public static IRepository<Comment, int> CommentDataAccess()
+        {
+            return new CommentRepo(db);
+        }
+        public static IRepository<Like, int> LikeDataAccess()
+        {
+            return new LikeRepo(db);
+        }
         public static IRepository<OAuth, int> OAuthDataAccess()
         {
             return new OAuthRepo(db);

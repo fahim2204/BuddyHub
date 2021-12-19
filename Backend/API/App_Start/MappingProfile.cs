@@ -30,8 +30,10 @@ namespace API.App_Start
             CreateMap<LogDto, Log>();
             CreateMap<Post, PostDto>();
             CreateMap<PostDto, Post>();
-
-
+            CreateMap<Comment, CommentDto>();
+            CreateMap<CommentDto, Comment>();
+            CreateMap<Like, LikeDto>();
+            CreateMap<LikeDto, Like>();
         }
     }
 }
