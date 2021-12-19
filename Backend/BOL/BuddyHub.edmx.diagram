@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="BuddyDbContext.SocialLink" Width="1.5" PointX="3" PointY="36.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BuddyDbContext.User" Width="1.5" PointX="0.75" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BuddyDbContext.WorksProfile" Width="1.5" PointX="3" PointY="39.5" IsExpanded="true" />
-        <AssociationConnector Association="BuddyDbContext.FK_Comments_Posts" ManuallyRouted="false" />
         <AssociationConnector Association="BuddyDbContext.FK_Comments_User" ManuallyRouted="false" />
         <AssociationConnector Association="BuddyDbContext.FK_EmailLog_EmailLog" ManuallyRouted="false" />
         <AssociationConnector Association="BuddyDbContext.FK_Followers_Users" ManuallyRouted="false" />
@@ -37,6 +36,7 @@
         <AssociationConnector Association="BuddyDbContext.FK_Saves_User" ManuallyRouted="false" />
         <AssociationConnector Association="BuddyDbContext.FK_SocialLinks_User" ManuallyRouted="false" />
         <AssociationConnector Association="BuddyDbContext.FK_WorksProfiles_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BuddyDbContext.FK_Comments_Posts1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

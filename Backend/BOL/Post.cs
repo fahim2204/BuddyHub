@@ -19,6 +19,7 @@ namespace BOL
         {
             this.Likes = new HashSet<Like>();
             this.Saves = new HashSet<Save>();
+            this.Comments = new HashSet<Comment>();
         }
     
         public int Id { get; set; }
@@ -27,11 +28,12 @@ namespace BOL
         public int Status { get; set; }
         public int FK_Users_Id { get; set; }
     
-        public virtual Comment Comment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Like> Likes { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Save> Saves { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

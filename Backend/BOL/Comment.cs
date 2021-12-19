@@ -20,7 +20,7 @@ namespace BOL
         public System.DateTime CreatedAt { get; set; }
         public string Text { get; set; }
     
-        public virtual Post Post { get; set; }
         public virtual User User { get; set; }
+        public virtual Post Post { get; set; }
     }
 }
