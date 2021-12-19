@@ -48,9 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentRepo.cs" />
     <Compile Include="DataAccessFactory.cs" />
     <Compile Include="EmailLogRepo.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="LikeRepo.cs" />
     <Compile Include="LogRepo.cs" />
     <Compile Include="OAuthRepo.cs" />
     <Compile Include="PostRepo.cs" />

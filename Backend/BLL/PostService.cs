@@ -24,13 +24,13 @@ namespace BLL
             return DataAccessFactory.PostDataAccess().Get().Select(Mapper.Map<Post, PostDto>);
         }
 
-        public static IEnumerable<PostDto> GetPostById(int id)
+        public static PostDto GetPostById(int id)
         {
             var posts = DataAccessFactory.PostDataAccess().Get().Select(Mapper.Map<Post, PostDto>);
 
             var data = (from p in posts
                         where p.Id == id
-                        select p);
+                        select p).FirstOrDefault();
             return data;
         }
 
