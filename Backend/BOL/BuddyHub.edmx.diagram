@@ -37,6 +37,7 @@
         <AssociationConnector Association="BuddyDbContext.FK_SocialLinks_User" ManuallyRouted="false" />
         <AssociationConnector Association="BuddyDbContext.FK_WorksProfiles_Users" ManuallyRouted="false" />
         <AssociationConnector Association="BuddyDbContext.FK_Comments_Posts" />
+
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

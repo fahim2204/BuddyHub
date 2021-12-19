@@ -76,7 +76,12 @@ const Login = () => {
             .then(res => {
                 console.log(res.data);
                 alert.success("Success!!");
-                    sessionStorage.setItem('LoggedUser', res.data);
+                    sessionStorage.setItem('ID', res.data.ID);
+                    sessionStorage.setItem('Name', res.data.Name);
+                    sessionStorage.setItem('Username', res.data.Username);
+                    sessionStorage.setItem('Token', res.data.Token);
+                    sessionStorage.setItem('Status', res.data.Status);
+                    sessionStorage.setItem('Type', res.data.Type);
                     setTimeout(() => {
                         navigate("/");
                     }, 2000)

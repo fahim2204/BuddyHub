@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "f05dfc5c-1fdc-40ef-a0f1-082a4007f43b": {
+      "ProjectGuid": "f05dfc5c-1fdc-40ef-a0f1-082a4007f43b",
+      "DisplayName": "API",
+      "ColorIndex": 0
+    },
+    "1de1701c-ec77-40f9-b68c-b639f423b4b4": {
+      "ProjectGuid": "1de1701c-ec77-40f9-b68c-b639f423b4b4",
+      "DisplayName": "ClassLibrary1",
+      "ColorIndex": 1
+    },
+    "f29b3dcd-e96b-492a-a92f-74916cbdc83b": {
+      "ProjectGuid": "f29b3dcd-e96b-492a-a92f-74916cbdc83b",
+      "DisplayName": "DAL",
+      "ColorIndex": 2
+    },
+    "359ba1dc-36ad-4d60-b829-daf144d2635c": {
+      "ProjectGuid": "359ba1dc-36ad-4d60-b829-daf144d2635c",
+      "DisplayName": "BLL",
+      "ColorIndex": 3
+    },
+    "c89712da-6853-4c03-a6a6-b39ee2c19293": {
+      "ProjectGuid": "c89712da-6853-4c03-a6a6-b39ee2c19293",
+      "DisplayName": "BOL",
+      "ColorIndex": 4
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 5
+}

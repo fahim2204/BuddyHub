@@ -485,7 +485,9 @@
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Comments_User" FromRole="Comments" ToRole="Users" />
+
           <NavigationProperty Name="Post" Relationship="BuddyDbContext.FK_Comments_Posts" FromRole="Comment" ToRole="Post" />
+
         </EntityType>
         <EntityType Name="EmailLog">
           <Key>
@@ -566,7 +568,9 @@
           <NavigationProperty Name="Likes" Relationship="Self.FK_Likes_Posts" FromRole="Posts" ToRole="Likes" />
           <NavigationProperty Name="User" Relationship="Self.FK_Posts_Users" FromRole="Posts" ToRole="Users" />
           <NavigationProperty Name="Saves" Relationship="Self.FK_Saves_Posts" FromRole="Posts" ToRole="Saves" />
+
           <NavigationProperty Name="Comments" Relationship="BuddyDbContext.FK_Comments_Posts" FromRole="Post" ToRole="Comment" />
+
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -954,12 +958,15 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="WorksProfiles" EntitySet="WorksProfiles" />
           </AssociationSet>
+
           <AssociationSet Name="FK_Comments_Posts" Association="BuddyDbContext.FK_Comments_Posts">
+
             <End Role="Post" EntitySet="Posts" />
             <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Comments_Posts">
+
           <End Type="BuddyDbContext.Post" Role="Post" Multiplicity="1" />
           <End Type="BuddyDbContext.Comment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>

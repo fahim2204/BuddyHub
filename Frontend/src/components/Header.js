@@ -1,8 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
 
 const Header = () => {
+    const navigate = useNavigate();
+
+    const logout = () => {
+        console.log(sessionStorage.getItem('LoggedUser'));        
+        sessionStorage.clear();
+        navigate("/login");
+    }
+    
+
+
     return (
         <>
             <nav className="navbar navbar-light bg-light fixed-top">
@@ -15,7 +25,10 @@ const Header = () => {
                             </Link>
                         </div>
                     </div>
-                    <NavBar />
+                    {sessionStorage.getItem('Token') ?  <>
+                        <button className='btn btn-sm btn-success' onClick={logout}>Logout</button>
+                    </>: <NavBar /> }
+                    
                 </div>
             </nav>
 
