@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangePasswordService.cs" />
     <Compile Include="CommentService.cs" />
     <Compile Include="EmailLogService.cs" />
     <Compile Include="LikeService.cs" />
