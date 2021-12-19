@@ -28,7 +28,8 @@ namespace API.App_Start
             CreateMap<User, OAuthDto>();
             CreateMap<Log, LogDto>();
             CreateMap<LogDto, Log>();
-
+            CreateMap<Post, PostDto>();
+            CreateMap<PostDto, Post>();
 
 
         }

@@ -18,27 +18,32 @@ namespace DAL
 
         public void Add(Post entity)
         {
-            throw new NotImplementedException();
+            db.Posts.Add(entity);
+            db.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var p = db.Posts.Find(id);
+            db.Posts.Remove(p);
+            db.SaveChanges();
         }
 
         public void Edit(Post entity)
         {
-            throw new NotImplementedException();
+            var p = db.Posts.Find(entity.Id);
+            db.Entry(p).CurrentValues.SetValues(entity);
+            db.SaveChanges();
         }
 
         public IEnumerable<Post> Get()
         {
-            throw new NotImplementedException();
+            return db.Posts;
         }
 
         public Post Get(int id)
         {
-            throw new NotImplementedException();
+            return db.Posts.Find(id);
         }
     }
 }

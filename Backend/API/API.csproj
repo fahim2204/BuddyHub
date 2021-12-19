@@ -109,6 +109,7 @@
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OAuthController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
