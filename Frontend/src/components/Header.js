@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
+import { isLoggedIn } from '../Config';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -25,10 +26,12 @@ const Header = () => {
                             </Link>
                         </div>
                     </div>
-                    {sessionStorage.getItem('Token') ?  <>
-                        <button className='btn btn-sm btn-success' onClick={logout}>Logout</button>
-                    </>: <NavBar /> }
-                    
+                    {isLoggedIn() && <>
+                        <button className='btn btn-sm btn-success' onClick={logout}>Logout</button> 
+                    </>}
+                    {!isLoggedIn() && <>
+                        <NavBar />
+                    </>}                    
                 </div>
             </nav>
 
