@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ChangePasswordController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\EmailConfirmationController.cs" />
     <Compile Include="Controllers\LikeController.cs" />
