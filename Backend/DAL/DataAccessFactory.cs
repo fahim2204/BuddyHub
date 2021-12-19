@@ -46,5 +46,9 @@ namespace DAL
         {
             return new EmailLogRepo(db);
         }
+        public static IRepository<Notification, int> NotificationDataAccess()
+        {
+            return new NotificationRepo(db);
+        }
     }
 }
