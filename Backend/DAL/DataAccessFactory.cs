@@ -46,5 +46,9 @@ namespace DAL
         {
             return new EmailLogRepo(db);
         }
+        public static IRepository<RecoveryPassword, int> RecoveryPasswordDataAccess()
+        {
+            return new RecoveryPasswordRepo(db);
+        }
     }
 }

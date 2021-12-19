@@ -77,6 +77,7 @@
     <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Dto\OAuthDto.cs" />
     <Compile Include="Dto\PostDto.cs" />
+    <Compile Include="Dto\RecoveryPasswordDto.cs" />
     <Compile Include="Dto\RegistrationDto.cs" />
     <Compile Include="Dto\ProfileDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
