@@ -54,6 +54,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="LikeRepo.cs" />
     <Compile Include="LogRepo.cs" />
+    <Compile Include="NotificationRepo.cs" />
     <Compile Include="OAuthRepo.cs" />
     <Compile Include="PostRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
