@@ -50,5 +50,10 @@ namespace DAL
         {
             return new NotificationRepo(db);
         }
+        public static IRepository<RecoveryPassword, int> RecoveryPasswordDataAccess()
+        {
+            return new RecoveryPasswordRepo(db);
+
+        }
     }
 }
