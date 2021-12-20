@@ -14,16 +14,17 @@ const ProfileCard = () => {
     }, []);
 
     var [profileInfo, SetprofileInfo] = useState({
-        UserName: "",
-        FullName: "",
+        Username: "",
+        Name: "",
         Contact: "",
         Email: "",
         Address: "",
         ProfileImage: "",
-        DateOFBirth: "",
+        DOB: "",
         Gender: "",
         Religion: "",
         Relationship: "",
+        Status: ""
     });
 
     const GetProfileData = () => {
@@ -35,24 +36,23 @@ const ProfileCard = () => {
                 SetprofileInfo(
                     {
                         ...profileInfo,
-                        UserName: res.data.UserName,
+                        Username: res.data.Username,
                         ProfileImage: res.data.ProfileImage,
-                        FullName: res.data.FullName,
+                        Name: res.data.Name,
                         Contact: res.data.Contact,
                         Email: res.data.Contact,
                         Address: res.data.Address,
-                        DateOFBirth: res.data.DOB,
+                        DOB: res.data.DOB,
                         Gender: res.data.Gender,
                         Religion: res.data.Religion,
                         Relationship: res.data.Relationship,
+                        Status: res.data.Status
                     }
                 )
             })
             .catch(err => {
                 console.log(err);
             })
-
-
     }
     return (
         <>
@@ -80,13 +80,10 @@ const ProfileCard = () => {
                                 <img className="rounded-circle border border-2 border-success shadow" src={profileInfo.ProfileImage} alt="user" style={{ height: '100px', width: '100px' }} />
                             </div>
                             <div className="col-12 d-flex justify-content-center align-items-center my-1">
-                                <h5 className="d-inline-block">{profileInfo.UserName}</h5>
-                                <h6 className="d-inline-block">
-                                    Active
-                                    {/* (@if (Model.Status == 1)
-                                        {'{'}@Html.Raw("Active"){'}'}
-                                        else
-                                        {'{'}@Html.Raw("Disabled"){'}'}) */}
+                                <h5 className="d-inline-block">{profileInfo.Username}</h5>
+                                <h6 className="d-inline-block ms-2 text-muted">
+                                    {profileInfo.Status === 1 && <>(Active)</>}
+                                    {profileInfo.Status === 2 && <>(Disabled)</>}
                                 </h6>
                             </div>
 
@@ -112,38 +109,38 @@ const ProfileCard = () => {
                                 {sessionStorage.getItem("Id") === params.id ? <Link to="/editprofile" className="btn btn-primary">Edit Profile</Link>
                                     : <Link to={"/follow/" + params.id} className="btn btn-success">Follow</Link>}
                             </div>
-                            <div className="col-8 my-2">
+                            <div className="col-12 my-4">
                                 <div className="row">
                                     <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile">Full Name : </span>
-                                        <span className="profile1">{profileInfo.FullName}</span>
+                                        <span className="profile me-2">Full Name : </span>
+                                        <span className="profile1">{profileInfo.Name}</span>
                                     </div>
                                     <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile">Date of Birth : </span>
-                                        <span className="profile1">{profileInfo.DateOFBirth.toString()}</span>
+                                        <span className="profile me-2">Date of Birth : </span>
+                                        <span className="profile1">{profileInfo.DOB.toString()}</span>
                                     </div>
                                     <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile">Contact :</span>
+                                        <span className="profile me-2">Contact :</span>
                                         <span className="profile1">{profileInfo.Contact}</span>
                                     </div>
                                     <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile">Gender :</span>
+                                        <span className="profile me-2">Gender :</span>
                                         <span className="profile1">{profileInfo.Gender}</span>
                                     </div>
                                     <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile">Email :</span>
+                                        <span className="profile me-2">Email :</span>
                                         <span className="profile1">{profileInfo.Email}</span>
                                     </div>
                                     <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile">Religion :</span>
+                                        <span className="profile me-2">Religion :</span>
                                         <span className="profile1">{profileInfo.Religion}</span>
                                     </div>
                                     <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile">Address :</span>
+                                        <span className="profile me-2">Address :</span>
                                         <span className="profile1">{profileInfo.Address}</span>
                                     </div>
                                     <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile">Relationship :</span>
+                                        <span className="profile me-2">Relationship :</span>
                                         <span className="profile1">{profileInfo.Relationship}</span>
                                     </div>
                                 </div>
