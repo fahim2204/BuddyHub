@@ -19,7 +19,20 @@ namespace BLL
 
         public static IEnumerable<PostDto> GetAllPost()
         {
-            return DataAccessFactory.PostDataAccess().Get().Select(Mapper.Map<Post, PostDto>);
+            var po = new List<PostDto>();
+            var posts =  DataAccessFactory.PostDataAccess().Get().Select(Mapper.Map<Post, PostDto>);
+            foreach(var p in posts)
+            {
+                var user = UserService.GetUserById(p.FK_Users_Id);
+                var comments = CommentService.GetCommentByPostId(p.Id);
+                var likes = LikeService.GetLikeByPostId(p.Id);
+                p.Name = user.Name;
+                p.Username = user.Username;
+                p.CommentCount = comments.Count();
+                p.LikeCount = likes.Count();
+                po.Add(p);
+            }
+            return po;
         }
 
         public static PostDto GetPostById(int id)
@@ -29,6 +42,13 @@ namespace BLL
             var data = (from p in posts
                         where p.Id == id
                         select p).FirstOrDefault();
+            var user = UserService.GetUserById(data.FK_Users_Id);
+            var comments = CommentService.GetCommentByPostId(data.Id);
+            var likes = LikeService.GetLikeByPostId(data.Id);
+            data.Name = user.Name;
+            data.Username = user.Username;
+            data.CommentCount = comments.Count();
+            data.LikeCount = likes.Count();
             return data;
         }
 
@@ -39,7 +59,19 @@ namespace BLL
             var data = (from p in posts
                         where p.FK_Users_Id == id
                         select p);
-            return data;
+            var po = new List<PostDto>();
+            foreach (var p in data)
+            {
+                var user = UserService.GetUserById(p.FK_Users_Id);
+                var comments = CommentService.GetCommentByPostId(p.Id);
+                var likes = LikeService.GetLikeByPostId(p.Id);
+                p.Name = user.Name;
+                p.Username = user.Username;
+                p.CommentCount = comments.Count();
+                p.LikeCount = likes.Count();
+                po.Add(p);
+            }
+            return po;
         }
 
         public static bool EditPost(PostDto post)

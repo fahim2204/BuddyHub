@@ -14,7 +14,10 @@ namespace BOL.Dto
         public System.DateTime CreatedAt { get; set; }
         public int Status { get; set; }
         public int FK_Users_Id { get; set; }
-
+        public string Name { get; set; }
+        public string Username { get; set; }
+        public int CommentCount{get; set;}
+        public int LikeCount { get; set; }
         /*public virtual Comment Comment { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
         public virtual User User { get; set; }*/
