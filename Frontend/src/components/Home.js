@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import './ProfileCard.css';
 import { isLoggedIn } from '../Config';
 import { useAlert } from 'react-alert';
-
+import View from './Post/View';
 
 function Home() {
 
@@ -35,6 +35,10 @@ function Home() {
                                         You can also share your experiences with others.
                                     </p>
                                 </div>
+                                <div>
+                                    <View />
+                                </div>
+                                
                             </div>
                         </div>
                         <div className="col-4">

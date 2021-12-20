@@ -17,15 +17,33 @@ namespace BLL
     {
         public static IEnumerable<ProfileDto> GetAllProfile()
         {
-            return DataAccessFactory.ProfileDataAccess().Get().Select(Mapper.Map<BOL.Profile, ProfileDto>);
+            // IEnumerable er vitore IEnumerable er same instace create kora jai na
+            var profs = new List<ProfileDto>();
+            var profiles = DataAccessFactory.ProfileDataAccess().Get().Select(Mapper.Map<BOL.Profile, ProfileDto>);
+            foreach(var pro in profiles)
+            {
+                var user = UserService.GetUserById(pro.FK_Users_Id);
+                pro.Username = user.Username;
+                pro.Name = user.Name;
+                pro.Status = user.Status;
+                pro.Type = user.Type;
+                profs.Add(pro);
+            }
+            return profs;
         }
 
         public static ProfileDto GetProfileById(int id)
         {
             var _Profile = DataAccessFactory.ProfileDataAccess().Get(id);
+            var user = UserService.GetUserById(id);
             if (_Profile != null )
             {
-                return Mapper.Map<BOL.Profile, ProfileDto>(_Profile);
+                var pro = Mapper.Map<BOL.Profile, ProfileDto>(_Profile);
+                pro.Username = user.Username;
+                pro.Name = user.Name;
+                pro.Status = user.Status;
+                pro.Type = user.Type;
+                return pro;
             }
             else
             {
