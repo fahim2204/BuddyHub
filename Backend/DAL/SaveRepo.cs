@@ -31,12 +31,12 @@ namespace DAL
 
         public IEnumerable<Save> Get()
         {
-            throw new NotImplementedException();
+            return db.Saves;
         }
 
         public Save Get(int id)
         {
-            throw new NotImplementedException();
+            return db.Saves.Find(id);
         }
     }
 }

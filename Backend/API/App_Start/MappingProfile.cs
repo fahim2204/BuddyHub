@@ -41,6 +41,9 @@ namespace API.App_Start
             CreateMap<RecoveryPassword, RecoveryPasswordDto>();
             CreateMap<RecoveryPasswordDto, RecoveryPassword>();
 
+            CreateMap<Save, SaveDto>();
+            CreateMap<SaveDto, Save>();
+
         }
     }
 }

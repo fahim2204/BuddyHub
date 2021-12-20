@@ -66,6 +66,7 @@
     <Compile Include="RegistrationService .cs" />
     <Compile Include="OAuthService.cs" />
     <Compile Include="ProfileService.cs" />
+    <Compile Include="SaveService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
