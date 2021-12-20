@@ -16,9 +16,9 @@ namespace BLL
         {
             DataAccessFactory.LikeDataAccess().Add(Mapper.Map<Like>(like));
             int notifierId = like.FK_Users_Id;
-            string notifierName = UserService.GetUserById(notifierId).Name;
+            //string notifierName = UserService.GetUserById(notifierId).Name;
             int userId = PostService.GetPostById(like.FK_Posts_Id).FK_Users_Id;
-            string msg = notifierName + " liked your post";
+            string msg = "liked your post";
             string link = "";
             NotificationService.AddNotification(userId, notifierId, msg, link);
         }

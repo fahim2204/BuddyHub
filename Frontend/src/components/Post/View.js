@@ -27,18 +27,18 @@ const View = () => {
                             <div className="me-1">
                                 <img className="rounded-circle" src="" style={{ height: '30px', width: '30px' }} />
                             </div>
-                            <a href="/Profile/@Model.Username" className="fs-6 text-success me-1 text-decoration-none">@Model.Username</a>
+                            <Link to="/Profile/@Model.Username" className="fs-6 text-success me-1 text-decoration-none">@Model.Username</Link>
                             <div className="font-weight-light text-danger">
                                 <time className="timeago" dateTime="@Model.CreatedAt" />
                             </div>
                         </div>
                         <div className="col-6 justify-content-end d-flex align-items-center">
-                            <a href="\Post\EditPost\@Model.PostId" className="text-decoration-none">
+                            <Link to="\Post\EditPost\@Model.PostId" className="text-decoration-none">
                                 <i className="fa fa-edit me-2 text-success"><span className="ms-1">Edit</span></i>
-                            </a>
-                            <a href="\Post\RemovePost\@Model.PostId" className="text-decoration-none">
+                            </Link>
+                            <Link to="\Post\RemovePost\@Model.PostId" className="text-decoration-none">
                                 <i className="fa fa-trash me-2 text-danger"><span className="ms-1">Delete</span></i>
-                            </a>
+                            </Link>
                             <i className="fa fa-ellipsis-h me-1" />
                         </div>
                     </div>
@@ -48,7 +48,7 @@ const View = () => {
                     </div>
                     <div className="row border-top mt-2 py-1 d-flex align-items-center">
                         <div className="col-6 justify-content-start d-flex">
-                            <a href="/Post/LikeOnPost/fahim/@Model.PostId" className="btn btn-outline-primary px-2 py-0">@Model.Likes.Count Likes<i className="fa fa-thumbs-o-up px-1 m-0" /></a>
+                            <Link to="/Post/LikeOnPost/fahim/@Model.PostId" className="btn btn-outline-primary px-2 py-0">@Model.Likes.Count Likes<i className="fa fa-thumbs-o-up px-1 m-0" /></Link>
                             <button className="btn btn-outline-primary px-2 py-0 ms-2">@Model.Comments.Count Comments<i className="fa fa-comment px-1 m-0" /></button>
                         </div>
                         <div className="col-6 justify-content-end d-flex">
@@ -90,18 +90,18 @@ const View = () => {
                             <div className="me-1">
                                 <img className="rounded-circle" src="" style={{ height: '30px', width: '30px' }} />
                             </div>
-                            <a href className="fs-6 text-success me-1 text-decoration-none"></a>
+                            <Link to className="fs-6 text-success me-1 text-decoration-none"></Link>
                             <div className="font-weight-light text-danger">
                                 <time className="timeago" dateTime="@item.CreatedAt" />
                             </div>
                         </div>
                         <div className="col-6 justify-content-end d-flex align-items-center">
-                            <a href="\Post\EditPost\@Model.PostId" className="text-decoration-none">
+                            <Link to="\Post\EditPost\@Model.PostId" className="text-decoration-none">
                                 <i className="fa fa-edit me-2 text-success"><span className="ms-1">Edit</span></i>
-                            </a>
-                            <a href="\Post\RemoveComment\@item.Id" className="text-decoration-none">
+                            </Link>
+                            <Link to="\Post\RemoveComment\@item.Id" className="text-decoration-none">
                                 <i className="fa fa-trash me-2 text-danger"><span className="ms-1">Delete</span></i>
-                            </a>
+                            </Link>
                             <i className="fa fa-ellipsis-h me-1" />
                         </div>
                     </div>

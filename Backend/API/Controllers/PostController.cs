@@ -5,9 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using BLL;
+using System.Web.Http.Cors;
 
 namespace API.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PostController : ApiController
     {
         [Route("Api/Post")]

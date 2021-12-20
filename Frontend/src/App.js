@@ -9,6 +9,7 @@ import ProfileCard from './components/ProfileCard';
 import Dashboard from './components/admin/Dashboard';
 import AdminAllUser from './components/admin/AdminAllUser';
 import AdminAllPost from './components/admin/AdminAllPost';
+import EditProfile from './components/EditProfile';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile/:id"  element={<ProfileCard/>}/>
+        <Route path="/profile/edit/:id"  element={<EditProfile/>}/>
         <Route path="/admin/home" element={<Dashboard />} />
         <Route path="/admin/all-user" element={<AdminAllUser />} />
         <Route path="/admin/all-post" element={<AdminAllPost />} />

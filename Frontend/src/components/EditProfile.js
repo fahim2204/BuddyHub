@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import { apiUrl } from '../Config';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { isLoggedIn } from '../Config';
-import moment from "moment";
 
-const ProfileCard = () => {
-    const navigate = useNavigate();
+function EditProfile() {
     let params = useParams();
 
     useEffect(() => {
@@ -87,38 +85,16 @@ const ProfileCard = () => {
                                     {profileInfo.Status === 2 && <>(Disabled)</>}
                                 </h6>
                             </div>
-
-                            <div className="col-3 d-flex justify-content-center my-1">
-                            </div>
-                            <div className="col-6 d-flex justify-content-center my-1">
-                                <div className="row shadow-sm rounded-3 d-flex justify-content-center">
-                                    <div className="col-3 d-flex flex-column align-items-center me-3">
-                                        <h6 className="my-0">Posts</h6>
-                                        <h6 className="my-0">10</h6>
-                                    </div>
-                                    <div className="col-3 d-flex flex-column align-items-center">
-                                        <h6 className="my-0">Comments</h6>
-                                        <h6 className="my-0">20</h6>
-                                    </div>
-                                    <div className="col-3 d-flex flex-column align-items-center ms-3">
-                                        <h6 className="my-0">Followers</h6>
-                                        <h6 className="my-0">2</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-3 d-flex justify-content-center my-1">
-                                {sessionStorage.getItem("Id") === params.id ? <Link to={"/profile/edit/"+params.id} className="btn btn-primary">Edit Profile</Link>
-                                    : <Link to={"/follow/" + params.id} className="btn btn-success">Follow</Link>}
-                            </div>
                             <div className="col-12 my-4">
                                 <div className="row">
-                                    <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile me-2">Full Name : </span>
-                                        <span className="profile1">{profileInfo.Name}</span>
+                                    <div className="my-2 col-5">
+                                        <label htmlFor="Name" className="form-label">Full Name :</label>
+                                        <input type="text" className="form-control" id="Name" value={profileInfo.Name} />
                                     </div>
-                                    <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile me-2">Date of Birth : </span>
-                                        <span className="profile1">{moment(profileInfo.DOB).format('DD-MMM-YYYY')}</span>
+                                    <div className="col-2"></div>
+                                    <div className="my-2 col-5">
+                                        <label htmlFor="dob" className="form-label">Date of Birth :</label>
+                                        <input type="date" className="form-control" id="dob" value={moment(profileInfo.DOB).format('YYYY-MM-DD')} />
                                     </div>
                                     <div className="my-2 col-6 d-flex justify-content-start align-items-center">
                                         <span className="profile me-2">Contact :</span>
@@ -146,6 +122,10 @@ const ProfileCard = () => {
                                     </div>
                                 </div>
                             </div>
+                            <div className="col-12 d-flex justify-content-end">
+                                <Link to={"/profile/" + params.id} className='btn btn-danger btn-sm me-4'>Cancel</Link>
+                                <button className='btn btn-primary btn-sm me-4'>Save</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -153,6 +133,6 @@ const ProfileCard = () => {
 
         </>
     )
-
 }
-export default ProfileCard;
+
+export default EditProfile

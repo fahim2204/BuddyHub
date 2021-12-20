@@ -57,6 +57,20 @@ namespace API.Controllers
                 return Ok(data);
             }
         }
+        [Route("Api/Notification/{id}")]
+        [HttpGet]
+        public IHttpActionResult GetNotificationByUserId(int id)
+        {
+            var data = NotificationService.GetNotificationByUserId(id);
+            if (data == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(data);
+            }
+        }
 
         [Route("Api/Profile")]
         [HttpPut]

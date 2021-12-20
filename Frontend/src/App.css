@@ -36,6 +36,10 @@
     transform: scale(1.1);
 }
 
+.mouse-hover-back:hover {
+    background-color: rgba(1, 1, 1, 0.15);
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
-import { isLoggedIn } from '../Config';
+import { apiUrl, isLoggedIn } from '../Config';
 import userImg from '../images/user.png';
 import '../App.css';
 import { Popover } from 'react-tiny-popover'
+import axios from 'axios';
+import moment from 'moment';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -15,9 +17,17 @@ const Header = () => {
         navigate("/login");
     }
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+    const [notifications, setNotifications] = useState([]);
 
-    const notification = () => {
-        alert("You are logged out!");
+    const GetNotification = () => {
+        axios.get(`${apiUrl}/notification/${sessionStorage.getItem('Id')}`)
+            .then(res => {
+                console.log(res.data);
+                setNotifications(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     return (
@@ -54,17 +64,24 @@ const Header = () => {
                                         //     <div>I'm {` ${nudgedTop} `} pixels beyond my boundary vertically!</div>
                                         // </div>
                                         <>
-                                            <div className="p-2 border shadow rounded-3 align-items-center bg-light">
-                                                <h6>
-                                                    <Link className="text-decoration-none text-success" to="Profile/@Html.DisplayFor(modelItem => item.FK_Notifier_Username)"> Fahim Faisal </Link>
-                                                    <Link className="text-decoration-none text-primary" to="@Html.DisplayFor(modelItem => item.GotoLink)"> Likes </Link> at  10:12PM
-                                                </h6>
-                                                <hr />
-                                                <h6>
-                                                    <Link className="text-decoration-none text-success" to="Profile/@Html.DisplayFor(modelItem => item.FK_Notifier_Username)"> Fahim Faisal </Link>
-                                                    <Link className="text-decoration-none text-primary" to="@Html.DisplayFor(modelItem => item.GotoLink)"> Likes </Link> at  10:12PM
-                                                </h6>
-                                                <hr />
+                                            <div className="p-1 border shadow rounded-3 align-items-center bg-light shadow-lg">
+                                                {notifications.length > 0 &&  notifications.map((notification, index) => {
+                                                    return (
+                                                        <div key={index} className="d-flex align-items-center px-2 rounded mouse-hover-back">
+                                                            <span>
+                                                                <Link className="text-decoration-none text-success" to={"Profile/"+notification.FK_Notifier_Id}> {notification.FK_Notifier_Users_Name} </Link>
+                                                                <Link className="text-decoration-none text-primary" to="@Html.DisplayFor(modelItem => item.GotoLink)"> {notification.Message} </Link> at  {moment(notification.CreatedAt).fromNow()}
+                                                            </span>
+                                                            <hr />
+                                                        </div>
+
+                                                    )
+                                                })}
+                                                {!notifications.length > 0 && <>
+                                                    <h6>No Notification</h6>
+                                                </>}
+
+
 
                                             </div>
 
@@ -72,7 +89,7 @@ const Header = () => {
                                     )}
                                 >
                                     {/* <div onClick={() => setIsPopoverOpen(!isPopoverOpen)}>Click me!</div> */}
-                                    <span className='text-success px-1 me-2 ms-4' onClick={() => { setIsPopoverOpen(!isPopoverOpen); console.log(isPopoverOpen) }}><i className="far fs-4 fa-bell mouse-hover"></i></span>
+                                    <span className='text-success px-1 me-2 ms-4' onClick={() => { setIsPopoverOpen(!isPopoverOpen); GetNotification(); }}><i className="far fs-4 fa-bell mouse-hover"></i></span>
                                 </Popover>
 
 
