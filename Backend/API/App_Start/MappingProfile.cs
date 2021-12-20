@@ -34,6 +34,8 @@ namespace API.App_Start
             CreateMap<CommentDto, Comment>();
             CreateMap<Like, LikeDto>();
             CreateMap<LikeDto, Like>();
+            CreateMap<RecoveryPassword, RecoveryPasswordDto>();
+            CreateMap<RecoveryPasswordDto, RecoveryPassword>();
         }
     }
 }
