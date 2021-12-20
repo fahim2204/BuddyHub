@@ -1,43 +1,56 @@
 import React, { useEffect, useState } from "react";
 import './ProfileCard.css';
-import axios  from "axios";
+import axios from "axios";
+import { apiUrl } from '../Config';
+import { Link, useNavigate } from 'react-router-dom';
+import { isLoggedIn } from '../Config';
 
-function ProfileCard() {
-    const [userName, setuserName] = useState('');
-    const [image, setimage] = useState('');
-    const [fullName, setfullName] = useState('');
-    const [contact, setcontact] = useState('');
-    const [email, setemail] = useState('');
-    const [address, setaddress] = useState('');
-    const [dob, setdob] = useState('');
-    const [gender, setgender] = useState('');
-    const [religion, setreligion] = useState('');
-    const [relationship,setrelationship]=useState('');
-    const profileData= async()=>
-    {
-        try{
-            const res =await axios.get("/");
-            setuserName();
-            setimage();
-            setfullName();
-            setcontact();
-            setemail();
-            setaddress();
-            setdob();
-            setgender();
-            setreligion();
-            setrelationship();
-        }
-        catch(error)
-        {
-            console.log(error);
-        }
+const ProfileCard = () => {
+    const navigate = useNavigate();
+    useEffect(() => { 
+        document.title = "BuddyHub - Profile";
+        GetProfileData();
+}, []);
+    var [profileInfo, SetprofileInfo] = useState({
+        UserName: "",
+        FullName: "",
+        Contact: "",
+        Email: "",
+        Address: "",
+        ProfileImage: "",
+        DateOFBirth: "",
+        Gender: "",
+        Religion: "",
+        Relationship: "",
+    });
+
+    const GetProfileData = () => {
+        console.log("Getting Data");
+        axios.get(`${apiUrl}/profile/28`)
+            .then(res => {
+                console.log(res.data)
+                SetprofileInfo(
+                    {
+                        ...profileInfo,
+                        UserName: res.data.UserName,
+                        ProfileImage: res.data.ProfileImage,
+                        FullName: res.data.FullName,
+                        Contact: res.data.Contact,
+                        Email: res.data.Contact,
+                        Address: res.data.Address,
+                        DateOFBirth: res.data.DOB,
+                        Gender: res.data.Gender,
+                        Religion: res.data.Religion,
+                        Relationship: res.data.Relationship,
+                    }
+                )
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+
     }
-    useEffect(()=>
-    {
-        profileData();
-    },[]
-    );
     return (
         <>
             {/* <div className="ProfileCard">
@@ -53,13 +66,12 @@ function ProfileCard() {
                 </div>
 
             </div> */}
-            <div className="col-9 p-1">
                 <div className="row shadow p-3 mx-1 rounded-3">
-                    <div className="col-12 d-flex justify-content-center">
-                        <img className="rounded-circle border border-2 border-secondary shadow" src={image} style={{ height: '100px', width: '100px' }} />
+                    <div className="col-8 d-flex justify-content-center">
+                        <img className="rounded-circle border border-2 border-secondary shadow" src={profileInfo.ProfileImage} style={{ height: '100px', width: '100px' }} />
                     </div>
                     <div className="col-12 d-flex justify-content-center align-items-center my-1">
-                        <h5 className="d-inline-block">{userName}</h5>
+                        <h5 className="d-inline-block">{profileInfo.UserName}</h5>
                         <h6 className="d-inline-block">
                             {/* (@if (Model.Status == 1)
                             {'{'}@Html.Raw("Active"){'}'}
@@ -91,44 +103,43 @@ function ProfileCard() {
                         <a className="btn btn-outline-primary" href="/Follower/DoFollow/@Model.FK_Users_Id">Follow/Unfollow</a>
                         {'}'} */}
                     </div>
-                    <div className="col-12 my-2">
+                    <div className="col-8 my-2">
                         <div className="row">
                             <div className="my-2 col-6 d-flex justify-content-start align-items-center">
                                 <span className="profile">Full Name : </span>
-                                <span className="profile1">{fullName}</span>
+                                <span className="profile1">{profileInfo.FullName}</span>
                             </div>
                             <div className="my-2 col-6 d-flex justify-content-start align-items-center">
                                 <span className="profile">Date of Birth : </span>
-                                <span className="profile1">{dob}</span>
+                                <span className="profile1">{profileInfo.DateOFBirth.toString()}</span>
                             </div>
                             <div className="my-2 col-6 d-flex justify-content-start align-items-center">
                                 <span className="profile">Contact :</span>
-                                <span className="profile1">{contact}</span>
+                                <span className="profile1">{profileInfo.Contact}</span>
                             </div>
                             <div className="my-2 col-6 d-flex justify-content-start align-items-center">
                                 <span className="profile">Gender :</span>
-                                <span className="profile1">{gender}</span>
+                                <span className="profile1">{profileInfo.Gender}</span>
                             </div>
                             <div className="my-2 col-6 d-flex justify-content-start align-items-center">
                                 <span className="profile">Email :</span>
-                                <span className="profile1">{email}</span>
+                                <span className="profile1">{profileInfo.Email}</span>
                             </div>
                             <div className="my-2 col-6 d-flex justify-content-start align-items-center">
                                 <span className="profile">Religion :</span>
-                                <span className="profile1">{religion}</span>
+                                <span className="profile1">{profileInfo.Religion}</span>
                             </div>
                             <div className="my-2 col-6 d-flex justify-content-start align-items-center">
                                 <span className="profile">Address :</span>
-                                <span className="profile1">{address}</span>
+                                <span className="profile1">{profileInfo.Address}</span>
                             </div>
                             <div className="my-2 col-6 d-flex justify-content-start align-items-center">
                                 <span className="profile">Relationship :</span>
-                                <span className="profile1">{relationship}</span>
+                                <span className="profile1">{profileInfo.Relationship}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
         </>
     )
