@@ -5,6 +5,8 @@ import Header from './components/Header'
 import Login from './components/Login'
 import Register from './components/Register';
 import Home from './components/Home';
+import ProfileCard from './components/ProfileCard';
+import Dashboard from './components/admin/Dashboard';
 
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile"  element={<ProfileCard/>}/>
+        <Route path="/admin" element={<Dashboard />} />
       </Routes>
     </>
   );
