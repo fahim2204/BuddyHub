@@ -71,7 +71,7 @@ const Login = () => {
             })
     }
     const SetLoggedUserInfo = (user) => {
-        sessionStorage.setItem('ID', user.ID);
+        sessionStorage.setItem('Id', user.Id);
         sessionStorage.setItem('Name', user.Name);
         sessionStorage.setItem('Username', user.Username);
         sessionStorage.setItem('Token', user.Token);
