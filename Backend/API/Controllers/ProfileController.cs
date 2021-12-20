@@ -13,7 +13,7 @@ namespace API.Controllers
     {
         [Route("Api/Profile")]
         [HttpPost]
-        public IHttpActionResult CreateLike(ProfileDto prof)
+        public IHttpActionResult CreateProfile(ProfileDto prof)
         {
             if (ModelState.IsValid)
             {

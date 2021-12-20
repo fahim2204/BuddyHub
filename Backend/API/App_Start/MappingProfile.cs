@@ -34,8 +34,13 @@ namespace API.App_Start
             CreateMap<CommentDto, Comment>();
             CreateMap<Like, LikeDto>();
             CreateMap<LikeDto, Like>();
+
+            CreateMap<BOL.Profile, ProfileDto>();
+            CreateMap<ProfileDto, BOL.Profile>();
+
             CreateMap<RecoveryPassword, RecoveryPasswordDto>();
             CreateMap<RecoveryPasswordDto, RecoveryPassword>();
+
         }
     }
 }

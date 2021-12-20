@@ -17,7 +17,7 @@ namespace BLL
     {
         public static IEnumerable<ProfileDto> GetAllProfile()
         {
-            return DataAccessFactory.ProfileDataAccess().Get().Select(Mapper.Map<BOL.Profile,ProfileDto>);
+            return DataAccessFactory.ProfileDataAccess().Get().Select(Mapper.Map<BOL.Profile, ProfileDto>);
         }
 
         public static ProfileDto GetProfileById(int id)
