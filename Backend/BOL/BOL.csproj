@@ -69,6 +69,7 @@
       <DependentUpon>BuddyHub.tt</DependentUpon>
     </Compile>
     <Compile Include="Dto\AuthenticUserDto.cs" />
+    <Compile Include="Dto\ChangePasswordDto.cs" />
     <Compile Include="Dto\CommentDto.cs" />
     <Compile Include="Dto\EmailDto.cs" />
     <Compile Include="Dto\LikeDto.cs" />
@@ -76,8 +77,10 @@
     <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Dto\OAuthDto.cs" />
     <Compile Include="Dto\PostDto.cs" />
+    <Compile Include="Dto\RecoveryPasswordDto.cs" />
     <Compile Include="Dto\RegistrationDto.cs" />
     <Compile Include="Dto\ProfileDto.cs" />
+    <Compile Include="Dto\SaveDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
     <Compile Include="EmailLog.cs">
       <DependentUpon>BuddyHub.tt</DependentUpon>

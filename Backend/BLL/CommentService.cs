@@ -15,6 +15,12 @@ namespace BLL
         public static void AddComment(CommentDto comment)
         {
             DataAccessFactory.CommentDataAccess().Add(Mapper.Map<Comment>(comment));
+            int notifierId = comment.FK_Users_Id;
+            string notifierName = UserService.GetUserById(notifierId).Name;
+            int userId = PostService.GetPostById(comment.FK_Posts_Id).FK_Users_Id;
+            string msg = notifierName + " commented on your post";
+            string link = "";
+            NotificationService.AddNotification(userId, notifierId, msg, link);
         }
 
         public static CommentDto GetCommentById(int id)

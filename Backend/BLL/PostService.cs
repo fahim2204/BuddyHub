@@ -14,8 +14,6 @@ namespace BLL
     {
         public static void Add(PostDto post)
         {
-            /* var config = new MapperConfiguration(cfg => cfg.CreateMap<PostDto, Post>());
-             var mapper = new Mapper(config);*/
             DataAccessFactory.PostDataAccess().Add(Mapper.Map<Post>(post));
         }
 

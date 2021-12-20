@@ -66,25 +66,27 @@ const Login = () => {
                     SendLoginRequest(user);
                 } else {
                     alert.info("User Not Found");
-                    setTimeout(() => {navigate("/Register")}, 2000);
+                    setTimeout(() => { navigate("/Register") }, 2000);
                 }
             })
     }
-
+    const SetLoggedUserInfo = (user) => {
+        sessionStorage.setItem('ID', user.ID);
+        sessionStorage.setItem('Name', user.Name);
+        sessionStorage.setItem('Username', user.Username);
+        sessionStorage.setItem('Token', user.Token);
+        sessionStorage.setItem('Status', user.Status);
+        sessionStorage.setItem('Type', user.Type);
+    }
     const SendLoginRequest = (user) => {
         axios.post(`${apiUrl}/OAuth/Login`, user)
             .then(res => {
                 console.log(res.data);
                 alert.success("Success!!");
-                    sessionStorage.setItem('ID', res.data.ID);
-                    sessionStorage.setItem('Name', res.data.Name);
-                    sessionStorage.setItem('Username', res.data.Username);
-                    sessionStorage.setItem('Token', res.data.Token);
-                    sessionStorage.setItem('Status', res.data.Status);
-                    sessionStorage.setItem('Type', res.data.Type);
-                    setTimeout(() => {
-                        navigate("/");
-                    }, 2000)
+                SetLoggedUserInfo(res.data);
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000)
             })
             .catch(err => {
                 if (err === undefined) {
@@ -131,16 +133,15 @@ const Login = () => {
     }
     const responseFacebook = (response) => {
         console.log(response);
-        // let user = {
-        //     Username: response.profileObj.email,
-        //     Name: response.profileObj.name,
-        //     Email: response.profileObj.email,
-        //     ProfileImage: response.profileObj.imageUrl,
-        //     OriginId: response.googleId,
-        //     OriginName: 'Google',
-        //     Password: response.googleId,
-        // }
+        let user = {
+            Name: response.name,
+            Email: response.email,
+            ProfileImage: response.picture,
+            OriginId: response.id,
+            OriginName: 'Facebook',
+        }
         // SendLoginRequest(user);
+       // CheckOAuth(user);
     }
 
 
@@ -170,7 +171,7 @@ const Login = () => {
                     alert.error("Please Verify your Email!!");
                 } else {
                     alert.success("Success!!");
-                    sessionStorage.setItem('token', res.data);
+                    SetLoggedUserInfo(res.data);
                     setTimeout(() => {
                         navigate("/");
                     }, 2000)
@@ -216,7 +217,7 @@ const Login = () => {
                                     <div className="col-4 text-center align-self-center">
                                         <GoogleLogin
                                             clientId="197200157088-jok25uj7eb4dm1jhdie8f5cth1kntimu.apps.googleusercontent.com"
-                                            buttonText="Login"
+                                            buttonText=""
                                             onSuccess={responseGoogle}
                                             onFailure={responseGoogle}
                                             cookiePolicy={'single_host_origin'}
@@ -228,7 +229,7 @@ const Login = () => {
                                             autoLoad={false}
                                             fields="name,email,picture"
                                             callback={responseFacebook}
-                                            textButton="Login"
+                                            textButton=""
                                             cssClass='btn btn-primary'
                                             icon="fa-facebook"
                                         />
