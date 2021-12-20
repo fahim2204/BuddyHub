@@ -25,6 +25,8 @@ namespace BLL
                 var user = UserService.GetUserById(pro.FK_Users_Id);
                 pro.Username = user.Username;
                 pro.Name = user.Name;
+                pro.Status = user.Status;
+                pro.Type = user.Type;
                 profs.Add(pro);
             }
             return profs;
@@ -39,6 +41,8 @@ namespace BLL
                 var pro = Mapper.Map<BOL.Profile, ProfileDto>(_Profile);
                 pro.Username = user.Username;
                 pro.Name = user.Name;
+                pro.Status = user.Status;
+                pro.Type = user.Type;
                 return pro;
             }
             else
