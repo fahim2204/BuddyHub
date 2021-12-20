@@ -50,5 +50,9 @@ namespace DAL
         {
             return new NotificationRepo(db);
         }
+        public static IRepository<Save, int> SaveDataAccess()
+        {
+            return new SaveRepo(db);
+        }
     }
 }

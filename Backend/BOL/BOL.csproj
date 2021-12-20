@@ -79,6 +79,7 @@
     <Compile Include="Dto\PostDto.cs" />
     <Compile Include="Dto\RegistrationDto.cs" />
     <Compile Include="Dto\ProfileDto.cs" />
+    <Compile Include="Dto\SaveDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
     <Compile Include="EmailLog.cs">
       <DependentUpon>BuddyHub.tt</DependentUpon>

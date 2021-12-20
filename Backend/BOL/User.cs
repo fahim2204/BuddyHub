@@ -27,7 +27,7 @@ namespace BOL
             this.Notifications1 = new HashSet<Notification>();
             this.Posts = new HashSet<Post>();
             this.RecoveryPasswords = new HashSet<RecoveryPassword>();
-            this.Saves = new HashSet<Save>();
+            this.Saves = new HashSet<Profile>();
             this.SocialLinks = new HashSet<SocialLink>();
         }
     
@@ -61,7 +61,7 @@ namespace BOL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecoveryPassword> RecoveryPasswords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Save> Saves { get; set; }
+        public virtual ICollection<Profile> Saves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SocialLink> SocialLinks { get; set; }
         public virtual WorksProfile WorksProfile { get; set; }

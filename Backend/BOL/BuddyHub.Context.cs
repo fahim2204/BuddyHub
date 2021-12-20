@@ -35,7 +35,7 @@ namespace BOL
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<RecoveryPassword> RecoveryPasswords { get; set; }
-        public virtual DbSet<Save> Saves { get; set; }
+        public virtual DbSet<Profile> Saves { get; set; }
         public virtual DbSet<SocialLink> SocialLinks { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WorksProfile> WorksProfiles { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class ProfileRepo : IRepository<Profile,int>
+    public class ProfileRepo : IRepository<Profile, int>
     {
         readonly BuddyDbContext db;
         public ProfileRepo(BuddyDbContext db) => this.db = db;
