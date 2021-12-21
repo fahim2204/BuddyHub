@@ -72,6 +72,7 @@
     <Compile Include="Dto\ChangePasswordDto.cs" />
     <Compile Include="Dto\CommentDto.cs" />
     <Compile Include="Dto\EmailDto.cs" />
+    <Compile Include="Dto\FollowerDto.cs" />
     <Compile Include="Dto\LikeDto.cs" />
     <Compile Include="Dto\LogDto.cs" />
     <Compile Include="Dto\LoginDto.cs" />

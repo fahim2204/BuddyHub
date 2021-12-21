@@ -59,5 +59,9 @@ namespace DAL
         {
             return new RecoveryPasswordRepo(db);
         }
+        public static IRepository<Follower, int> FollowerDataAccess()
+        {
+            return new FollowerRepo(db);
+        }
     }
 }
