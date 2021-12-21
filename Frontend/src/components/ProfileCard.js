@@ -83,6 +83,9 @@ const ProfileCard = () => {
                                 <img className="rounded-circle border border-2 border-success shadow" src={profileInfo.ProfileImage.startsWith('https')? profileInfo.ProfileImage : userImg} alt="user" style={{ height: '100px', width: '100px' }} />
                             </div>
                             <div className="col-12 d-flex justify-content-center align-items-center my-1">
+                                <h4 className="d-inline-block">{profileInfo.Name}</h4>
+                            </div>
+                            <div className="col-12 d-flex justify-content-center align-items-center my-1">
                                 <h5 className="d-inline-block">{profileInfo.Username}</h5>
                                 <h6 className="d-inline-block ms-2 text-muted">
                                     {profileInfo.Status === 1 && <>(Active)</>}

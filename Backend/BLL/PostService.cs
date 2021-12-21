@@ -14,6 +14,8 @@ namespace BLL
     {
         public static void Add(PostDto post)
         {
+            post.CreatedAt = DateTime.Now;
+            post.Status = 1;
             DataAccessFactory.PostDataAccess().Add(Mapper.Map<Post>(post));
         }
 
@@ -32,7 +34,7 @@ namespace BLL
                 p.LikeCount = likes.Count();
                 po.Add(p);
             }
-            return po;
+            return po.OrderByDescending(x=> x.CreatedAt);
         }
 
         public static PostDto GetPostById(int id)
@@ -96,6 +98,15 @@ namespace BLL
                 DataAccessFactory.PostDataAccess().Delete(id);
                 return true;
             }
+        }
+        public static StatsDto GetAllStats()
+        {
+            var _post = DataAccessFactory.PostDataAccess().Get().Count();
+            var _user = DataAccessFactory.UserDataAccess().Get().Count();
+            var _liveuser = DataAccessFactory.LogDataAccess().Get().Where(x => x.Status == 0 && x.EndAt > DateTime.Now).Count();
+
+            var _comment = DataAccessFactory.CommentDataAccess().Get().Count();
+            return new StatsDto() { CommentCount = _comment, UserCount = _user, PostCount = _post, LiveUserCount =  _liveuser };
         }
     }
 }

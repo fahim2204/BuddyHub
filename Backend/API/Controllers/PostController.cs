@@ -109,5 +109,12 @@ namespace API.Controllers
             }
 
         }
+        [Route("Api/Stats")]
+        [HttpGet]
+        public IHttpActionResult GetAllStats()
+        {
+            return Ok(PostService.GetAllStats());
+
+        }
     }
 }
