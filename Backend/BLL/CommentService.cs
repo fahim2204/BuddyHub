@@ -14,6 +14,7 @@ namespace BLL
     {
         public static void AddComment(CommentDto comment)
         {
+            //comment.CreatedAt = DateTime.Now;   
             DataAccessFactory.CommentDataAccess().Add(Mapper.Map<Comment>(comment));
             int notifierId = comment.FK_Users_Id;
             //string notifierName = UserService.GetUserById(notifierId).Name;
@@ -35,12 +36,16 @@ namespace BLL
 
         public static IEnumerable<CommentDto> GetCommentByPostId(int id)
         {
-            var comments = DataAccessFactory.CommentDataAccess().Get().Select(Mapper.Map<Comment, CommentDto>);
+            var comments = DataAccessFactory.CommentDataAccess().Get().Where(c=>c.FK_Posts_Id == id).Select(Mapper.Map<Comment, CommentDto>);
 
-            var data = (from c in comments
-                        where c.FK_Posts_Id == id
-                        select c);
-            return data;
+            var com = new List<CommentDto>();
+
+            foreach (var d in comments)
+            {
+                d.Username = UserService.GetUserById(d.FK_Users_Id).Username;
+                com.Add(d);
+            }
+            return com;
         }
 
         public static bool EditComment(CommentDto comment)

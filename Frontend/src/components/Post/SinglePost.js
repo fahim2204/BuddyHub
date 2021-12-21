@@ -25,6 +25,12 @@ function AllPost() {
 
     let [post, setPost] = useState([]);
     let [comments, SetComments] = useState([]);
+    var [postInfo, SetPostInfo] = useState({
+        FK_Posts_Id: params.id,
+        Text: "",
+        FK_Users_Id: sessionStorage.getItem("Id")
+    });
+
 
     const authAxios = axios.create({
         baseURL: apiUrl,
@@ -52,6 +58,29 @@ function AllPost() {
         }).catch(err => {
             console.log(err)
         })
+    }
+    const HandleForm = e => {
+        SetPostInfo({
+            ...postInfo,
+            [e.target.name]: e.target.value,
+        })
+    }
+    const ShareNewComment = () => {
+        // console.log(postInfo);
+        alert("Comment Added")
+        axios.post(`${apiUrl}/Comment`, postInfo)
+            .then(res => {
+                // setLoading(true);
+               // GetAllPost();
+                console.log(res.data);
+                SetPostInfo({
+                    ...postInfo,
+                    Text: "",
+                })
+                alert.success("Shared!!");
+
+            })
+            .catch(err => { console.log(err) })
     }
 
     return (
@@ -115,12 +144,12 @@ function AllPost() {
                                             <div className="d-flex">
                                                 <div className="row w-100">
                                                     <div className="col-9">
-                                                        <input type="text" name="ctext" className="form-control mr-3 my-2"
+                                                        <input type="text" name='Text' onChange={HandleForm} value={postInfo.PostsText} className="form-control mr-3 my-2"
                                                             placeholder="Add comment" />
                                                     </div>
                                                     <div className="col-3">
-                                                        <button className="btn btn-primary my-2"
-                                                            type="submit">
+                                                        <button className="btn btn-primary my-2" 
+                                                            onClick={ShareNewComment}>
                                                             Comment
                                                         </button>
                                                     </div>
@@ -133,11 +162,11 @@ function AllPost() {
 
                                     <h5>Comments:</h5>
                                     <hr className="text-muted my-2" />
-                                    {comments.length > 0 ? comments.map(comment => {
+                                    {comments.length > 0 ? comments.map((comment,i) => {
                                         return (
                                             <>
 
-                                                <div className="row d-flex align-items-center mb-1">
+                                                <div key={i} className="row d-flex align-items-center mb-1">
                                                     <div className="col-6 justify-content-start d-flex">
                                                         <div className="me-1">
                                                             <img className="rounded-circle me-1" src={userImg} width="20" height="20" alt='user' />
