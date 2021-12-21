@@ -10,6 +10,7 @@ import Dashboard from './components/admin/Dashboard';
 import AdminAllUser from './components/admin/AdminAllUser';
 import AdminAllPost from './components/admin/AdminAllPost';
 import EditProfile from './components/EditProfile';
+import Allpost from './components/Post/Allpost';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/admin/home" element={<Dashboard />} />
         <Route path="/admin/all-user" element={<AdminAllUser />} />
         <Route path="/admin/all-post" element={<AdminAllPost />} />
+        <Route path="/all-post" element={<Allpost />} />
       </Routes>
     </>
   );
