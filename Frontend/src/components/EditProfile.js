@@ -1,11 +1,16 @@
 import axios from 'axios';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { apiUrl } from '../Config';
+import { useAlert } from 'react-alert';
+import userImg from '../images/user.png';
+
 
 function EditProfile() {
     let params = useParams();
+    let alert = useAlert();
+    let navigate = useNavigate();
 
     useEffect(() => {
         document.title = "BuddyHub - Profile";
@@ -23,7 +28,8 @@ function EditProfile() {
         Gender: "",
         Religion: "",
         Relationship: "",
-        Status: ""
+        Status: "",
+        FK_Users_Id: ""
     });
 
     const GetProfileData = () => {
@@ -39,19 +45,30 @@ function EditProfile() {
                         ProfileImage: res.data.ProfileImage,
                         Name: res.data.Name,
                         Contact: res.data.Contact,
-                        Email: res.data.Contact,
+                        Email: res.data.Email,
                         Address: res.data.Address,
                         DOB: res.data.DOB,
                         Gender: res.data.Gender,
                         Religion: res.data.Religion,
                         Relationship: res.data.Relationship,
-                        Status: res.data.Status
+                        Status: res.data.Status,
+                        FK_Users_Id: res.data.FK_Users_Id
                     }
                 )
             })
             .catch(err => {
                 console.log(err);
             })
+    }
+    const UpdateProfile = ()=>{
+        axios.put(`${apiUrl}/profile`,profileInfo).then(res=>{alert.success("Saved Succesfully"); setTimeout(() => { navigate(-1) }, 1000);}).catch(err=>{})
+    }
+    const HandleForm = e => {
+        SetprofileInfo({
+            ...profileInfo,
+            [e.target.name]: e.target.value
+        })
+        console.log(profileInfo);
     }
     return (
         <>
@@ -76,7 +93,7 @@ function EditProfile() {
                     <div className="col-9">
                         <div className="row shadow p-3 mx-1 rounded-3">
                             <div className="col-12 d-flex justify-content-center">
-                                <img className="rounded-circle border border-2 border-success shadow" src={profileInfo.ProfileImage} alt="user" style={{ height: '100px', width: '100px' }} />
+                                <img className="rounded-circle border border-2 border-success shadow" src={profileInfo.ProfileImage.startsWith('https')? profileInfo.ProfileImage : userImg} alt="user" style={{ height: '100px', width: '100px' }} />
                             </div>
                             <div className="col-12 d-flex justify-content-center align-items-center my-1">
                                 <h5 className="d-inline-block">{profileInfo.Username}</h5>
@@ -89,42 +106,93 @@ function EditProfile() {
                                 <div className="row">
                                     <div className="my-2 col-5">
                                         <label htmlFor="Name" className="form-label">Full Name :</label>
-                                        <input type="text" className="form-control" id="Name" value={profileInfo.Name} />
+                                        <input
+                                            name="Name"
+                                            type="text"
+                                            className='form-control'
+                                            value={profileInfo.Name}
+                                            onChange={HandleForm}
+                                        />
                                     </div>
                                     <div className="col-2"></div>
                                     <div className="my-2 col-5">
                                         <label htmlFor="dob" className="form-label">Date of Birth :</label>
-                                        <input type="date" className="form-control" id="dob" value={moment(profileInfo.DOB).format('YYYY-MM-DD')} />
+                                        <input
+                                            name="DOB"
+                                            type="date"
+                                            className='form-control'
+                                            value={moment(profileInfo.DOB).format('YYYY-MM-DD')}
+                                            onChange={HandleForm}
+                                        />
                                     </div>
-                                    <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile me-2">Contact :</span>
-                                        <span className="profile1">{profileInfo.Contact}</span>
+                                    <div className="my-2 col-5">
+                                        <label htmlFor="contact" className="form-label">Contact :</label>
+                                        <input
+                                            name="Contact"
+                                            type="text"
+                                            className='form-control'
+                                            value={profileInfo.Contact}
+                                            onChange={HandleForm}
+                                        />
                                     </div>
-                                    <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile me-2">Gender :</span>
-                                        <span className="profile1">{profileInfo.Gender}</span>
+                                    <div className="col-2"></div>
+                                    <div className="my-2 col-5">
+                                        <label htmlFor="gender" className="form-label">Gender :</label>
+                                        <input
+                                            name="Gender"
+                                            type="text"
+                                            className='form-control'
+                                            value={profileInfo.Gender}
+                                            onChange={HandleForm}
+                                        />
                                     </div>
-                                    <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile me-2">Email :</span>
-                                        <span className="profile1">{profileInfo.Email}</span>
+                                    <div className="my-2 col-5">
+                                        <label htmlFor="email" className="form-label">Email :</label>
+                                        <input
+                                            name="Email"
+                                            type="text"
+                                            className='form-control'
+                                            value={profileInfo.Email}
+                                            onChange={HandleForm}
+                                        />
                                     </div>
-                                    <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile me-2">Religion :</span>
-                                        <span className="profile1">{profileInfo.Religion}</span>
+                                    <div className="col-2"></div>
+                                    <div className="my-2 col-5">
+                                        <label htmlFor="religion" className="form-label">Religion :</label>
+                                        <input
+                                            name="Religion"
+                                            type="text"
+                                            className='form-control'
+                                            value={profileInfo.Religion}
+                                            onChange={HandleForm}
+                                        />
                                     </div>
-                                    <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile me-2">Address :</span>
-                                        <span className="profile1">{profileInfo.Address}</span>
+                                    <div className="my-2 col-5">
+                                        <label htmlFor="Address" className="form-label">Address :</label>
+                                        <input
+                                            name="Address"
+                                            type="text"
+                                            className='form-control'
+                                            value={profileInfo.Address}
+                                            onChange={HandleForm}
+                                        />
                                     </div>
-                                    <div className="my-2 col-6 d-flex justify-content-start align-items-center">
-                                        <span className="profile me-2">Relationship :</span>
-                                        <span className="profile1">{profileInfo.Relationship}</span>
+                                    <div className="col-2"></div>
+                                    <div className="my-2 col-5">
+                                        <label htmlFor="Relationship" className="form-label">Relationship :</label>
+                                        <input
+                                            name="Relationship"
+                                            type="text"
+                                            className='form-control'
+                                            value={profileInfo.Relationship}
+                                            onChange={HandleForm}
+                                        />
                                     </div>
                                 </div>
                             </div>
                             <div className="col-12 d-flex justify-content-end">
                                 <Link to={"/profile/" + params.id} className='btn btn-danger btn-sm me-4'>Cancel</Link>
-                                <button className='btn btn-primary btn-sm me-4'>Save</button>
+                                <button className='btn btn-primary btn-sm me-4' onClick={UpdateProfile}>Save</button>
                             </div>
                         </div>
                     </div>

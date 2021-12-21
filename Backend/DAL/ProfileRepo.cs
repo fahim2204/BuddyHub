@@ -28,8 +28,8 @@ namespace DAL
 
         public void Edit(Profile profile)
         {
-            var _Profile = db.Profiles.Find(profile);
-            db.Entry(_Profile).CurrentValues.SetValues(_Profile);
+            var _Profile = db.Profiles.Find(profile.FK_Users_Id);
+            db.Entry(_Profile).CurrentValues.SetValues(profile);
             db.SaveChanges();
         }
 

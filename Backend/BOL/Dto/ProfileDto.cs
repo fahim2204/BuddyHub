@@ -8,7 +8,6 @@ namespace BOL.Dto
 {
     public class ProfileDto
     {
-        public int Id { get; set; }
 
         public int FK_Users_Id { get; set; }
         public string Username { get; set; }
@@ -20,7 +19,7 @@ namespace BOL.Dto
         public string ProfileImage { get; set; }
         public string Address { get; set; }
         public string Gender { get; set; }
-        public Nullable<System.DateTime> DOB { get; set; }
+        public System.DateTime DOB { get; set; }
         public string Religion { get; set; }
         public string Relationship { get; set; }
     }

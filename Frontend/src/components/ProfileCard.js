@@ -4,6 +4,8 @@ import { apiUrl } from '../Config';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { isLoggedIn } from '../Config';
 import moment from "moment";
+import userImg from '../images/user.png';
+
 
 const ProfileCard = () => {
     const navigate = useNavigate();
@@ -41,7 +43,7 @@ const ProfileCard = () => {
                         ProfileImage: res.data.ProfileImage,
                         Name: res.data.Name,
                         Contact: res.data.Contact,
-                        Email: res.data.Contact,
+                        Email: res.data.Email,
                         Address: res.data.Address,
                         DOB: res.data.DOB,
                         Gender: res.data.Gender,
@@ -78,7 +80,7 @@ const ProfileCard = () => {
                     <div className="col-9">
                         <div className="row shadow p-3 mx-1 rounded-3">
                             <div className="col-12 d-flex justify-content-center">
-                                <img className="rounded-circle border border-2 border-success shadow" src={profileInfo.ProfileImage} alt="user" style={{ height: '100px', width: '100px' }} />
+                                <img className="rounded-circle border border-2 border-success shadow" src={profileInfo.ProfileImage.startsWith('https')? profileInfo.ProfileImage : userImg} alt="user" style={{ height: '100px', width: '100px' }} />
                             </div>
                             <div className="col-12 d-flex justify-content-center align-items-center my-1">
                                 <h5 className="d-inline-block">{profileInfo.Username}</h5>

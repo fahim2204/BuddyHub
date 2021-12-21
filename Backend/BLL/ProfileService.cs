@@ -75,7 +75,7 @@ namespace BLL
 
         public static bool EditProfile(ProfileDto user)
         {
-            var _Profile = DataAccessFactory.ProfileDataAccess().Get(user.Id);
+            var _Profile = DataAccessFactory.ProfileDataAccess().Get(user.FK_Users_Id);
 
             if (_Profile == null) { return false; }
             else

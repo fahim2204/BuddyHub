@@ -48,6 +48,7 @@ namespace BLL
         public static AuthenticUserDto GetAuthenticUserInfoByUsername(string username)
         {
             var _user = GetUserByUsername(username);
+            var _profile = ProfileService.GetProfileById(_user.Id);
             var _token = LogService.GetTokenByUsername(username);
             return new AuthenticUserDto()
             {
@@ -57,6 +58,7 @@ namespace BLL
                 Token = _token,
                 Status = _user.Status,
                 Type = _user.Type,
+                ProfileImage = _profile.ProfileImage
             };
         }
 

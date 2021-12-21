@@ -77,6 +77,7 @@ const Login = () => {
         sessionStorage.setItem('Token', user.Token);
         sessionStorage.setItem('Status', user.Status);
         sessionStorage.setItem('Type', user.Type);
+        sessionStorage.setItem('ProfileImage', user.ProfileImage);
     }
     const SendLoginRequest = (user) => {
         axios.post(`${apiUrl}/OAuth/Login`, user)

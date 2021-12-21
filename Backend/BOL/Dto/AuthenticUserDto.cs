@@ -13,6 +13,8 @@ namespace BOL.Dto
         public string Username { get; set; }
         public string Token { get; set; }
         public string Type { get; set; }
+        public string ProfileImage { get; set; }
+
         public int Status { get; set; }
     }
 }

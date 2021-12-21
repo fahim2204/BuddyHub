@@ -45,7 +45,7 @@ const Header = () => {
                         <div className="col-4 d-flex justify-content-end">
                             {isLoggedIn() && <>
                                 <div className="d-flex align-items-center">
-                                    <span className='me-2 border border-info rounded-circle mouse-hover'><Link to={"/profile/" + sessionStorage.getItem('Id')}><img src={userImg} alt="user" width="35" height="35" className='rounded-circle m-0 p-0' /></Link></span>
+                                    <span className='me-2 border border-info rounded-circle mouse-hover'><Link to={"/profile/" + sessionStorage.getItem('Id')}><img src={sessionStorage.getItem("ProfileImage").startsWith('https')? sessionStorage.getItem("ProfileImage") : userImg} alt="user" width="35" height="35" className='rounded-circle m-0 p-0' /></Link></span>
                                     <span className='me-4 fw-bold'>{sessionStorage.getItem('Name')}</span>
                                 </div>
                                 {/* <span className='text-success px-1 me-2 ms-4' onClick={notification}><i className="far fs-4 fa-bell mouse-hover"></i></span>*/}
@@ -58,11 +58,6 @@ const Header = () => {
                                     reposition={false} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
                                     onClickOutside={() => setIsPopoverOpen(false)} // handle click events outside of the popover/target here!
                                     content={({ position, nudgedLeft, nudgedTop }) => ( // you can also provide a render function that injects some useful stuff!
-                                        // <div>
-                                        //     <div>Hi! I'm popover content. Here's my current position: {position}.</div>
-                                        //     <div>I'm {` ${nudgedLeft} `} pixels beyond my boundary horizontally!</div>
-                                        //     <div>I'm {` ${nudgedTop} `} pixels beyond my boundary vertically!</div>
-                                        // </div>
                                         <>
                                             <div className="p-1 border shadow rounded-3 align-items-center bg-light shadow-lg">
                                                 {notifications.length > 0 &&  notifications.map((notification, index) => {
