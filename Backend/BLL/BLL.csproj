@@ -57,6 +57,7 @@
     <Compile Include="ChangePasswordService.cs" />
     <Compile Include="CommentService.cs" />
     <Compile Include="EmailLogService.cs" />
+    <Compile Include="FollowerService.cs" />
     <Compile Include="LikeService.cs" />
     <Compile Include="LogService.cs" />
     <Compile Include="NotificationService.cs" />

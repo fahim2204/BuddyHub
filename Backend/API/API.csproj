@@ -108,6 +108,7 @@
     <Compile Include="Controllers\ChangePasswordController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\EmailConfirmationController.cs" />
+    <Compile Include="Controllers\FollowerController.cs" />
     <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\LoginController.cs" />

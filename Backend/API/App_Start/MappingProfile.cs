@@ -44,6 +44,9 @@ namespace API.App_Start
             CreateMap<Save, SaveDto>();
             CreateMap<SaveDto, Save>();
 
+            CreateMap<Follower, FollowerDto>();
+            CreateMap<FollowerDto, Follower>();
+
         }
     }
 }
